@@ -1,0 +1,119 @@
+.main-content {
+    width: min(65%, 1200px);
+    height: clamp(80vh, 80vh, 80vh);
+    padding: 0 55px;
+    margin: 0 auto;
+}
+
+.index-title {
+    text-align: center;
+    text-shadow: 2px 3px #6f402a4d;
+    font-size: 52px;
+    margin-top: 50px;
+
+    color: var(--main-title-text-color);
+}
+
+.view-cards {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    gap: 40px;
+}
+
+.view-card {
+    width: 100%;
+    min-height: 50vh;
+    height: 100%;
+}
+
+.view-card::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20vh;
+}
+
+
+.view-card.learning::before {
+    content: '📖';
+}
+
+.view-card.training::before {
+    content: '✍️';
+}
+
+
+
+
+.view-card img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.view-card a {
+    height: 40vh;
+    display: block;
+}
+
+.learning img,
+.training img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.transition-icon {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #6f402A;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+/*Поворачивающиеся*/
+
+.view-cards {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.view-cards .split-card {
+    transition: .5s;
+}
+
+
+.view-card.learning:hover {
+    transform: translateZ(80px) rotateY(15deg);
+}
+
+.view-card.training:hover {
+    transform: translateZ(80px) rotateY(-15deg);
+}
+/*
+.view-card:hover+* {
+    transform: translateZ(-150px);
+}
+
+.view-card:has(+ *:hover) {
+    transform: translateZ(-150px);
+}*/
+/*
+.view-card:hover+* {
+    opacity: 0.3;
+    background-color:black;
+    filter: brightness(0.2);
+}
+
+.view-card:has(+ *:hover) {
+    opacity: 0.3;
+    background-color:black;
+    filter: brightness(0.2);
+}*/
