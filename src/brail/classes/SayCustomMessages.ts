@@ -197,11 +197,11 @@ export class SayCustomMessages {
         private isSkippable(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
                 return (
-                    sound === '/public/sounds/Exellent.wav' ||
-                    sound === '/public/sounds/success.mp3' ||
-                    sound === '/public/sounds/error.mp3' ||
+                    sound.indexOf('/public/sounds/Exellent') > 0 ||
+                    sound.indexOf('/public/sounds/success') > 0 ||
+                    sound.indexOf('/public/sounds/error') > 0 ||
                     /\/src\/assets\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
-                    sound === '/public/sounds/Obuch_end.wav'
+                    sound.indexOf('/public/sounds/Obuch_end') > 0
                 );
             });
             return res;
@@ -210,12 +210,12 @@ export class SayCustomMessages {
         private filterSuccessSounds(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
                 return (
-                    sound === '/public/sounds/Exellent.wav' ||
-                    sound === '/public/sounds/success.mp3' ||
-                    sound === '/public/sounds/error.mp3' ||
+                    sound.indexOf('/public/sounds/Exellent') > 0 ||
+                    sound.indexOf('/public/sounds/success') > 0 ||
+                    sound.indexOf('/public/sounds/error') > 0 ||
                     /\/public\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
                     /\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) ||
-                    sound === '/public/sounds/Obuch_end.wav'
+                    sound.indexOf('/public/sounds/Obuch_end') > 0
                 );
             });
             return res;
@@ -246,7 +246,7 @@ export class SayCustomMessages {
             const maxNumberDescriptionSound = numberDescriptionSounds[0]; // Берем звук с наибольшим числом
         
             // Проверяем наличие `Obuch_end.wav`
-            const obuchEndSound = filteredSounds.find(sound => sound === '/public/sounds/Obuch_end.wav');
+            const obuchEndSound = filteredSounds.find(sound => sound.indexOf('/public/sounds/Obuch_end') > 0);
         
             // Собираем окончательный массив, оставляя `numberDescription` и `Obuch_end` файлы в конце
             const resultSounds = filteredSounds
