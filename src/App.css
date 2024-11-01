@@ -7,18 +7,12 @@
 }
 
 :root {
-  --main-bg-bright-color: #91644f;
-  --main-bg-dark-color: #a77259;
-  --main-bg-text-blocks:#C3936773;
 
-  --main-buttons-bg-color:#a77259;
-  --main-admin-buttons-bg-color:rgba(200, 186, 173, 0.836);
-
-
-  --main-text-color:#35190d;
-  --main-title-text-color:#623B2A;
-
-  --main-border-color:#623B2AE5;
+  --main-text-color:white;
+  --main-green:#A8EF25;
+  --main-orange:#DDD044;
+  --main-red:#DD4444
+  --main-black:#001000;
 
   --green: #86BB71;
   --blue: #94C2ED;
@@ -26,13 +20,14 @@
   --gray: #92959E;
 }
 
-
+/*
 section.main{
   max-width: 1280px;
   margin: 0 auto;
-}
+}*/
 
 .App {
+  height: inherit;
   text-align: center;
 }
 
@@ -44,6 +39,23 @@ section.main{
 body, html{
   width: 100%;
   height: 100%;
+}
+
+.sber-background{
+  background: rgba(18, 20, 22, 1);
+  /*background-image: url("/src/assets/img/background.jpg");*/
+  background-image: url("/src/assets/img/bg_main.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+section.main-menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: auto;
 }
 
 body{
@@ -65,6 +77,7 @@ button{
   border: none;
   background: none;
 }
+
 
 
 .hidden {
@@ -96,7 +109,6 @@ button.color-button{
   color: #fff;
   padding-left: 25px;
   font-family: Roboto, serif;
-  font-size: 1.2vw;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -146,4 +158,24 @@ div#result {
 div#main {
   height: 100%;
   border: 1px solid black;
+}
+
+.back-arrow-button img{
+  transform: rotateY(180deg);
+  max-height: 3vh;
+}
+
+.result-number-container , .necessary-number-container{
+  position: absolute;
+  bottom: 0;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+}
+.result-number , .necessary-number{
+  font-size: 15vw;
+  color:white;
+  width: fit-content;
 }

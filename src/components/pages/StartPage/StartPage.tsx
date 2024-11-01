@@ -1,17 +1,20 @@
 
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
+import { Container } from "@mui/material";
 import ViewCardComponent from "./ViewCard";
 
 import styles from './mainPage.module.css'
-import { useSpeechRecognition } from "react-speech-recognition";
+import MyTypography from "../../MyTyphography";
+//import { useSpeechRecognition } from "react-speech-recognition";
 
-
+import learningSVG from "../../../assets/img/learning.svg"
+import trainingSVG from "../../../assets/img/training.svg"
 interface MainPageComponentProps {
     type?: string;
     setType: (type: string) => void;
 }
 
-
+/*
 const checkMicrophonePermission = async () => {
     try {
         await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -21,40 +24,45 @@ const checkMicrophonePermission = async () => {
         return false; // Ошибка или отказ в доступе
     }
 };
-
+*/
 
 const StartPage = ({ setType }: MainPageComponentProps) => {
 
     //myFunctionWithDelay(()=>speakAndContinueListen(welcomeMessage), 100)
 
-    const clearImg = " "//'🎓'//📖 //✍️ //📚 //clearIndexPNG//ClearLanguage._indexImg;
-    const gesturalImg = " "//'✍️'//gesturalIndexPNG//GesturalLanguage._indexImg;
+    const learning = learningSVG;
+    const training = trainingSVG
 
     return (
-        <section className={`main-menu ${styles["main-content"]} main`}>
-            <h1 className={styles["index-title"]}>Выберете маршрут/Что вы хотите делать?</h1>
+        <Container sx={{height:"inherit;"}}>
+            <section className={`main-menu ${styles["main-content"]} main`}>
+            <MyTypography variant="h4" /*className={styles["index-title"]}*/>Тренажер брайльского ввода</MyTypography>
+            {<MyTypography>
+            Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
+            </MyTypography>}
             <ul className={styles["view-cards"]}>
                 <ViewCardComponent
                     destination={"/learning"}
-                    className={styles["learning"]}
+                    className={`${styles["learning"]}  ${styles["view-card"]}`} 
                     typeOfRoute="learning"
-                    img={gesturalImg}
+                    img={learning}
                     alt="учиться"
                     setType={setType}
-                    renderHeader={() => <h2>Обучение</h2>}
+                    renderHeader={() => <MyTypography sx={{color:"black"}} variant="h5">Обучение</MyTypography>}
                 />
 
                 <ViewCardComponent
                     destination={"/training"}
-                    className={styles["training"]}
+                    className={`${styles["training"]} ${styles["view-card"]}`}
                     typeOfRoute="training"
-                    img={clearImg}
+                    img={training}
                     alt="Тренирвать шрифт брайля"
                     setType={setType}
-                    renderHeader={() => <h2>Тренировка</h2>}
+                    renderHeader={() => <MyTypography sx={{color:"black"}} variant="h5">Тренажер</MyTypography>}
                 />
             </ul>
-        </section>
+            </section>
+        </Container>
     );
 }
 

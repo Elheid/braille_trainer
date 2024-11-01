@@ -5,10 +5,10 @@ import { Player } from './player';
 
 
 export class TouchHandlerTrainer extends BaseTouchHandler {
-    private resultElement: HTMLElement | null;
+    private resultElement: HTMLElement;
     private _errorMessage: string;
 
-    constructor(player: Player, resultElement: HTMLElement | null) {
+    constructor(player: Player, resultElement: HTMLElement) {
         super(player); // Инициализация базового класса
         this.resultElement = resultElement;
         this._errorMessage = 'Ошибка! Не удалось распознать комбинацию точек.';

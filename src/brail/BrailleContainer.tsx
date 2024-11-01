@@ -1,23 +1,27 @@
 import { Button, Container, Typography } from "@mui/material"
 import LinkButtonComponent from "../components/ReturnButton";
-import buttonWithImageStyle from "../styles/buttonWithImageStyle";
 
+
+import arrow from "../assets/img/breadMini.svg"
+import buttonWithImageStyle from "../styles/buttonWithImageStyle";
+import MyTypography from "../components/MyTyphography";
 interface BrailleProps {
     isStarted: boolean;
     speechEnabled: boolean;
     resultRef: React.RefObject<HTMLDivElement>;
+    necessaryRef?:React.RefObject<HTMLDivElement>;
     mainRef: React.RefObject<HTMLDivElement>;
     setSpeechEnabled: React.Dispatch<React.SetStateAction<boolean>>;
     handleStart: () => void;
 }
 
-const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, resultRef, handleStart}:BrailleProps)=>{
+const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, resultRef, necessaryRef, handleStart}:BrailleProps)=>{
     return (
         <Container
         disableGutters={true}
         sx={{pt:"2vh",display:"flex", flexDirection: "column", gap:"2.5vh", height:"100vh"}}
         >
-            <LinkButtonComponent style={buttonWithImageStyle} classes={"color-button"}/>
+            <LinkButtonComponent style={buttonWithImageStyle} classes={"back-arrow-button color-button"} img={arrow}/>
             {!isStarted && (
                 <Button variant="contained" id="startbutton" onClick={handleStart}>
                     Начать
@@ -40,7 +44,14 @@ const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, 
             </Container>
             {isStarted && (
                 <Container id="main" ref={mainRef}>
-                    <div ref={resultRef}></div>
+                    <Container className={"result-number-container"}>
+                        <div className={"result-number"} ref={resultRef}></div>
+                        <MyTypography>Распознано</MyTypography>
+                    </Container>
+                    {necessaryRef && <Container className={"necessary-number-container"}>
+                        <div className={"necessary-number"} ref={necessaryRef}></div>
+                        <MyTypography>Распознано</MyTypography>
+                    </Container>}
                 </Container>
             )}
         </Container>

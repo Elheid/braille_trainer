@@ -15,6 +15,7 @@ const BrailleLearningApp: React.FC = () => {
 
     const mainRef = useRef<HTMLDivElement | null>(null);
     const resultRef = useRef<HTMLDivElement | null>(null);
+    const necessaryRef = useRef<HTMLDivElement | null>(null);
 
     //const touchHandlerRef = useRef<TouchHandlerLearning | null>(null);
 
@@ -30,6 +31,7 @@ const BrailleLearningApp: React.FC = () => {
         isStarted={isStarted} 
         speechEnabled={speechEnabled} 
         resultRef={resultRef} 
+        necessaryRef={necessaryRef}
         mainRef={mainRef} 
         setSpeechEnabled={setSpeechEnabled}
         handleStart={handleStart}

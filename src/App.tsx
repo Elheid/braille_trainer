@@ -12,7 +12,7 @@ function App() {
   return (
 
     <BrowserRouter>
-      <div className={"App "}>
+      <div className={"App"}>
         <Routes>
           <Route path="/braille" element={<BrailleTrainApp/>}/>
           <Route path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
