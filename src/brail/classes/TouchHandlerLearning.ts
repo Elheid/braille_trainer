@@ -21,20 +21,33 @@ export class TouchHandlerLearning extends BaseTouchHandler {
     private maxAttempts: number;
     private levelInstructions: LevelCondition[];
 
-    constructor(player: Player, levelInstructions = levelInstructionsTest, maxAttempts = 4) {
-        super(player);
+    private necessaryRef: HTMLElement;
+
+    constructor(player: Player, resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions = levelInstructionsTest, maxAttempts = 4) {
+        super(player, resultElement);
+        this.necessaryRef = necessaryRef
         this.level = 1;
         this.attempts = 0;
         this.maxAttempts = maxAttempts;
         this.levelInstructions = levelInstructions;
     }
 
+    protected showNecessaryNumber(message: string): void {
+        if (this.necessaryRef)
+            this.necessaryRef.textContent = message;
+        else 
+            console.log("result el not found")
+    }
+
+
     public startLevel(): void {
         const levelCondition = this.getLevelCondition();
+        this.showNecessaryNumber((levelCondition.levelExpect).toString())
         if (!levelCondition.mp3)
             this.player.SayMessage(this.getInstruction());
-        else
-            this.player.SayCustomMessage(levelCondition.mp3)
+        else{
+            this.player.SayCustomMessage(levelCondition.mp3)// Выполняем callback после задержки
+        }
     }
 
     protected convertPoints(): void {
@@ -72,6 +85,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         // Логика завершения уровня
         //return true; // Временное значение
         const expectedNumber = this.getExpectedNumber();
+        if (digit) this.showResult(digit.toString());
         if (expectedNumber === digit){
             this.player.PlaySuccess(digit);
             //this.player.stopMessages();

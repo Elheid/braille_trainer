@@ -24,7 +24,7 @@ const BrailleLearningApp: React.FC = () => {
         setIsStarted(true);
     };
     const messagePlayer = new SayCustomMessages();
-    useTouchHandler({isStarted, speechEnabled, resultRef, mainRef, typeOfTouchHandler:TouchHandlerType.LEARNING, customMessagePlayer: messagePlayer})
+    useTouchHandler({isStarted, speechEnabled, resultRef, necessaryRef, mainRef, typeOfTouchHandler:TouchHandlerType.LEARNING, customMessagePlayer: messagePlayer})
 
     return (
         <BrailleContainer 

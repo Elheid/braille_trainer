@@ -57,12 +57,16 @@ export class SayCustomMessages {
     }
 }*/
 
+interface MyHowl{
+    howl:Howl;
+    skippable:boolean;
+}
 export class SayCustomMessages {
     private customMessage: Howl | null = null;
     private messageQueue: string[] = [];
     private isPlaying: boolean = false;
-    private sounds: Howl[] = []; // Массив для хранения экземпляров Howl
-
+    //private sounds: Howl[] = []; // Массив для хранения экземпляров Howl
+    private sounds2:MyHowl[] = [];
 
 
 
@@ -108,7 +112,10 @@ export class SayCustomMessages {
 
         //this.sayMessage(messageSrc); // Воспроизводим его
         this.lastMessageSrc = messageSrc; // Обновляем предыдущий источник
-        this.sounds.push(this.customMessage); // Сохраняем экземпляр Howl
+        //this.sounds.push(this.customMessage); // Сохраняем экземпляр Howl
+
+        const isSkippable = this.isSkippable([messageSrc]).length > 0 ? false : true;
+        this.sounds2.push({howl:this.customMessage, skippable:isSkippable });
         this.customMessage.play();
 
 
@@ -158,8 +165,15 @@ export class SayCustomMessages {
 
     public stopMessages(): void {
         this.messageQueue = []; // Очистка очереди
-        this.sounds.forEach(sound => sound.stop()); // Остановка всех звуков
-        this.sounds = []; // Очистка массива экземпляров
+        //this.sounds.forEach(sound => sound.stop()); // Остановка всех звуков
+        //this.sounds = []; // Очистка массива экземпляров
+
+        this.sounds2.forEach(sound => {
+            if (sound.skippable)
+                sound.howl.stop()
+        });
+        this.sounds2 = this.sounds2.filter(el => !el.skippable);
+
         this.isPlaying = false;
     }
 
@@ -180,17 +194,45 @@ export class SayCustomMessages {
         });
     }*/
 
-        private getSuccessInQue() {
-            // Фильтруем звуки, оставляя только нужные
-            const filteredSounds = this.messageQueue.filter((sound) => {
+        private isSkippable(messageQueue:string[]){
+            const res = messageQueue.filter((sound) => {
                 return (
                     sound === '/src/assets/sounds/Exellent.wav' ||
                     sound === '/src/assets/sounds/success.mp3' ||
+                    sound === '/src/assets/sounds/error.mp3' ||
+                    /\/src\/assets\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
+                    sound === '/src/assets/sounds/Obuch_end.wav'
+                );
+            });
+            return res;
+        }
+
+        private filterSuccessSounds(messageQueue:string[]){
+            const res = messageQueue.filter((sound) => {
+                return (
+                    sound === '/src/assets/sounds/Exellent.wav' ||
+                    sound === '/src/assets/sounds/success.mp3' ||
+                    sound === '/src/assets/sounds/error.mp3' ||
                     /\/src\/assets\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
                     /\/src\/assets\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) ||
                     sound === '/src/assets/sounds/Obuch_end.wav'
                 );
             });
+            return res;
+        }
+
+        private getSuccessInQue(messageQueue:string[]) {
+            // Фильтруем звуки, оставляя только нужные
+            const filteredSounds = this.filterSuccessSounds(messageQueue);/*messageQueue.filter((sound) => {
+                return (
+                    sound === '/src/assets/sounds/Exellent.wav' ||
+                    sound === '/src/assets/sounds/success.mp3' ||
+                    sound === '/src/assets/sounds/error.mp3' ||
+                    /\/src\/assets\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
+                    /\/src\/assets\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) ||
+                    sound === '/src/assets/sounds/Obuch_end.wav'
+                );
+            });*/
         
             // Обрабатываем звуки `numberDescription`, чтобы оставить только один с наибольшим числом перед `v1`
             const numberDescriptionSounds = filteredSounds
@@ -227,22 +269,34 @@ export class SayCustomMessages {
         //const allowedPattern = /^\/src\/assets\/sounds\/(Exellent\.wav|success\.mp3|[0-9]\.wav)$/;
 
         // Фильтруем массив
-        const filteredSounds = this.getSuccessInQue()
+        const filteredSounds = this.getSuccessInQue(this.messageQueue)
         this.messageQueue = filteredSounds;
-        this.sounds.forEach(sound => sound.stop()); // Остановка всех звуков
-        this.sounds = []; // Очистка массива экземпляров
+        /*this.sounds.forEach(sound => {
+            console.log("stop ", sound);
+            sound.stop();
+        }); // Остановка всех звуков*/
+        const filterSkippable = this.sounds2.filter(el => !el.skippable);
+        this.sounds2.forEach(sound => {
+            if (sound.skippable)
+                sound.howl.stop()
+        });
+        this.sounds2 = filterSkippable;
+
+        //this.sounds = []; // Очистка массива экземпляров
         this.isPlaying = false;
     }
 
 
     // Метод для заглушки всех сообщений
     public muteMessages(): void {
-        this.sounds.forEach(sound => sound.mute(true)); // Заглушить все сообщения
+        //this.sounds.forEach(sound => sound.mute(true)); // Заглушить все сообщения
+        this.sounds2.forEach(sound => sound.howl.mute(true)); // Заглушить все сообщения
     }
 
     // Метод для снятия заглушки
     public unmuteMessages(): void {
-        this.sounds.forEach(sound => sound.mute(false)); // Снять заглушку с всех сообщений
+        //this.sounds.forEach(sound => sound.mute(false)); // Снять заглушку с всех сообщений
+        this.sounds2.forEach(sound => sound.howl.mute(false));
     }
 
     /*private processQueue(): void {

@@ -8,13 +8,17 @@ interface Point {
 
 
 export class BaseTouchHandler {
+    protected resultElement: HTMLElement;
+
     protected player: Player;
     protected _points: Point[] = [];
     protected _timerId: ReturnType<typeof setTimeout> | null = null;
     protected _period = 1000; // время в миллисекундах
 
-    constructor(player: Player) {
+    constructor(player: Player,  resultElement: HTMLElement) {
         this.player = player;
+
+        this.resultElement = resultElement;
 
         this.Handle = this.Handle.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
@@ -49,4 +53,14 @@ export class BaseTouchHandler {
         // Обработка точки для распознавания цифр
         console.log("Конвертация точек для распознавания");
     }
+
+
+    // Метод для отображения результата
+    protected showResult(message: string): void {
+        if (this.resultElement)
+            this.resultElement.textContent = message;
+        else 
+            console.log("result el not found")
+    }
+
 }

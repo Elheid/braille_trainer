@@ -33,13 +33,14 @@ interface UseTouchHandlerProps {
     isStarted: boolean;
     speechEnabled: boolean;
     resultRef: React.RefObject<HTMLDivElement>;
+    necessaryRef?: React.RefObject<HTMLDivElement>;
     mainRef: React.RefObject<HTMLDivElement>;
     typeOfTouchHandler:TouchHandlerType;
     customMessagePlayer:SayCustomMessages;
 }
 
 
-const useTouchHandler = ({ isStarted, speechEnabled, resultRef, mainRef, typeOfTouchHandler=TouchHandlerType.TRAINING, customMessagePlayer }: UseTouchHandlerProps) => {
+const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, mainRef, typeOfTouchHandler=TouchHandlerType.TRAINING, customMessagePlayer }: UseTouchHandlerProps) => {
     const isHandlerAttachedRef = useRef(false);
     const customMessagePlayerRef = useRef(customMessagePlayer);
     //const customMessagePlayer = new SayCustomMessages();
@@ -52,8 +53,8 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, mainRef, typeOfT
             let touchHandlerClass: TouchHandlerTrainer | TouchHandlerLearning = new TouchHandlerTrainer(player, resultRef.current);
             if (typeOfTouchHandler === TouchHandlerType.TRAINING)
                 touchHandlerClass =   new TouchHandlerTrainer(player, resultRef.current);
-            if (typeOfTouchHandler === TouchHandlerType.LEARNING)
-                touchHandlerClass =  new TouchHandlerLearning(player, levelInstructions);
+            if (typeOfTouchHandler === TouchHandlerType.LEARNING && necessaryRef && necessaryRef.current)
+                touchHandlerClass =  new TouchHandlerLearning(player, resultRef.current, necessaryRef.current,  levelInstructions);
 
             const touchHandler = (e: TouchEvent) => touchHandlerClass?.Handle(e);
 

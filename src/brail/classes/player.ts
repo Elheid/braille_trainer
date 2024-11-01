@@ -22,7 +22,6 @@ const numbersToSay: { [key: number]: string } = {
 
 export class Player {
   private _speechEnabled: boolean;
-  private error: Howl;
   private touch?: Howl;
 
   
@@ -36,10 +35,6 @@ export class Player {
   constructor(speechEnabled: boolean, customMessagesPlayer:SayCustomMessages) {
     this._speechEnabled = speechEnabled;
     this.customMessagePlayer = customMessagesPlayer//new SayCustomMessages();
-
-    this.error = new Howl({
-      src: [errorSound],
-    });
 
     this._synth = window.speechSynthesis;
     this.lang = 'ru-RU';
@@ -85,7 +80,8 @@ export class Player {
   }
 
   public PlayError(): void {
-    this.error.play();
+    this.SayCustomMessage(errorSound,()=>this.stopMessages())
+    //this.error.play();
   }
 /*
   public SayCustomMessage(messageSrc: string): void {

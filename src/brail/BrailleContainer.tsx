@@ -44,14 +44,16 @@ const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, 
             </Container>
             {isStarted && (
                 <Container id="main" ref={mainRef}>
+                    <div className={"numbers-container"}>
                     <Container className={"result-number-container"}>
                         <div className={"result-number"} ref={resultRef}></div>
                         <MyTypography>Распознано</MyTypography>
                     </Container>
                     {necessaryRef && <Container className={"necessary-number-container"}>
                         <div className={"necessary-number"} ref={necessaryRef}></div>
-                        <MyTypography>Распознано</MyTypography>
+                        <MyTypography>Ожидается</MyTypography>
                     </Container>}
+                    </div>
                 </Container>
             )}
         </Container>
