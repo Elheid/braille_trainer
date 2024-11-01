@@ -195,16 +195,7 @@ export class SayCustomMessages {
     }*/
 
         private isNumSrc(sound:string){
-            return (sound.includes('1') && !sound.includes('v1')) ||
-                (sound.includes('2') && !sound.includes('v1')) ||
-                (sound.includes('3') && !sound.includes('v1')) ||
-                (sound.includes('4') && !sound.includes('v1')) ||
-                (sound.includes('5') && !sound.includes('v1')) ||
-                (sound.includes('6') && !sound.includes('v1')) ||
-                (sound.includes('7') && !sound.includes('v1')) ||
-                (sound.includes('8') && !sound.includes('v1')) ||
-                (sound.includes('9') && !sound.includes('v1')) ||
-                (sound.includes('0') && !sound.includes('v1'));
+            return (sound.includes('number_') && !sound.includes('v1'))
         }
 
         private isDescriptionSrc(sound:string){
