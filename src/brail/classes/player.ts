@@ -1,17 +1,18 @@
 import { Howl } from 'howler';
 
-import succsesSound from "../../assets/sounds/success.mp3"
-import errorSound from "../../assets/sounds/error.mp3"
-import touchSound from "../../assets/sounds/touch.mp3"
+
+import succsesSound from "../../../public/sounds/success.mp3"//"../../assets/sounds/success.mp3"
+import errorSound from  "../../../public/sounds/error.mp3"
+import touchSound from  "../../../public/sounds/touch.mp3"
 import { SayCustomMessages } from './SayCustomMessages';
 
-import numberOneMP3 from "../../assets/sounds/numbers/1.wav"
-import numberTwoMP3 from "../../assets/sounds/numbers/2.wav"
-import numberThreeMP3 from "../../assets/sounds/numbers/3.wav"
+import numberOneMP3 from  "../../../public/sounds/numbers/1.wav"
+import numberTwoMP3 from  "../../../public/sounds/numbers/2.wav"
+import numberThreeMP3 from  "../../../public/sounds/numbers/3.wav"
 
 
 
-import succsesMessage from "../../assets/sounds/Exellent.wav"
+import succsesMessage from  "../../../public/sounds/Exellent.wav"
 
 
 const numbersToSay: { [key: number]: string } = {

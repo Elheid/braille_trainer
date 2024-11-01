@@ -4,7 +4,7 @@ import { BrailleDigitRecognizer } from './brailleDigetRecognizer';
 import { Player } from './player';
 
 
-import endLearningMessage from "../../assets/sounds/Obuch_end.wav"
+import endLearningMessage from "../../../public/sounds/Obuch_end.wav"//"../../assets/sounds/Obuch_end.wav"
 
 type LevelCondition = {levelInstruct: string, levelExpect:number, mp3?:string}
 

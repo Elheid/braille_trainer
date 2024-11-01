@@ -5,12 +5,12 @@ import { TouchHandlerLearning } from "../brail/classes/TouchHandlerLearning";
 import { TouchHandlerType } from "../enum/TouchHandlerType";
 
 
-import screenReaderTrainingMP3 from "../assets/sounds/Terminal_screenreader.wav"
-import screenReaderLearningMP3 from "../assets/sounds/Obuch_screenreader_off.wav"
+import screenReaderTrainingMP3 from "../../public/sounds/Terminal_screenreader.wav"//"../assets/sounds/Terminal_screenreader.wav"
+import screenReaderLearningMP3 from "../../public//sounds/Obuch_screenreader_off.wav"
 
-import numberOneDescribeMP3 from "../assets/sounds/numberDescription/1v1.wav"
-import numberTwoDescribeMP3 from "../assets/sounds/numberDescription/2v1.wav"
-import numberThreeDescribeMP3 from "../assets/sounds/numberDescription/3v1.wav"
+import numberOneDescribeMP3 from "../../public//sounds/numberDescription/1v1.wav"
+import numberTwoDescribeMP3 from "../../public//sounds/numberDescription/2v1.wav"
+import numberThreeDescribeMP3 from "../../public//sounds/numberDescription/3v1.wav"
 import { SayCustomMessages } from "../brail/classes/SayCustomMessages";
 
 const levelInstructions = [
