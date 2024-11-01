@@ -194,18 +194,45 @@ export class SayCustomMessages {
         });
     }*/
 
+        private isNumSrc(sound:string){
+            return (sound.includes('1') && !sound.includes('v1')) ||
+                (sound.includes('2') && !sound.includes('v1')) ||
+                (sound.includes('3') && !sound.includes('v1')) ||
+                (sound.includes('4') && !sound.includes('v1')) ||
+                (sound.includes('5') && !sound.includes('v1')) ||
+                (sound.includes('6') && !sound.includes('v1')) ||
+                (sound.includes('7') && !sound.includes('v1')) ||
+                (sound.includes('8') && !sound.includes('v1')) ||
+                (sound.includes('9') && !sound.includes('v1')) ||
+                (sound.includes('0') && !sound.includes('v1'));
+        }
+
+        private isDescriptionSrc(sound:string){
+            return (sound.includes('1') && sound.includes('v1')) ||
+            (sound.includes('2') && sound.includes('v1')) ||
+            (sound.includes('3') && sound.includes('v1')) ||
+            (sound.includes('4') && sound.includes('v1')) ||
+            (sound.includes('5') && sound.includes('v1')) ||
+            (sound.includes('6') && sound.includes('v1')) ||
+            (sound.includes('7') && sound.includes('v1')) ||
+            (sound.includes('8') && sound.includes('v1')) ||
+            (sound.includes('9') && sound.includes('v1')) ||
+            (sound.includes('0') && sound.includes('v1'));
+        }
+
+
         private isSkippable(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
                 const isExellent =  sound.includes('Exellent');
                 const isSuccess= sound.includes('/success');
                 const isError =  sound.includes('error');
-
+                const isNum = this.isNumSrc(sound);
                 const isEnd = sound.includes('Obuch_end');
                 return (
                     isExellent||
                     isSuccess ||
                     isError ||
-                    /\/[0-9]\.wav$/.test(sound) ||
+                    isNum ||
                     isEnd
                 );
             });
@@ -215,16 +242,19 @@ export class SayCustomMessages {
         private filterSuccessSounds(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
                 const isExellent =  sound.includes('Exellent');
-                const isSuccess= sound.includes('success');
+                const isSuccess= sound.includes('/success');
                 const isError =  sound.includes('error');
+                const isNum = this.isNumSrc(sound);
+
+                const isDescription = this.isDescriptionSrc(sound);
 
                 const isEnd = sound.includes('Obuch_end');
                 return (
                     isExellent||
                     isSuccess ||
                     isError ||
-                    /\/public\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
-                    /\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) ||
+                    isNum ||
+                    isDescription ||
                     isEnd
                 );
             });
@@ -245,8 +275,12 @@ export class SayCustomMessages {
             });*/
         
             // Обрабатываем звуки `numberDescription`, чтобы оставить только один с наибольшим числом перед `v1`
+            
             const numberDescriptionSounds = filteredSounds
-                .filter((sound) => /\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound))
+                .filter((sound) => {
+                    const isDescription = this.isDescriptionSrc(sound);
+                    return isDescription;
+                })///\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound))
                 .sort((a, b) => {
                     const numberA = parseInt(a.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
                     const numberB = parseInt(b.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
@@ -260,9 +294,12 @@ export class SayCustomMessages {
         
             // Собираем окончательный массив, оставляя `numberDescription` и `Obuch_end` файлы в конце
             const resultSounds = filteredSounds
-                .filter((sound) =>
-                    !/\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) &&
+                .filter((sound) =>{
+                    const isDescription = this.isDescriptionSrc(sound);
+
+                    return !isDescription&&
                     !sound.includes('Obuch_end')
+                }
                 );
         
             // Добавляем `numberDescription` файл и `Obuch_end.wav` в конец, если они есть
