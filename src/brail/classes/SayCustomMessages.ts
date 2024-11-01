@@ -254,18 +254,7 @@ export class SayCustomMessages {
 
         private getSuccessInQue(messageQueue:string[]) {
             // Фильтруем звуки, оставляя только нужные
-            const filteredSounds = this.filterSuccessSounds(messageQueue);/*messageQueue.filter((sound) => {
-                return (
-                    sound === '/src/assets/sounds/Exellent.wav' ||
-                    sound === '/src/assets/sounds/success.mp3' ||
-                    sound === '/src/assets/sounds/error.mp3' ||
-                    /\/src\/assets\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
-                    /\/src\/assets\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) ||
-                    sound === '/src/assets/sounds/Obuch_end.wav'
-                );
-            });*/
-        
-            // Обрабатываем звуки `numberDescription`, чтобы оставить только один с наибольшим числом перед `v1`
+            const filteredSounds = this.filterSuccessSounds(messageQueue);
             
             const numberDescriptionSounds = filteredSounds
                 .filter((sound) => {
@@ -273,9 +262,15 @@ export class SayCustomMessages {
                     return isDescription;
                 })///\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound))
                 .sort((a, b) => {
-                    const numberA = parseInt(a.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
-                    const numberB = parseInt(b.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
-                    return numberB - numberA; // Сортируем по убыванию чисел
+                    const matchA = a.match(/\/assets\/(\d+)v1/);
+                    const numberA = matchA ? Number(matchA[1]) : -1;
+
+                    const matchB = b.match(/\/assets\/(\d+)v1/);
+                    const numberB = matchB ? Number(matchB[1]) : -1;
+
+                    //const numberA = parseInt(a.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
+                    //const numberB = parseInt(b.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
+                    return numberB - numberA; 
                 });
         
             const maxNumberDescriptionSound = numberDescriptionSounds[0]; // Берем звук с наибольшим числом
