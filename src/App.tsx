@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import StartPage from './components/pages/StartPage/StartPage'
@@ -6,12 +6,24 @@ import StartPage from './components/pages/StartPage/StartPage'
 import SplitScreen from './components/pages/StartPage/SplitScreanPage';
 import BrailleTrainApp from './brail/BrailleTrainApp';
 import BrailleLearningApp from './brail/BrailleLearningApp';
+import { Alert } from '@mui/material';
 
 function App() {
   const [typeOfRoute, setType] = useState(localStorage.getItem('route') || ''); 
-  return (
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    setIsMobile(isMobileDevice);
+  }, []);
+  return (
     <BrowserRouter>
+        {!isMobile &&
+        <Alert severity="error">
+          Функционал приложения доступен только на мобильных устройствах
+        </Alert>
+        }
       <div className={"App"}>
         <Routes>
           <Route path="/braille" element={<BrailleTrainApp/>}/>
