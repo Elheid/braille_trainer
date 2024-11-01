@@ -196,12 +196,17 @@ export class SayCustomMessages {
 
         private isSkippable(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
+                const isExellent =  sound.includes('/public/sounds/Exellent');
+                const isSuccess= sound.includes('/public/sounds/success');
+                const isError =  sound.includes('/public/sounds/error');
+
+                const isEnd = sound.includes('/public/sounds/Obuch_end');
                 return (
-                    sound.indexOf('/public/sounds/Exellent') > 0 ||
-                    sound.indexOf('/public/sounds/success') > 0 ||
-                    sound.indexOf('/public/sounds/error') > 0 ||
-                    /\/src\/assets\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
-                    sound.indexOf('/public/sounds/Obuch_end') > 0
+                    isExellent||
+                    isSuccess ||
+                    isError ||
+                    /\/public\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
+                    isEnd
                 );
             });
             return res;
@@ -209,13 +214,18 @@ export class SayCustomMessages {
 
         private filterSuccessSounds(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
+                const isExellent =  sound.includes('/public/sounds/Exellent');
+                const isSuccess= sound.includes('/public/sounds/success');
+                const isError =  sound.includes('/public/sounds/error');
+
+                const isEnd = sound.includes('/public/sounds/Obuch_end');
                 return (
-                    sound.indexOf('/public/sounds/Exellent') > 0 ||
-                    sound.indexOf('/public/sounds/success') > 0 ||
-                    sound.indexOf('/public/sounds/error') > 0 ||
+                    isExellent||
+                    isSuccess ||
+                    isError ||
                     /\/public\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
                     /\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) ||
-                    sound.indexOf('/public/sounds/Obuch_end') > 0
+                    isEnd
                 );
             });
             return res;
@@ -246,13 +256,13 @@ export class SayCustomMessages {
             const maxNumberDescriptionSound = numberDescriptionSounds[0]; // Берем звук с наибольшим числом
         
             // Проверяем наличие `Obuch_end.wav`
-            const obuchEndSound = filteredSounds.find(sound => sound.indexOf('/public/sounds/Obuch_end') > 0);
+            const obuchEndSound = filteredSounds.find(sound => sound.includes('/public/sounds/Obuch_end'));
         
             // Собираем окончательный массив, оставляя `numberDescription` и `Obuch_end` файлы в конце
             const resultSounds = filteredSounds
                 .filter((sound) =>
                     !/\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) &&
-                    sound !== '/public/sounds/Obuch_end.wav'
+                    !sound.includes('/public/sounds/Obuch_end')
                 );
         
             // Добавляем `numberDescription` файл и `Obuch_end.wav` в конец, если они есть
