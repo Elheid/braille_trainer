@@ -196,16 +196,16 @@ export class SayCustomMessages {
 
         private isSkippable(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
-                const isExellent =  sound.includes('/public/sounds/Exellent');
-                const isSuccess= sound.includes('/public/sounds/success');
-                const isError =  sound.includes('/public/sounds/error');
+                const isExellent =  sound.includes('Exellent');
+                const isSuccess= sound.includes('/success');
+                const isError =  sound.includes('error');
 
-                const isEnd = sound.includes('/public/sounds/Obuch_end');
+                const isEnd = sound.includes('Obuch_end');
                 return (
                     isExellent||
                     isSuccess ||
                     isError ||
-                    /\/public\/sounds\/numbers\/[0-9]\.wav$/.test(sound) ||
+                    /\/[0-9]\.wav$/.test(sound) ||
                     isEnd
                 );
             });
@@ -214,11 +214,11 @@ export class SayCustomMessages {
 
         private filterSuccessSounds(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
-                const isExellent =  sound.includes('/public/sounds/Exellent');
-                const isSuccess= sound.includes('/public/sounds/success');
-                const isError =  sound.includes('/public/sounds/error');
+                const isExellent =  sound.includes('Exellent');
+                const isSuccess= sound.includes('success');
+                const isError =  sound.includes('error');
 
-                const isEnd = sound.includes('/public/sounds/Obuch_end');
+                const isEnd = sound.includes('Obuch_end');
                 return (
                     isExellent||
                     isSuccess ||
@@ -256,13 +256,13 @@ export class SayCustomMessages {
             const maxNumberDescriptionSound = numberDescriptionSounds[0]; // Берем звук с наибольшим числом
         
             // Проверяем наличие `Obuch_end.wav`
-            const obuchEndSound = filteredSounds.find(sound => sound.includes('/public/sounds/Obuch_end'));
+            const obuchEndSound = filteredSounds.find(sound => sound.includes('Obuch_end'));
         
             // Собираем окончательный массив, оставляя `numberDescription` и `Obuch_end` файлы в конце
             const resultSounds = filteredSounds
                 .filter((sound) =>
                     !/\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound) &&
-                    !sound.includes('/public/sounds/Obuch_end')
+                    !sound.includes('Obuch_end')
                 );
         
             // Добавляем `numberDescription` файл и `Obuch_end.wav` в конец, если они есть
