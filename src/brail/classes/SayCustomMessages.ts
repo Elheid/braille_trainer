@@ -80,6 +80,7 @@ export class SayCustomMessages {
             //callBack();
             this.stopMessagesButNoSuccses();
         }
+
         if (!this.isPlaying) {
             this.playNextMessage();
         }
@@ -261,19 +262,30 @@ export class SayCustomMessages {
                     const isDescription = this.isDescriptionSrc(sound);
                     return isDescription;
                 })///\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound))
-                .sort((a, b) => {
-                    const matchA = a.match(/\/assets\/(\d+)v1/);
+                /*.sort((a, b) => {
+                    const matchA = a.match(/(\d+)(?=v1)/);//a.match(/\/assets\/(\d+)v1/);
                     const numberA = matchA ? Number(matchA[1]) : -1;
 
-                    const matchB = b.match(/\/assets\/(\d+)v1/);
+                    const matchB = b.match(/(\d+)(?=v1)/);//b.match(/\/assets\/(\d+)v1/);
                     const numberB = matchB ? Number(matchB[1]) : -1;
 
                     //const numberA = parseInt(a.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
                     //const numberB = parseInt(b.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
                     return numberB - numberA; 
-                });
-        
-            const maxNumberDescriptionSound = numberDescriptionSounds[0]; // Берем звук с наибольшим числом
+                });*/
+                .reduce((maxStr, currentStr) => {
+                    const regex = /(\d+)(?=\s*v1)/;
+                    const currentMatch = currentStr.match(regex);
+                    const currentNumber = currentMatch ? parseInt(currentMatch[1], 10) : -Infinity;
+            
+                    const maxMatch = maxStr.match(regex);
+                    const maxNumber = maxMatch ? parseInt(maxMatch[1], 10) : -Infinity;
+            
+                    return currentNumber > maxNumber ? currentStr : maxStr;
+                }, "");
+            let maxNumberDescriptionSound : string = "";
+            //if (numberDescriptionSounds.length !== 1)
+                maxNumberDescriptionSound = numberDescriptionSounds; // Берем звук с наибольшим числом
         
             // Проверяем наличие `Obuch_end.wav`
             const obuchEndSound = filteredSounds.find(sound => sound.includes('Obuch_end'));
@@ -289,7 +301,7 @@ export class SayCustomMessages {
                 );
         
             // Добавляем `numberDescription` файл и `Obuch_end.wav` в конец, если они есть
-            if (maxNumberDescriptionSound) resultSounds.push(maxNumberDescriptionSound);
+            if (maxNumberDescriptionSound && maxNumberDescriptionSound !== "") resultSounds.push(maxNumberDescriptionSound);
             if (obuchEndSound) resultSounds.push(obuchEndSound);
         
             return resultSounds;

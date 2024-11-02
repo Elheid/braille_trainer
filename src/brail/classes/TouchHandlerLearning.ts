@@ -5,7 +5,6 @@ import { Player } from './player';
 
 
 import endLearningMessage from "../../../public/sounds/Obuch_end.wav"//"../../assets/sounds/Obuch_end.wav"
-
 type LevelCondition = {levelInstruct: string, levelExpect:number, mp3?:string}
 
 
@@ -46,7 +45,8 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         if (!levelCondition.mp3)
             this.player.SayMessage(this.getInstruction());
         else{
-            this.player.SayCustomMessage(levelCondition.mp3)// Выполняем callback после задержки
+                this.player.SayCustomMessage(levelCondition.mp3)
+            // Выполняем callback после задержки
         }
     }
 
