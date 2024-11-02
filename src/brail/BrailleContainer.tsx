@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from "@mui/material"
+import { Button, Container } from "@mui/material"
 import LinkButtonComponent from "../components/ReturnButton";
 
 
@@ -7,15 +7,15 @@ import buttonWithImageStyle from "../styles/buttonWithImageStyle";
 import MyTypography from "../components/MyTyphography";
 interface BrailleProps {
     isStarted: boolean;
-    speechEnabled: boolean;
+    //speechEnabled: boolean;
     resultRef: React.RefObject<HTMLDivElement>;
     necessaryRef?:React.RefObject<HTMLDivElement>;
     mainRef: React.RefObject<HTMLDivElement>;
-    setSpeechEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+    //setSpeechEnabled: React.Dispatch<React.SetStateAction<boolean>>;
     handleStart: () => void;
 }
 
-const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, resultRef, necessaryRef, handleStart}:BrailleProps)=>{
+const BrailleContainer = ({isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart}:BrailleProps)=>{
     return (
         <Container
         disableGutters={true}
@@ -27,7 +27,7 @@ const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, 
                     Начать
                 </Button>
             )}
-            <Container  sx={{ display: "flex", 
+            {/*<Container  sx={{ display: "flex", 
             flexDirection: "row", 
             margin:"0 auto",
             alignItems: "center;",
@@ -41,7 +41,7 @@ const BrailleContainer = ({isStarted, speechEnabled, setSpeechEnabled, mainRef, 
                 <Typography color="info">
                     Озвучивать введенные цифры встроенным синтезатором речи
                 </Typography>
-            </Container>
+            </Container>*/}
             {isStarted && (
                 <Container id="main" ref={mainRef}>
                     <div className={"numbers-container"}>

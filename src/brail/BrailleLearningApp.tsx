@@ -11,7 +11,7 @@ import { SayCustomMessages } from './classes/SayCustomMessages';
 
 const BrailleLearningApp: React.FC = () => {
     const [isStarted, setIsStarted] = useState(false);
-    const [speechEnabled, setSpeechEnabled] = useState(false);
+    const [speechEnabled, /*setSpeechEnabled*/] = useState(true);
 
     const mainRef = useRef<HTMLDivElement | null>(null);
     const resultRef = useRef<HTMLDivElement | null>(null);
@@ -20,7 +20,7 @@ const BrailleLearningApp: React.FC = () => {
     //const touchHandlerRef = useRef<TouchHandlerLearning | null>(null);
 
     const handleStart = () => {
-        setSpeechEnabled((document.getElementById('switch') as HTMLInputElement).checked);
+        //setSpeechEnabled((document.getElementById('switch') as HTMLInputElement).checked);
         setIsStarted(true);
     };
     const messagePlayer = new SayCustomMessages();
@@ -29,11 +29,11 @@ const BrailleLearningApp: React.FC = () => {
     return (
         <BrailleContainer 
         isStarted={isStarted} 
-        speechEnabled={speechEnabled} 
+        //speechEnabled={speechEnabled} 
         resultRef={resultRef} 
         necessaryRef={necessaryRef}
         mainRef={mainRef} 
-        setSpeechEnabled={setSpeechEnabled}
+        //setSpeechEnabled={setSpeechEnabled}
         handleStart={handleStart}
         />
     );

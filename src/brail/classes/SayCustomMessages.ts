@@ -57,6 +57,8 @@ export class SayCustomMessages {
     }
 }*/
 
+import { myFunctionWithDelay } from "../../components/utill";
+
 interface MyHowl{
     howl:Howl;
     skippable:boolean;
@@ -117,7 +119,12 @@ export class SayCustomMessages {
 
         const isSkippable = this.isSkippable([messageSrc]).length > 0 ? false : true;
         this.sounds2.push({howl:this.customMessage, skippable:isSkippable });
-        this.customMessage.play();
+        if ((this.isDescriptionSrc(messageSrc) || this.isEndMessage(messageSrc)) && this.customMessage !== null){
+            const message = this.customMessage;
+            myFunctionWithDelay(()=> message.play(), 500)
+        }
+        else
+            this.customMessage.play();
 
 
     }
@@ -194,6 +201,11 @@ export class SayCustomMessages {
             return 0;
         });
     }*/
+
+        private isEndMessage(sound:string){
+            return sound.includes('Obuch_end');
+        }
+
 
         private isNumSrc(sound:string){
             return (sound.includes('number_') && !sound.includes('v1'))

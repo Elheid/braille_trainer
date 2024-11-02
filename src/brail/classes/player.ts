@@ -10,7 +10,15 @@ import numberOneMP3 from  "../../../public/sounds/numbers/number_1.wav"
 import numberTwoMP3 from  "../../../public/sounds/numbers/number_2.wav"
 import numberThreeMP3 from  "../../../public/sounds/numbers/number_3.wav"
 
+import numberFourMP3 from  "../../../public/sounds/numbers/number_4.wav"
+import numberFiveMP3 from  "../../../public/sounds/numbers/number_5.wav"
+import numberSixMP3 from  "../../../public/sounds/numbers/number_6.wav"
 
+import numberSevenMP3 from  "../../../public/sounds/numbers/number_7.wav"
+import numberEightMP3 from  "../../../public/sounds/numbers/number_8.wav"
+import numberNineMP3 from  "../../../public/sounds/numbers/number_9.wav"
+
+import numberZeroMP3 from  "../../../public/sounds/numbers/number_0.wav"
 
 import succsesMessage from  "../../../public/sounds/Exellent.wav"
 
@@ -19,6 +27,16 @@ const numbersToSay: { [key: number]: string } = {
   1: numberOneMP3,
   2: numberTwoMP3,
   3:numberThreeMP3,
+
+  4: numberFourMP3,
+  5: numberFiveMP3,
+  6:numberSixMP3,
+
+  7: numberSevenMP3,
+  8: numberEightMP3,
+  9:numberNineMP3,
+
+  0:numberZeroMP3,
 };
 
 export class Player {

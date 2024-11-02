@@ -61,7 +61,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         if (this.isLevelCompleted(digit)) {
             this.nextLevel();
         } else if (this.attempts === 2) {
-            this.player.SayMessage("Попробуйте еще раз, вот дополнительная инструкция... Пока нету lol");
+            this.player.SayMessage("Попробуйте еще раз, вот дополнительная инструкция...");
         } else if (this.attempts >= this.maxAttempts) {
             this.player.SayMessage("Попытки исчерпаны. Переходим к следующему уровню.");
             this.nextLevel();
