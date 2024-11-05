@@ -38,6 +38,13 @@ export class TouchHandlerLearning extends BaseTouchHandler {
             console.log("result el not found")
     }
 
+    public getMaxAttempts(): number {
+        return this.maxAttempts;
+    }
+
+    public getCurrentttempts(): number {
+        return this.maxAttempts;
+    }
 
     public startLevel(): void {
         const levelCondition = this.getLevelCondition();

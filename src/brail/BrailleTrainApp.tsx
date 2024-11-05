@@ -7,7 +7,7 @@ import { SayCustomMessages } from './classes/SayCustomMessages';
 
 const BrailleTrainApp: React.FC = () => {
     const [isStarted, setIsStarted] = useState(false);
-    const [speechEnabled, /*setSpeechEnabled*/] = useState(false);
+    const [speechEnabled, /*setSpeechEnabled*/] = useState(true);
 
     const mainRef = useRef<HTMLDivElement | null>(null);
     const resultRef = useRef<HTMLDivElement>(null);
