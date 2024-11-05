@@ -20,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
         {!isMobile &&
-        <Alert severity="error">
+        <Alert severity="error" sx={{position:"absolute"}}>
           Функционал приложения доступен только на мобильных устройствах
         </Alert>
         }
