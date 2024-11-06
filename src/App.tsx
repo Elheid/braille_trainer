@@ -26,15 +26,15 @@ function App() {
 
   if (isMobile)
   return (
-    <BrowserRouter aria-hidden="true">
+    <BrowserRouter>
 
       <div className={"App"}>
-        <Routes aria-hidden="true">
-          <Route aria-hidden="true"  path="/braille" element={<BrailleTrainApp/>}/>
-          <Route aria-hidden="true" path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
-          <Route aria-hidden="true" path="/split" element={<SplitScreen type={typeOfRoute} setType={setType}/>}/>
-          <Route aria-hidden="true" path="/training" element={<BrailleTrainApp/>}/>
-          <Route aria-hidden="true" path="/learning" element={<BrailleLearningApp/>}/>
+        <Routes >
+          <Route  path="/braille" element={<BrailleTrainApp/>}/>
+          <Route  path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
+          <Route path="/split" element={<SplitScreen type={typeOfRoute} setType={setType}/>}/>
+          <Route  path="/training" element={<BrailleTrainApp/>}/>
+          <Route  path="/learning" element={<BrailleLearningApp/>}/>
         </Routes>
       </div>
     </BrowserRouter>
