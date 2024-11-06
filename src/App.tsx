@@ -16,16 +16,17 @@ function App() {
     const userAgent = window.navigator.userAgent.toLowerCase();
     const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
     setIsMobile(isMobileDevice);
+
   }, []);
   return (
-    <BrowserRouter>
+    <BrowserRouter aria-hidden="true">
         {!isMobile &&
-        <Alert severity="error" sx={{position:"absolute"}}>
+        <Alert aria-hidden="true" severity="error" sx={{position:"absolute"}}>
           Функционал приложения доступен только на мобильных устройствах
         </Alert>
         }
       <div className={"App"} aria-label='Тренажер брайлевского ввода'>
-        <Routes>
+        <Routes aria-hidden="true">
           <Route path="/braille" element={<BrailleTrainApp/>}/>
           <Route path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
           <Route path="/split" element={<SplitScreen type={typeOfRoute} setType={setType}/>}/>
