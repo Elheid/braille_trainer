@@ -36,11 +36,11 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
     return (
         <Container sx={{height:"inherit;"}}>
             <section className={`main-menu ${styles["main-content"]} main`}>
-            <MyTypography variant="h4" /*className={styles["index-title"]}*/>Тренажер брайльского ввода</MyTypography>
-            {<MyTypography>
+            <MyTypography tabIndex={0}  variant="h4" /*className={styles["index-title"]}*/>Тренажер брайльского ввода</MyTypography>
+            {<MyTypography tabIndex={1}>
             Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
             </MyTypography>}
-            <ul className={styles["view-cards"]}>
+            <ul className={styles["view-cards"]} tabIndex={2}>
                 <ViewCardComponent
                     destination={"/learning"}
                     className={`${styles["learning"]}  ${styles["view-card"]}`} 

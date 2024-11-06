@@ -18,6 +18,8 @@ function App() {
     setIsMobile(isMobileDevice);
 
   }, []);
+
+  if (isMobile)
   return (
     <BrowserRouter aria-hidden="true">
         {!isMobile &&
@@ -25,13 +27,13 @@ function App() {
           Функционал приложения доступен только на мобильных устройствах
         </Alert>
         }
-      <div className={"App"} aria-label='Тренажер брайлевского ввода'>
+      <div className={"App"} aria-live="assertive" aria-label='Тренажер брайлевского ввода'>
         <Routes aria-hidden="true">
-          <Route path="/braille" element={<BrailleTrainApp/>}/>
-          <Route path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
-          <Route path="/split" element={<SplitScreen type={typeOfRoute} setType={setType}/>}/>
-          <Route path="/training" element={<BrailleTrainApp/>}/>
-          <Route path="/learning" element={<BrailleLearningApp/>}/>
+          <Route aria-hidden="true"  path="/braille" element={<BrailleTrainApp/>}/>
+          <Route aria-hidden="true" path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
+          <Route aria-hidden="true" path="/split" element={<SplitScreen type={typeOfRoute} setType={setType}/>}/>
+          <Route aria-hidden="true" path="/training" element={<BrailleTrainApp/>}/>
+          <Route aria-hidden="true" path="/learning" element={<BrailleLearningApp/>}/>
         </Routes>
       </div>
     </BrowserRouter>

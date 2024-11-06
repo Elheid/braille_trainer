@@ -63,13 +63,13 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh" }}
         >
-            <LinkButtonComponent onClick={() => {
+            <LinkButtonComponent tabIndex={0}  onClick={() => {
                 messagePlayer.stopMessages();
             }
             }
                 style={buttonWithImageStyle} classes={"back-arrow-button color-button"} img={arrow} />
             {!isStarted && (
-                <Button variant="contained" id="startbutton" onClick={handleStart}>
+                <Button tabIndex={1}  variant="contained" id="startbutton" onClick={handleStart}>
                     Начать
                 </Button>
             )}
