@@ -45,8 +45,10 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
                 ...(buttonProps.style ||{})
             }}
             onClick={()=>{
-                if (!onClick) backClick();
-                else onClick();
+                backClick();
+                onClick?.();
+                /*if (!onClick) backClick();
+                else onClick();*/
             }}
         >
             <ReturnButtonComponent img={img} description={description} />

@@ -1,10 +1,20 @@
 import { Howl } from 'howler';
 
 
-import succsesSound from "../../../public/sounds/success.mp3"//"../../assets/sounds/success.mp3"
-import errorSound from  "../../../public/sounds/error.mp3"
-import touchSound from  "../../../public/sounds/touch.mp3"
+//import succsesSound from "../../../public/sounds/success.mp3"//"../../assets/sounds/success.mp3"
+import succsesSound from "../../../public/sounds/Positive.mp3"
+//import errorSound from  "../../../public/sounds/error.mp3"
+import errorSound from  "../../../public/sounds/Decline.mp3"
+//import touchSound from  "../../../public/sounds/touch.mp3"
+import touchSound from  "../../../public/sounds/Dot.mp3"
+
+import doubleTouchSound from  "../../../public/sounds/Pull_to_refresh_1.mp3"
+
+import longTouchSound from  "../../../public/sounds/Pin_Success.mp3"
+
+
 import { SayCustomMessages } from './SayCustomMessages';
+
 
 import numberOneMP3 from  "../../../public/sounds/numbers/number_1.wav"
 import numberTwoMP3 from  "../../../public/sounds/numbers/number_2.wav"
@@ -21,6 +31,8 @@ import numberNineMP3 from  "../../../public/sounds/numbers/number_9.wav"
 import numberZeroMP3 from  "../../../public/sounds/numbers/number_0.wav"
 
 import succsesMessage from  "../../../public/sounds/Exellent.wav"
+import { TouchHandlerType } from '../../enum/TouchHandlerType';
+
 
 
 const numbersToSay: { [key: number]: string } = {
@@ -46,18 +58,23 @@ export class Player {
   
 
   private customMessagePlayer: SayCustomMessages;
+  typeOfTouchHandler:TouchHandlerType;
 
   private _synth: SpeechSynthesis;
   private voice?: SpeechSynthesisVoice;
   private lang: string;
 
-  constructor(speechEnabled: boolean, customMessagesPlayer:SayCustomMessages) {
+
+
+  constructor(speechEnabled: boolean, customMessagesPlayer:SayCustomMessages, typeOfTouchHandler:TouchHandlerType) {
     this._speechEnabled = speechEnabled;
     this.customMessagePlayer = customMessagesPlayer//new SayCustomMessages();
 
     this._synth = window.speechSynthesis;
     this.lang = 'ru-RU';
     this._synth.onvoiceschanged = () => this._setVoice();
+
+    this.typeOfTouchHandler = typeOfTouchHandler;
   }
 
   public PlayTouch(): void {
@@ -72,25 +89,36 @@ export class Player {
     if (numbersToSay[digit]){
       this.SayCustomMessage(numbersToSay[digit])
     }
-    else
-      this.SayMessage(digit.toString());
+    /*else
+      this.SayMessage(digit.toString());*/
+  }
+  
+  public PlayLongTouch():void{
+    this.SayCustomMessage(longTouchSound, ()=>this.stopMessages())
+  }
+  public PlayDoubleTouch():void{
+    this.SayCustomMessage(doubleTouchSound, ()=>this.stopMessages())
   }
 
   private async playSuccessSounds(digit: number):Promise<void>{
+    if (this.typeOfTouchHandler === TouchHandlerType.LEARNING){
       await this.SayCustomMessage(succsesSound)
       await this.SayDigit(digit);
       //await this.SayCustomMessage(succsesSound)
       await this.SayCustomMessage(succsesMessage,()=>this.stopMessages())
+    }
+    else{
+      await this.SayCustomMessage(succsesSound, ()=>this.stopMessages())
+      await this.SayDigit(digit);
+      //await this.SayCustomMessage(succsesSound)
+      //await this.SayCustomMessage(succsesMessage,()=>this.stopMessages())
+    }
   }
 
   public PlaySuccess(digit?: number): void {
     if (digit !== undefined){
       if (this._speechEnabled) {
         this.playSuccessSounds(digit);
-      }
-      else{
-        this.SayCustomMessage(succsesMessage)
-        this.SayCustomMessage(succsesSound, ()=>this.stopMessages())
       }
       //this.success.play();
 
@@ -99,6 +127,7 @@ export class Player {
   }
 
   public PlayError(): void {
+    //this.SayCustomMessage(errorSound,()=>this.stopMessages())
     this.SayCustomMessage(errorSound,()=>this.stopMessages())
     //this.error.play();
   }
@@ -123,7 +152,7 @@ export class Player {
 
 
 
-  public SayMessage(message: string): void {
+  /*public SayMessage(message: string): void {
     if (!this._speechEnabled) return;
 
     const utter = new SpeechSynthesisUtterance(message);
@@ -132,7 +161,7 @@ export class Player {
     }
     utter.lang = this.lang;
     this._synth.speak(utter);
-  }
+  }*/
 
   private _setVoice(): void {
     const voices = this._synth.getVoices();

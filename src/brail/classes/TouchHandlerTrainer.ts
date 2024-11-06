@@ -7,15 +7,19 @@ import { Player } from './player';
 export class TouchHandlerTrainer extends BaseTouchHandler {
     private _errorMessage: string;
 
-    constructor(player: Player, resultElement: HTMLElement) {
-        super(player, resultElement); // Инициализация базового класса
+    constructor(player: Player, resultElement: HTMLElement, digitRecognizer:BrailleDigitRecognizer,) {
+        super(player, resultElement, digitRecognizer); // Инициализация базового класса
         this._errorMessage = 'Ошибка! Не удалось распознать комбинацию точек.';
     }
 
     // Метод convertPoints переопределяется для реализации распознавания
     protected convertPoints(): void {
-        const digitRecognizer = new BrailleDigitRecognizer();
-        const digit = digitRecognizer.recognizeDigit(this._points);
+        
+        const digit = this.digitRecognizer.recognizeDigit(this._points);
+       /* if (this.digitRecognizer.isGestureHandled && digit === undefined){
+            this._points = [];
+            return
+        }*/
 
         if (digit === undefined || digit < 0) {
             this.player.PlayError();

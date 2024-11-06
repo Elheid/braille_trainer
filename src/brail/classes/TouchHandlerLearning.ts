@@ -22,8 +22,8 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     private necessaryRef: HTMLElement;
 
-    constructor(player: Player, resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions = levelInstructionsTest, maxAttempts = 4) {
-        super(player, resultElement);
+    constructor(player: Player,digitRecognizer:BrailleDigitRecognizer,  resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions = levelInstructionsTest, maxAttempts = 4) {
+        super(player, resultElement, digitRecognizer);
         this.necessaryRef = necessaryRef
         this.level = 1;
         this.attempts = 0;
@@ -49,18 +49,20 @@ export class TouchHandlerLearning extends BaseTouchHandler {
     public startLevel(): void {
         const levelCondition = this.getLevelCondition();
         this.showNecessaryNumber((levelCondition.levelExpect).toString())
-        if (!levelCondition.mp3)
-            this.player.SayMessage(this.getInstruction());
+        if (levelCondition.mp3)
+            this.player.SayCustomMessage(levelCondition.mp3)
         else{
-                this.player.SayCustomMessage(levelCondition.mp3)
+           // this.player.SayMessage(this.getInstruction());
             // Выполняем callback после задержки
         }
     }
 
     protected convertPoints(): void {
-        const digitRecognizer = new BrailleDigitRecognizer();
-        const digit = digitRecognizer.recognizeDigit(this._points);
-
+        const digit = this.digitRecognizer.recognizeDigit(this._points);
+       /* if (this.digitRecognizer.isGestureHandled && digit === undefined){
+            this._points = [];
+            return
+        }*/
         //super.convertPoints();
         this.attempts++;
 
@@ -68,9 +70,11 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         if (this.isLevelCompleted(digit)) {
             this.nextLevel();
         } else if (this.attempts === 2) {
-            this.player.SayMessage("Попробуйте еще раз, вот дополнительная инструкция...");
+            //this.player.SayMessage("Попробуйте еще раз, вот дополнительная инструкция...");
+            console.log("Попробуйте еще раз, вот дополнительная инструкция...");
         } else if (this.attempts >= this.maxAttempts) {
-            this.player.SayMessage("Попытки исчерпаны. Переходим к следующему уровню.");
+            console.log("Попытки исчерпаны. Переходим к следующему уровню.");
+            //this.player.SayMessage("Попытки исчерпаны. Переходим к следующему уровню.");
             this.nextLevel();
         }
         this._points = [];

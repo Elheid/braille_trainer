@@ -34,12 +34,15 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
     }*/
     return (
             <li className={classNamees} 
+            role="button"
+            aria-label={typeOfRoute === 'learning' ? 'Перейти в режим обучения' : 'Перейти в режим тренировки'}
             style={{cursor:"pointer", position:'relative'}}
             onClick={() => {
                 //window.location.reload();
                 setType(typeOfRoute);
                 localStorage.setItem("language", typeOfRoute);
                 navigateHandleClick(false, destination, navigate)
+                
             }}>
                     <Container className={styles["card-header"]}>
                         {imageContainer}

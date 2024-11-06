@@ -4,6 +4,8 @@ import useTouchHandler from '../hooks/useTouchHandler';
 import BrailleContainer from './BrailleContainer';
 import { TouchHandlerType } from '../enum/TouchHandlerType';
 import { SayCustomMessages } from './classes/SayCustomMessages';
+import { BrailleDigitRecognizer } from './classes/brailleDigetRecognizer';
+import { Player } from './classes/player';
 
 const BrailleTrainApp: React.FC = () => {
     const [isStarted, setIsStarted] = useState(false);
@@ -20,17 +22,33 @@ const BrailleTrainApp: React.FC = () => {
     //const player = new Player(speechEnabled);
     //touchHandlerRef.current = new TouchHandlerTrainer(player, resultRef.current);
     const messagePlayer = new SayCustomMessages();
-    useTouchHandler({isStarted, speechEnabled, resultRef, mainRef, typeOfTouchHandler:TouchHandlerType.TRAINING, customMessagePlayer: messagePlayer})
+    //const customMessagePlayerRef = useRef(new SayCustomMessages());
+    const player = new Player(speechEnabled, messagePlayer, TouchHandlerType.TRAINING);
+    //const digitRecognizer= new BrailleDigitRecognizer(()=> player.PlayDoubleTouch(), ()=> player.PlayLongTouch());
+    const digitRecognizer= new BrailleDigitRecognizer();
+    //const [messagePlayer] = useState(new SayCustomMessages());
+    useTouchHandler({
+        isStarted, 
+        speechEnabled, 
+        resultRef, 
+        mainRef, 
+        typeOfTouchHandler:TouchHandlerType.TRAINING, 
+        digitRecognizer, 
+        player})
+
+    //useTouchHandler({isStarted, speechEnabled, resultRef, mainRef, typeOfTouchHandler:TouchHandlerType.TRAINING, customMessagePlayer: messagePlayer})
 
 
     return (
         <BrailleContainer 
+        messagePlayer={messagePlayer}
         isStarted={isStarted} 
         //speechEnabled={speechEnabled} 
         resultRef={resultRef} 
         mainRef={mainRef} 
         //setSpeechEnabled={setSpeechEnabled}
         handleStart={handleStart}
+        digitRecognizer={digitRecognizer}
         />
     );
 };

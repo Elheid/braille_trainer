@@ -15,3 +15,12 @@ export const myFunctionWithDelay = (callback: () => void, delay: number) => {
         callback(); // Выполняем callback после задержки
     }, delay);
 }
+
+
+export const sleep = (milliseconds: number) => {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}

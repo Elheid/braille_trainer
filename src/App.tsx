@@ -24,7 +24,7 @@ function App() {
           Функционал приложения доступен только на мобильных устройствах
         </Alert>
         }
-      <div className={"App"}>
+      <div className={"App"} aria-label='Тренажер брайлевского ввода'>
         <Routes>
           <Route path="/braille" element={<BrailleTrainApp/>}/>
           <Route path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>

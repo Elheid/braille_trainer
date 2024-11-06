@@ -24,6 +24,7 @@ import numberZeroDescribeMP3 from "../../public//sounds/numberDescription/0v1.wa
 
 
 import { SayCustomMessages } from "../brail/classes/SayCustomMessages";
+import { BrailleDigitRecognizer } from "../brail/classes/brailleDigetRecognizer";
 
 const levelInstructions = [
     { levelInstruct: 'Цифра "один". Цифра 1 состоит из одной точки. Коснитесь один раз в любом месте экрана.', levelExpect: 1, mp3:numberOneDescribeMP3 },
@@ -47,25 +48,25 @@ interface UseTouchHandlerProps {
     necessaryRef?: React.RefObject<HTMLDivElement>;
     mainRef: React.RefObject<HTMLDivElement>;
     typeOfTouchHandler:TouchHandlerType;
-    customMessagePlayer:SayCustomMessages;
+    digitRecognizer:BrailleDigitRecognizer;
+    player:Player;
 }
 
 
-const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, mainRef, typeOfTouchHandler=TouchHandlerType.TRAINING, customMessagePlayer }: UseTouchHandlerProps) => {
+const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, mainRef, typeOfTouchHandler=TouchHandlerType.TRAINING, digitRecognizer, player }: UseTouchHandlerProps) => {
     const isHandlerAttachedRef = useRef(false);
-    const customMessagePlayerRef = useRef(customMessagePlayer);
     //const customMessagePlayer = new SayCustomMessages();
     useEffect(() => {
         if (isStarted && resultRef.current && mainRef.current) {
 
             // Инициализируем Player, если он не передан в пропсах
             //playerRef.current = player || new Player(speechEnabled);
-            const player = new Player(speechEnabled, customMessagePlayerRef.current);
-            let touchHandlerClass: TouchHandlerTrainer | TouchHandlerLearning = new TouchHandlerTrainer(player, resultRef.current);
+            //const player = new Player(speechEnabled, customMessagePlayer);
+            let touchHandlerClass: TouchHandlerTrainer | TouchHandlerLearning = new TouchHandlerTrainer(player, resultRef.current, digitRecognizer);
             if (typeOfTouchHandler === TouchHandlerType.TRAINING)
-                touchHandlerClass =   new TouchHandlerTrainer(player, resultRef.current);
+                touchHandlerClass =   new TouchHandlerTrainer(player, resultRef.current, digitRecognizer);
             if (typeOfTouchHandler === TouchHandlerType.LEARNING && necessaryRef && necessaryRef.current)
-                touchHandlerClass =  new TouchHandlerLearning(player, resultRef.current, necessaryRef.current,  levelInstructions);
+                touchHandlerClass =  new TouchHandlerLearning(player,digitRecognizer, resultRef.current, necessaryRef.current,  levelInstructions);
 
             const touchHandler = (e: TouchEvent) => touchHandlerClass?.Handle(e);
 
@@ -76,23 +77,29 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
             if (touchHandlerClass){
 
                 // Проверяем, добавлен ли обработчик событий
-                if (!isHandlerAttachedRef.current) {
-                    mainRef.current.addEventListener('touchstart', touchHandler);
-                    isHandlerAttachedRef.current = true;
+                const addTouchHandler = ()=>{
+                    if (!isHandlerAttachedRef.current && mainRef.current) {
+                        player.stopMessages();
+                        mainRef.current.addEventListener('touchstart', touchHandler);
+                        isHandlerAttachedRef.current = true;
+                        mainRef.current.removeEventListener('touchstart', addTouchHandler);
+                        // Проверка типа для вызова `startLevel()` у TouchHandlerLearning
+                        if (touchHandlerClass instanceof TouchHandlerLearning) {
+                            if (speechEnabled &&  isStarted)
+                                touchHandlerClass.startLevel();
+                            }
+                        }
                 }
     
                 // Сообщение при запуске
                 if (isStarted && speechEnabled){
                     if (touchHandlerClass instanceof TouchHandlerLearning){
                         player.SayCustomMessage(screenReaderLearningMP3)
+                        mainRef.current.addEventListener('touchstart', addTouchHandler);
                     }
                     else{
                         player.SayCustomMessage(screenReaderTrainingMP3)
-                    }
-                    // Проверка типа для вызова `startLevel()` у TouchHandlerLearning
-                    if (touchHandlerClass instanceof TouchHandlerLearning) {
-                        if (speechEnabled &&  isStarted)
-                            touchHandlerClass.startLevel();
+                        mainRef.current.addEventListener('touchstart', addTouchHandler);
                     }
                 }
             }

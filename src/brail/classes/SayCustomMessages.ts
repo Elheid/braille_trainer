@@ -57,7 +57,18 @@ export class SayCustomMessages {
     }
 }*/
 
-import { myFunctionWithDelay } from "../../components/utill";
+import { sleep } from "../../components/utill";
+
+const uniquePartSrcOfSounds = {
+    exellent:"Exellent",
+    description:"v1",
+    numbder:"number_",
+    success:"Positive",//"success",
+    error:"Decline",//"error",
+    end_learning:"Obuch_end",
+    longTouch:"Pin_Success",
+    doubleTouch:"Pull_to_refresh_1"
+}
 
 interface MyHowl{
     howl:Howl;
@@ -69,6 +80,7 @@ export class SayCustomMessages {
     private isPlaying: boolean = false;
     //private sounds: Howl[] = []; // Массив для хранения экземпляров Howl
     private sounds2:MyHowl[] = [];
+
 
 
 
@@ -108,10 +120,10 @@ export class SayCustomMessages {
         });
 
 
-        if (this.lastMessageSrc === messageSrc) {
+        /*if (this.lastMessageSrc === messageSrc) {
             console.log(`Сообщение "${messageSrc}" совпадает с предыдущим. Пропускаем.`);
             return; // Если совпадает, пропускаем воспроизведение
-        }
+        }*/
 
         //this.sayMessage(messageSrc); // Воспроизводим его
         this.lastMessageSrc = messageSrc; // Обновляем предыдущий источник
@@ -121,7 +133,9 @@ export class SayCustomMessages {
         this.sounds2.push({howl:this.customMessage, skippable:isSkippable });
         if ((this.isDescriptionSrc(messageSrc) || this.isEndMessage(messageSrc)) && this.customMessage !== null){
             const message = this.customMessage;
-            myFunctionWithDelay(()=> message.play(), 500)
+            sleep(250);
+            //myFunctionWithDelay(()=> message.play(), 150)
+            message.play()
         }
         else
             this.customMessage.play();
@@ -203,35 +217,35 @@ export class SayCustomMessages {
     }*/
 
         private isEndMessage(sound:string){
-            return sound.includes('Obuch_end');
+            return sound.includes(uniquePartSrcOfSounds.end_learning);
         }
 
 
         private isNumSrc(sound:string){
-            return (sound.includes('number_') && !sound.includes('v1'))
+            return (sound.includes(uniquePartSrcOfSounds.numbder) && !sound.includes(uniquePartSrcOfSounds.description))
         }
 
         private isDescriptionSrc(sound:string){
-            return (sound.includes('1') && sound.includes('v1')) ||
-            (sound.includes('2') && sound.includes('v1')) ||
-            (sound.includes('3') && sound.includes('v1')) ||
-            (sound.includes('4') && sound.includes('v1')) ||
-            (sound.includes('5') && sound.includes('v1')) ||
-            (sound.includes('6') && sound.includes('v1')) ||
-            (sound.includes('7') && sound.includes('v1')) ||
-            (sound.includes('8') && sound.includes('v1')) ||
-            (sound.includes('9') && sound.includes('v1')) ||
-            (sound.includes('0') && sound.includes('v1'));
+            return (sound.includes('1') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('2') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('3') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('4') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('5') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('6') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('7') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('8') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('9') && sound.includes(uniquePartSrcOfSounds.description)) ||
+            (sound.includes('0') && sound.includes(uniquePartSrcOfSounds.description));
         }
 
 
         private isSkippable(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
-                const isExellent =  sound.includes('Exellent');
-                const isSuccess= sound.includes('/success');
-                const isError =  sound.includes('error');
+                const isExellent =  sound.includes(uniquePartSrcOfSounds.exellent);
+                const isSuccess= sound.includes(uniquePartSrcOfSounds.success);
+                const isError =  sound.includes(uniquePartSrcOfSounds.error);
                 const isNum = this.isNumSrc(sound);
-                const isEnd = sound.includes('Obuch_end');
+                const isEnd = sound.includes(uniquePartSrcOfSounds.end_learning);
                 return (
                     isExellent||
                     isSuccess ||
@@ -245,21 +259,27 @@ export class SayCustomMessages {
 
         private filterSuccessSounds(messageQueue:string[]){
             const res = messageQueue.filter((sound) => {
-                const isExellent =  sound.includes('Exellent');
-                const isSuccess= sound.includes('/success');
-                const isError =  sound.includes('error');
+                const isExellent =  sound.includes(uniquePartSrcOfSounds.exellent);
+                const isSuccess= sound.includes(uniquePartSrcOfSounds.success);
+                const isError =  sound.includes(uniquePartSrcOfSounds.error);
                 const isNum = this.isNumSrc(sound);
 
+                const isDouble = sound.includes(uniquePartSrcOfSounds.doubleTouch);
+                const isLong = sound.includes(uniquePartSrcOfSounds.longTouch);
+                
                 const isDescription = this.isDescriptionSrc(sound);
 
-                const isEnd = sound.includes('Obuch_end');
+                const isEnd = sound.includes(uniquePartSrcOfSounds.end_learning);
                 return (
                     isExellent||
                     isSuccess ||
                     isError ||
                     isNum ||
                     isDescription ||
-                    isEnd
+                    isEnd ||
+
+                    isDouble ||
+                    isLong
                 );
             });
             return res;
@@ -273,18 +293,7 @@ export class SayCustomMessages {
                 .filter((sound) => {
                     const isDescription = this.isDescriptionSrc(sound);
                     return isDescription;
-                })///\/public\/sounds\/numberDescription\/[0-9]+v1\.wav$/.test(sound))
-                /*.sort((a, b) => {
-                    const matchA = a.match(/(\d+)(?=v1)/);//a.match(/\/assets\/(\d+)v1/);
-                    const numberA = matchA ? Number(matchA[1]) : -1;
-
-                    const matchB = b.match(/(\d+)(?=v1)/);//b.match(/\/assets\/(\d+)v1/);
-                    const numberB = matchB ? Number(matchB[1]) : -1;
-
-                    //const numberA = parseInt(a.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
-                    //const numberB = parseInt(b.match(/\/([0-9]+)v1\.wav$/)?.[1] || "0", 10);
-                    return numberB - numberA; 
-                });*/
+                })
                 .reduce((maxStr, currentStr) => {
                     const regex = /(\d+)(?=\s*v1)/;
                     const currentMatch = currentStr.match(regex);
@@ -300,7 +309,7 @@ export class SayCustomMessages {
                 maxNumberDescriptionSound = numberDescriptionSounds; // Берем звук с наибольшим числом
         
             // Проверяем наличие `Obuch_end.wav`
-            const obuchEndSound = filteredSounds.find(sound => sound.includes('Obuch_end'));
+            const obuchEndSound = filteredSounds.find(sound => sound.includes(uniquePartSrcOfSounds.end_learning));
         
             // Собираем окончательный массив, оставляя `numberDescription` и `Obuch_end` файлы в конце
             const resultSounds = filteredSounds
@@ -308,7 +317,7 @@ export class SayCustomMessages {
                     const isDescription = this.isDescriptionSrc(sound);
 
                     return !isDescription&&
-                    !sound.includes('Obuch_end')
+                    !sound.includes(uniquePartSrcOfSounds.end_learning)
                 }
                 );
         

@@ -1,4 +1,5 @@
 // BaseTouchHandler.ts
+import { BrailleDigitRecognizer } from './brailleDigetRecognizer';
 import { Player } from './player';
 
 interface Point {
@@ -15,14 +16,21 @@ export class BaseTouchHandler {
     protected _timerId: ReturnType<typeof setTimeout> | null = null;
     protected _period = 1000; // время в миллисекундах
 
-    constructor(player: Player,  resultElement: HTMLElement) {
+    protected digitRecognizer:BrailleDigitRecognizer;// = new BrailleDigitRecognizer();
+
+
+    constructor(player: Player,  resultElement: HTMLElement, digitRecognizer:BrailleDigitRecognizer) {
         this.player = player;
 
         this.resultElement = resultElement;
 
+        this.digitRecognizer = digitRecognizer
+
         this.Handle = this.Handle.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
         this.startTimer = this.startTimer.bind(this);
+
+
         
     }
 
@@ -57,10 +65,16 @@ export class BaseTouchHandler {
 
     // Метод для отображения результата
     protected showResult(message: string): void {
-        if (this.resultElement)
+        if (this.resultElement){
+            /*if (this.resultElement.textContent?.length === 4)
+                return;
+            if (!message.includes("Ошибка"))
+                this.resultElement.textContent += message;
+            else 
+                console.log(message)*/
             this.resultElement.textContent = message;
+        }
         else 
             console.log("result el not found")
     }
-
 }
