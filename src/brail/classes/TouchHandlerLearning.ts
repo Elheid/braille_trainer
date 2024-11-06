@@ -80,9 +80,9 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         this._points = [];
     }
 
-    private getInstruction(): string {
+   /* private getInstruction(): string {
         return this.levelInstructions[this.level - 1].levelInstruct;
-    }
+    }*/
 
     private getExpectedNumber(): number {
         return this.levelInstructions[this.level - 1].levelExpect;

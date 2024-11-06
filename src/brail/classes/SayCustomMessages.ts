@@ -126,7 +126,7 @@ export class SayCustomMessages {
         }*/
 
         //this.sayMessage(messageSrc); // Воспроизводим его
-        this.lastMessageSrc = messageSrc; // Обновляем предыдущий источник
+        //this.lastMessageSrc = messageSrc; // Обновляем предыдущий источник
         //this.sounds.push(this.customMessage); // Сохраняем экземпляр Howl
 
         const isSkippable = this.isSkippable([messageSrc]).length > 0 ? false : true;
@@ -372,7 +372,7 @@ export class SayCustomMessages {
         }
     }*/
 
-    private lastMessageSrc: string | null = null; // Сохраняем предыдущий источник сообщения
+    //private lastMessageSrc: string | null = null; // Сохраняем предыдущий источник сообщения
 
     /*private processQueue(): void {
         if (this.messageQueue.length > 0) {

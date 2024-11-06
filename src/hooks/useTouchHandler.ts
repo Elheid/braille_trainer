@@ -23,7 +23,6 @@ import numberNineDescribeMP3 from "../../public//sounds/numberDescription/9v1.wa
 import numberZeroDescribeMP3 from "../../public//sounds/numberDescription/0v1.wav"
 
 
-import { SayCustomMessages } from "../brail/classes/SayCustomMessages";
 import { BrailleDigitRecognizer } from "../brail/classes/brailleDigetRecognizer";
 
 const levelInstructions = [

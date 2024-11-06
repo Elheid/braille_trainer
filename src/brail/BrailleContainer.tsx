@@ -55,7 +55,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
         // Очистить таймеры, если тап завершен
         digitRecognizer.onRelease();
       };*/
-
+    console.log(digitRecognizer)
     return (
         <Container
             /*onTouchStart={handleTouchStart}
