@@ -28,7 +28,7 @@ function App() {
   return (
     <BrowserRouter aria-hidden="true">
 
-      <div className={"App"}>
+      <div className={"App"} tabIndex={0}>
         <Routes aria-hidden="true">
           <Route aria-hidden="true"  path="/braille" element={<BrailleTrainApp/>}/>
           <Route aria-hidden="true" path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>
