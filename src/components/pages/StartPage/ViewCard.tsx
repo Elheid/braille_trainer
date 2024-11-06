@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './mainPage.module.css'
 import { navigateHandleClick } from "../../utill";
 import { Container } from "@mui/material";
-import ImageButton from "../../ImageButtonComponent";
+//import ImageButton from "../../ImageButtonComponent";
 
 import arrow from "../../../assets/img/chevron-right.svg"
 import whiteArrowButton from "../../../styles/whiteArrowButton";
