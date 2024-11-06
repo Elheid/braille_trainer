@@ -46,9 +46,12 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
             }}>
                     <Container className={styles["card-header"]}>
                         {imageContainer}
-                        <ImageButton sx={whiteArrowButton}>
+                       { /*<ImageButton sx={whiteArrowButton}>*/}
+                        <div style={whiteArrowButton}>
                             <img src={arrow}></img>
-                        </ImageButton>
+                        </div>
+                            
+                       { /*</ImageButton>*/}
                     </Container>
                     <Container className={styles["card-footer"]}>{renderHeader?.()}</Container>
             </button>
