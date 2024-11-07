@@ -7,7 +7,6 @@ interface Point {
     y: number;
 }
 
-
 export class BaseTouchHandler {
     protected resultElement: HTMLElement;
 
@@ -17,6 +16,7 @@ export class BaseTouchHandler {
     protected _period = 1000; // время в миллисекундах
 
     protected digitRecognizer:BrailleDigitRecognizer;// = new BrailleDigitRecognizer();
+
 
 
     constructor(player: Player,  resultElement: HTMLElement, digitRecognizer:BrailleDigitRecognizer) {
@@ -59,19 +59,13 @@ export class BaseTouchHandler {
 
     protected convertPoints(): void {
         // Обработка точки для распознавания цифр
-        console.log("Конвертация точек для распознавания");
     }
 
 
     // Метод для отображения результата
     protected showResult(message: string): void {
         if (this.resultElement){
-            /*if (this.resultElement.textContent?.length === 4)
-                return;
-            if (!message.includes("Ошибка"))
-                this.resultElement.textContent += message;
-            else 
-                console.log(message)*/
+
             this.resultElement.textContent = message;
         }
         else 

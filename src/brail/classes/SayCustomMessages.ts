@@ -88,8 +88,8 @@ export class SayCustomMessages {
         this.messageQueue.push(messageSrc); // Добавьте сообщение в очередь
 
 
-        console.log("after add")
-        console.log(this.messageQueue);
+        //console.log("after add")
+        //console.log(this.messageQueue);
         if (callBack) {
             //callBack();
             this.stopMessagesButNoSuccses();

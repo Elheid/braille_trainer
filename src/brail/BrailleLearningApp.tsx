@@ -28,16 +28,10 @@ const BrailleLearningApp: React.FC = () => {
     
     const messagePlayer = new SayCustomMessages();
     const player = new Player(speechEnabled, messagePlayer, TouchHandlerType.LEARNING);
-    /*const digitRecognizer= new BrailleDigitRecognizer(
-        ()=> {
-            player.PlayDoubleTouch()
-        }, 
-        ()=> {
-            
-            player.PlayLongTouch()
-        });*/
+
     const digitRecognizer= new BrailleDigitRecognizer();
-    //const [messagePlayer] = useState(new SayCustomMessages());
+
+
     useTouchHandler({
         isStarted, 
         speechEnabled, 
@@ -58,7 +52,7 @@ const BrailleLearningApp: React.FC = () => {
         mainRef={mainRef} 
         //setSpeechEnabled={setSpeechEnabled}
         handleStart={handleStart}
-        digitRecognizer={digitRecognizer}
+        player={player}
         />
     );
 };

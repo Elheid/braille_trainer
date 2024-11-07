@@ -7,6 +7,7 @@ import { SayCustomMessages } from './classes/SayCustomMessages';
 import { BrailleDigitRecognizer } from './classes/brailleDigetRecognizer';
 import { Player } from './classes/player';
 
+
 const BrailleTrainApp: React.FC = () => {
     const [isStarted, setIsStarted] = useState(false);
     const [speechEnabled, /*setSpeechEnabled*/] = useState(true);
@@ -19,14 +20,13 @@ const BrailleTrainApp: React.FC = () => {
         setIsStarted(true);
     };
 
-    //const player = new Player(speechEnabled);
-    //touchHandlerRef.current = new TouchHandlerTrainer(player, resultRef.current);
+
     const messagePlayer = new SayCustomMessages();
-    //const customMessagePlayerRef = useRef(new SayCustomMessages());
+
     const player = new Player(speechEnabled, messagePlayer, TouchHandlerType.TRAINING);
-    //const digitRecognizer= new BrailleDigitRecognizer(()=> player.PlayDoubleTouch(), ()=> player.PlayLongTouch());
+
     const digitRecognizer= new BrailleDigitRecognizer();
-    //const [messagePlayer] = useState(new SayCustomMessages());
+
     useTouchHandler({
         isStarted, 
         speechEnabled, 
@@ -48,7 +48,7 @@ const BrailleTrainApp: React.FC = () => {
         mainRef={mainRef} 
         //setSpeechEnabled={setSpeechEnabled}
         handleStart={handleStart}
-        digitRecognizer={digitRecognizer}
+        player={player}
         />
     );
 };
