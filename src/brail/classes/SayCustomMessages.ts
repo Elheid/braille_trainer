@@ -23,7 +23,7 @@ export class SayCustomMessages {
     //private sounds: Howl[] = []; // Массив для хранения экземпляров Howl
     private sounds2:MyHowl[] = [];
 
-    private sleepAfterMessage = 150;
+    private sleepAfterMessage = 180;
 
 
 
