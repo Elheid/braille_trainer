@@ -1,61 +1,3 @@
-/*
-import { Howl } from 'howler';
-export class SayCustomMessages {
-    private messageQueue: string[] = [];
-    private isPlaying: boolean = false;
-    private currentHowl: Howl | null = null;
-
-    private sounds: Howl[] = [];
-
-    constructor(){
-        console.log("Создан SayCustomMessages")
-    }
-
-    public getIsPlaing() : boolean{
-        return this.isPlaying;
-    }
-    public sayMessage(messageSrc: string): void {
-        this.messageQueue.push(messageSrc);
-        console.log("after add")
-        console.log(this.messageQueue);
-        if (!this.isPlaying) {
-            this.playNextMessage();
-        }
-    }
-
-    private playNextMessage(): void {
-        if (this.messageQueue.length === 0) {
-            this.isPlaying = false;
-            return;
-        }
-
-        this.isPlaying = true;
-        const messageSrc = this.messageQueue.shift() as string;
-
-        this.currentHowl = new Howl({
-            src: [messageSrc],
-            onend: () => {
-                this.playNextMessage();
-            },
-            onstop: () => {
-                this.isPlaying = false;
-            }
-        });
-
-        this.currentHowl.play();
-    }
-
-    public stopMessages(): void {
-        console.log("before clean")
-        console.log(this.messageQueue);
-
-        this.messageQueue = [];
-        if (this.currentHowl) {
-            this.currentHowl.stop();
-        }
-        this.isPlaying = false;
-    }
-}*/
 
 import { sleep } from "../../components/utill";
 
@@ -81,6 +23,7 @@ export class SayCustomMessages {
     //private sounds: Howl[] = []; // Массив для хранения экземпляров Howl
     private sounds2:MyHowl[] = [];
 
+    private sleepAfterMessage = 150;
 
 
 
@@ -133,7 +76,7 @@ export class SayCustomMessages {
         this.sounds2.push({howl:this.customMessage, skippable:isSkippable });
         if ((this.isDescriptionSrc(messageSrc) || this.isEndMessage(messageSrc)) && this.customMessage !== null){
             const message = this.customMessage;
-            sleep(250);
+            sleep(this.sleepAfterMessage);
             //myFunctionWithDelay(()=> message.play(), 150)
             message.play()
         }
