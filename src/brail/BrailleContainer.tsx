@@ -25,48 +25,19 @@ interface BrailleProps {
 }
 
 const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart, digitRecognizer, player }: BrailleProps) => {
-    /*const gestureHandlerRef = useRef(
-        new GestureHandler(
-            () => console.log("Double tap detected"),
-            () => console.log("Long press detected")
-        )
-    );*/
 
-    /*const handleTouchStart = () => {
-        digitRecognizer.handleTouchStart();
-    };
-
-    const handleTouchEnd = () => {
-        digitRecognizer.handleTouchEnd();
-    };*/
-    /*const handleTap = (event: React.TouchEvent<HTMLDivElement>) => {
-        const touchPoint: Point = {
-          x: event.touches[0].clientX,
-          y: event.touches[0].clientY,
-        };
-    
-        // Вызовем метод onTap, чтобы обработать тап
-        digitRecognizer.onTap(touchPoint, () => {
-          // Здесь происходит ваша логика по обработке нажатия
-          // Например, распознавание цифры или выполнение действия
-          const digit = digitRecognizer.recognizeDigit([touchPoint]); // Или передайте другие точки, если нужно
-          console.log(digit);
-          //setRecognizedDigit(digit);
-        });
-      };
-    
-      const handleRelease = () => {
-        // Очистить таймеры, если тап завершен
-        digitRecognizer.onRelease();
-      };*/
-    //console.log(digitRecognizer)
     const onTap = (event: { type: 'doubleTap' | 'longTap' | 'tap'; position: { x: number; y: number } }) => {
-        player.isUniqueTaped = false;
         console.log('Event type:', event.type);
         console.log('Position:', event.position);
-        if (event.type === 'doubleTap') player.PlayDoubleTouch();
-        if (event.type === 'longTap') player.PlayLongTouch();
-        player.isUniqueTaped = true
+        if (event.type === 'doubleTap'){
+            player.PlayDoubleTouch();
+            player.isDoubleTaped = true;
+        } 
+        if (event.type === 'longTap'){
+            player.PlayLongTouch();
+            player.isLongTaped = true;
+        } 
+
     };
 
     useTapRecognizer(player, onTap);

@@ -16,9 +16,10 @@ export class TouchHandlerTrainer extends BaseTouchHandler {
     protected convertPoints(): void {
         super.convertPoints();
 
-        if (this.player.isUniqueTaped) {
+        if (this.player.isDoubleTaped || this.player.isLongTaped) {
             console.log("base touch handler return");
-            this.showResult("Уникальный жест");
+            if (this.player.isDoubleTaped ) this.showResult("Удаление цифры");
+            if (this.player.isLongTaped ) this.showResult("Ввод пин-кода");
             this._points = [];
             return;
         }

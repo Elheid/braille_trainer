@@ -65,7 +65,8 @@ export class Player {
   private lang: string;
 
 
-  public isUniqueTaped = false;
+  public isDoubleTaped = false;
+  public isLongTaped = false;
 
 
   constructor(speechEnabled: boolean, customMessagesPlayer:SayCustomMessages, typeOfTouchHandler:TouchHandlerType) {
@@ -91,8 +92,7 @@ export class Player {
     if (numbersToSay[digit]){
       this.SayCustomMessage(numbersToSay[digit])
     }
-    /*else
-      this.SayMessage(digit.toString());*/
+
   }
   
   public PlayLongTouch():void{
@@ -112,8 +112,7 @@ export class Player {
     else{
       await this.SayCustomMessage(succsesSound, ()=>this.stopMessages())
       await this.SayDigit(digit);
-      //await this.SayCustomMessage(succsesSound)
-      //await this.SayCustomMessage(succsesMessage,()=>this.stopMessages())
+
     }
   }
 
@@ -122,9 +121,7 @@ export class Player {
       if (this._speechEnabled) {
         this.playSuccessSounds(digit);
       }
-      //this.success.play();
 
-      //this.stopMessages();
     }
   }
 
@@ -133,14 +130,7 @@ export class Player {
     this.SayCustomMessage(errorSound,()=>this.stopMessages())
     //this.error.play();
   }
-/*
-  public SayCustomMessage(messageSrc: string): void {
-    this.customMessage = new Howl({
-      src: [messageSrc],
-    });
-    if (this._speechEnabled)
-      this.customMessage.play();
-  }*/
+
 
 
     public SayCustomMessage(messageSrc: string, callBack?:()=>void): void {
@@ -153,17 +143,6 @@ export class Player {
   }
 
 
-
-  /*public SayMessage(message: string): void {
-    if (!this._speechEnabled) return;
-
-    const utter = new SpeechSynthesisUtterance(message);
-    if (this.voice) {
-      utter.voice = this.voice;
-    }
-    utter.lang = this.lang;
-    this._synth.speak(utter);
-  }*/
 
   private _setVoice(): void {
     const voices = this._synth.getVoices();

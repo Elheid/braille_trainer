@@ -7,13 +7,6 @@ import { Player } from './player';
 import endLearningMessage from "../../../public/sounds/Obuch_end.wav"//"../../assets/sounds/Obuch_end.wav"
 type LevelCondition = {levelInstruct: string, levelExpect:number, mp3?:string}
 
-
-const levelInstructionsTest = [
-    {levelInstruct:"Для первого уровня, распознайте цифру 1", levelExpect: 1},
-    {levelInstruct:"Для второго уровня, распознайте цифру 2",  levelExpect: 2},
-    // Добавьте инструкции для всех 10 уровней
-]
-
 export class TouchHandlerLearning extends BaseTouchHandler {
     private level: number;
     private attempts: number;
@@ -22,7 +15,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     private necessaryRef: HTMLElement;
 
-    constructor(player: Player,digitRecognizer:BrailleDigitRecognizer, resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions = levelInstructionsTest, maxAttempts = 4) {
+    constructor(player: Player,digitRecognizer:BrailleDigitRecognizer, resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions: LevelCondition[], maxAttempts = 4) {
         super(player, resultElement, digitRecognizer);
         this.necessaryRef = necessaryRef
         this.level = 1;
@@ -48,7 +41,12 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     public startLevel(): void {
         const levelCondition = this.getLevelCondition();
-        this.showNecessaryNumber((levelCondition.levelExpect).toString())
+        let expectNumStr = levelCondition.levelExpect.toString();
+        if (levelCondition.levelExpect ===-2 || levelCondition.levelExpect === -3 ){
+            if (levelCondition.levelExpect === -2  ) expectNumStr = ("Удаление цифры");
+            if (levelCondition.levelExpect === -3) expectNumStr = ("Ввод пин-кода");
+        }
+        this.showNecessaryNumber(expectNumStr)
         if (levelCondition.mp3)
             this.player.SayCustomMessage(levelCondition.mp3)
         else{
@@ -59,15 +57,20 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     protected convertPoints(): void {
         const digit = this.digitRecognizer.recognizeDigit(this._points);
-       /* if (this.digitRecognizer.isGestureHandled && digit === undefined){
-            this._points = [];
-            return
-        }*/
         super.convertPoints();
         this.attempts++;
 
-        
-        if (this.isLevelCompleted(digit)) {
+        let uniqueDigit:number = -1; // -2 double tap, -3 long tap
+        if (this.player.isDoubleTaped || this.player.isLongTaped) {
+            console.log("base touch handler return");
+            if (this.player.isDoubleTaped ) uniqueDigit = -2
+            if (this.player.isLongTaped ) uniqueDigit = -3
+            this._points = [];
+            
+        }
+
+        const resDigit = uniqueDigit !== -1 ? uniqueDigit : digit;
+        if (this.isLevelCompleted(resDigit)) {
             this.nextLevel();
         } else if (this.attempts === 2) {
             //this.player.SayMessage("Попробуйте еще раз, вот дополнительная инструкция...");
@@ -96,7 +99,13 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         // Логика завершения уровня
         //return true; // Временное значение
         const expectedNumber = this.getExpectedNumber();
-        if (digit) this.showResult(digit.toString());
+        if (digit){
+            if (digit !== -2 && digit !== -3) this.showResult(digit.toString());
+            else {
+                if (this.player.isDoubleTaped ) this.showResult("Удаление цифры");
+                if (this.player.isLongTaped ) this.showResult("Ввод пин-кода");
+            }
+        }
         if (expectedNumber === digit){
             this.player.PlaySuccess(digit);
             //this.player.stopMessages();

@@ -27,7 +27,8 @@ export const useTapRecognizer = (
             const now = Date.now();
 
 
-            player.isUniqueTaped = false;
+            player.isDoubleTaped = false;
+            player.isLongTaped = false;
 
             if (lastTapTime && now - lastTapTime <= doubleTapThreshold) {
                 // Проверка на близость двух тапов
