@@ -58,6 +58,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
     console.log(digitRecognizer)
     return (
         <Container
+            
             /*onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}*/
             disableGutters={true}

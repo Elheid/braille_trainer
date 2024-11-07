@@ -18,13 +18,16 @@ function App() {
     setIsMobile(isMobileDevice);
 
   }, []);
-  const alert =!isMobile &&
+  const alert = !isMobile &&
     <Alert aria-hidden="true" severity="error" sx={{position:"absolute"}}>
       Функционал приложения доступен только на мобильных устройствах
     </Alert>
     console.log(alert)
 
-  if (isMobile)
+  if (!isMobile){
+    return alert;
+  }
+  else 
   return (
     <BrowserRouter>
 
