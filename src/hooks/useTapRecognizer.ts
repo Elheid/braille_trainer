@@ -22,7 +22,7 @@ export const useTapRecognizer = (
     };
 
     const handleTouchStart = useCallback(
-        (event: React.TouchEvent) => {
+        (event: TouchEvent) => {
             const { clientX, clientY } = event.touches[0];
             const now = Date.now();
 

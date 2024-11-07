@@ -7,7 +7,6 @@ import buttonWithImageStyle from "../styles/buttonWithImageStyle";
 import MyTypography from "../components/MyTyphography";
 import { SayCustomMessages } from "./classes/SayCustomMessages";
 
-import { BrailleDigitRecognizer } from "./classes/brailleDigetRecognizer";
 import { useTapRecognizer } from "../hooks/useTapRecognizer";
 import { Player } from "./classes/player";
 
@@ -20,11 +19,10 @@ interface BrailleProps {
     mainRef: React.RefObject<HTMLDivElement>;
     //setSpeechEnabled: React.Dispatch<React.SetStateAction<boolean>>;
     handleStart: () => void;
-    digitRecognizer: BrailleDigitRecognizer;
     player:Player;
 }
 
-const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart, digitRecognizer, player }: BrailleProps) => {
+const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart, player }: BrailleProps) => {
 
     const onTap = (event: { type: 'doubleTap' | 'longTap' | 'tap'; position: { x: number; y: number } }) => {
         console.log('Event type:', event.type);
