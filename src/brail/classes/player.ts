@@ -65,6 +65,8 @@ export class Player {
   private lang: string;
 
 
+  public isUniqueTaped = false;
+
 
   constructor(speechEnabled: boolean, customMessagesPlayer:SayCustomMessages, typeOfTouchHandler:TouchHandlerType) {
     this._speechEnabled = speechEnabled;

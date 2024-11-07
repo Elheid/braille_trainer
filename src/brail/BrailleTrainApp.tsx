@@ -6,6 +6,7 @@ import { TouchHandlerType } from '../enum/TouchHandlerType';
 import { SayCustomMessages } from './classes/SayCustomMessages';
 import { BrailleDigitRecognizer } from './classes/brailleDigetRecognizer';
 import { Player } from './classes/player';
+import { TapEvent, UniqueTapRecognizer } from './classes/UniqueTapRecognizer';
 
 const BrailleTrainApp: React.FC = () => {
     const [isStarted, setIsStarted] = useState(false);
@@ -27,6 +28,7 @@ const BrailleTrainApp: React.FC = () => {
     //const digitRecognizer= new BrailleDigitRecognizer(()=> player.PlayDoubleTouch(), ()=> player.PlayLongTouch());
     const digitRecognizer= new BrailleDigitRecognizer();
     //const [messagePlayer] = useState(new SayCustomMessages());
+    //tapRecognizer.componentDidMount();
     useTouchHandler({
         isStarted, 
         speechEnabled, 

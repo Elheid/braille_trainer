@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Player } from '../brail/classes/player';
 
 type TapEvent = {
     type: 'doubleTap' | 'longTap' | 'tap';
@@ -6,10 +7,11 @@ type TapEvent = {
 };
 
 export const useTapRecognizer = (
+    player:Player,
     onTap: (event: TapEvent) => void,
     doubleTapThreshold = 300,
     longTapThreshold = 500,
-    doubleTapDistanceThreshold = 30 // Максимальное расстояние для двойного тапа
+    doubleTapDistanceThreshold = 30, // Максимальное расстояние для двойного тапа,
 ) => {
     const [lastTapTime, setLastTapTime] = useState<number | null>(null);
     const [lastTapPosition, setLastTapPosition] = useState<{ x: number; y: number } | null>(null);
@@ -23,6 +25,9 @@ export const useTapRecognizer = (
         (event: React.TouchEvent) => {
             const { clientX, clientY } = event.touches[0];
             const now = Date.now();
+
+
+            player.isUniqueTaped = false;
 
             if (lastTapTime && now - lastTapTime <= doubleTapThreshold) {
                 // Проверка на близость двух тапов

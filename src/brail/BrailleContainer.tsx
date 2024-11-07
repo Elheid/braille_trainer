@@ -61,13 +61,16 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
       };*/
     //console.log(digitRecognizer)
     const onTap = (event: { type: 'doubleTap' | 'longTap' | 'tap'; position: { x: number; y: number } }) => {
+        player.isUniqueTaped = false;
         console.log('Event type:', event.type);
         console.log('Position:', event.position);
         if (event.type === 'doubleTap') player.PlayDoubleTouch();
         if (event.type === 'longTap') player.PlayLongTouch();
+        player.isUniqueTaped = true
     };
 
-    useTapRecognizer(onTap);
+    useTapRecognizer(player, onTap);
+
 
 
     return (

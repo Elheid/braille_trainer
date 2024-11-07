@@ -22,7 +22,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     private necessaryRef: HTMLElement;
 
-    constructor(player: Player,digitRecognizer:BrailleDigitRecognizer,  resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions = levelInstructionsTest, maxAttempts = 4) {
+    constructor(player: Player,digitRecognizer:BrailleDigitRecognizer, resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions = levelInstructionsTest, maxAttempts = 4) {
         super(player, resultElement, digitRecognizer);
         this.necessaryRef = necessaryRef
         this.level = 1;

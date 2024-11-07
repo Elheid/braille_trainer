@@ -8,6 +8,7 @@ import { TouchHandlerType } from '../enum/TouchHandlerType';
 import { SayCustomMessages } from './classes/SayCustomMessages';
 import { BrailleDigitRecognizer } from './classes/brailleDigetRecognizer';
 import { Player } from './classes/player';
+import {TapEvent, UniqueTapRecognizer} from './classes/UniqueTapRecognizer';
 
 
 
@@ -38,6 +39,8 @@ const BrailleLearningApp: React.FC = () => {
         });*/
     const digitRecognizer= new BrailleDigitRecognizer();
     //const [messagePlayer] = useState(new SayCustomMessages());
+    // 
+
     useTouchHandler({
         isStarted, 
         speechEnabled, 

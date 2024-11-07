@@ -25,6 +25,7 @@ import numberZeroDescribeMP3 from "../../public//sounds/numberDescription/0v1.wa
 
 import { BrailleDigitRecognizer } from "../brail/classes/brailleDigetRecognizer";
 
+
 const levelInstructions = [
     { levelInstruct: 'Цифра "один". Цифра 1 состоит из одной точки. Коснитесь один раз в любом месте экрана.', levelExpect: 1, mp3:numberOneDescribeMP3 },
     { levelInstruct: 'Цифра "два". Цифра 2 состоит из двух точек на одной вертикали. Коснитесь один раз в любом месте экрана и еще раз чуть ниже первого касания.', levelExpect: 2, mp3:numberTwoDescribeMP3 },
@@ -52,7 +53,7 @@ interface UseTouchHandlerProps {
 }
 
 
-const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, mainRef, typeOfTouchHandler=TouchHandlerType.TRAINING, digitRecognizer, player }: UseTouchHandlerProps) => {
+const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, mainRef, typeOfTouchHandler=TouchHandlerType.TRAINING, digitRecognizer, player}: UseTouchHandlerProps) => {
     const isHandlerAttachedRef = useRef(false);
     //const customMessagePlayer = new SayCustomMessages();
     useEffect(() => {
@@ -61,7 +62,7 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
             // Инициализируем Player, если он не передан в пропсах
             //playerRef.current = player || new Player(speechEnabled);
             //const player = new Player(speechEnabled, customMessagePlayer);
-            let touchHandlerClass: TouchHandlerTrainer | TouchHandlerLearning = new TouchHandlerTrainer(player, resultRef.current, digitRecognizer);
+            let touchHandlerClass: TouchHandlerTrainer | TouchHandlerLearning = new TouchHandlerTrainer(player, resultRef.current, digitRecognizer, );
             if (typeOfTouchHandler === TouchHandlerType.TRAINING)
                 touchHandlerClass =   new TouchHandlerTrainer(player, resultRef.current, digitRecognizer);
             if (typeOfTouchHandler === TouchHandlerType.LEARNING && necessaryRef && necessaryRef.current)

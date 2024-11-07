@@ -18,6 +18,7 @@ export class BaseTouchHandler {
     protected digitRecognizer:BrailleDigitRecognizer;// = new BrailleDigitRecognizer();
 
 
+
     constructor(player: Player,  resultElement: HTMLElement, digitRecognizer:BrailleDigitRecognizer) {
         this.player = player;
 
@@ -58,7 +59,6 @@ export class BaseTouchHandler {
 
     protected convertPoints(): void {
         // Обработка точки для распознавания цифр
-        //console.log("Конвертация точек для распознавания");
     }
 
 
