@@ -49,6 +49,7 @@ const BrailleTrainApp: React.FC = () => {
         //setSpeechEnabled={setSpeechEnabled}
         handleStart={handleStart}
         digitRecognizer={digitRecognizer}
+        player={player}
         />
     );
 };

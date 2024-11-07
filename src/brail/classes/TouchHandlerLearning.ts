@@ -63,7 +63,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
             this._points = [];
             return
         }*/
-        //super.convertPoints();
+        super.convertPoints();
         this.attempts++;
 
         

@@ -14,7 +14,7 @@ export class TouchHandlerTrainer extends BaseTouchHandler {
 
     // Метод convertPoints переопределяется для реализации распознавания
     protected convertPoints(): void {
-        
+        super.convertPoints();
         const digit = this.digitRecognizer.recognizeDigit(this._points);
        /* if (this.digitRecognizer.isGestureHandled && digit === undefined){
             this._points = [];

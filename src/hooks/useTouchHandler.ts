@@ -69,6 +69,7 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
 
             const touchHandler = (e: TouchEvent) => touchHandlerClass?.Handle(e);
 
+            
             if (!speechEnabled){
                 player.stopMessages()
             }
@@ -79,7 +80,8 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
                 const addTouchHandler = ()=>{
                     if (!isHandlerAttachedRef.current && mainRef.current) {
                         player.stopMessages();
-                        mainRef.current.addEventListener('touchstart', touchHandler);
+                        mainRef.current.addEventListener("touchstart", touchHandler);
+
                         isHandlerAttachedRef.current = true;
                         mainRef.current.removeEventListener('touchstart', addTouchHandler);
                         // Проверка типа для вызова `startLevel()` у TouchHandlerLearning

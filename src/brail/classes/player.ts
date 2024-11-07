@@ -144,7 +144,7 @@ export class Player {
     public SayCustomMessage(messageSrc: string, callBack?:()=>void): void {
       if (this._speechEnabled)
         this.customMessagePlayer.sayMessage(messageSrc, callBack);
-  }
+    }
 
   public stopMessages(): void {
       this.customMessagePlayer.stopMessages();

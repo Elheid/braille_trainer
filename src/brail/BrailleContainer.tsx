@@ -8,6 +8,9 @@ import MyTypography from "../components/MyTyphography";
 import { SayCustomMessages } from "./classes/SayCustomMessages";
 
 import { BrailleDigitRecognizer } from "./classes/brailleDigetRecognizer";
+import { useTapRecognizer } from "../hooks/useTapRecognizer";
+import { Player } from "./classes/player";
+
 interface BrailleProps {
     messagePlayer: SayCustomMessages,
     isStarted: boolean;
@@ -17,10 +20,11 @@ interface BrailleProps {
     mainRef: React.RefObject<HTMLDivElement>;
     //setSpeechEnabled: React.Dispatch<React.SetStateAction<boolean>>;
     handleStart: () => void;
-    digitRecognizer:BrailleDigitRecognizer;
+    digitRecognizer: BrailleDigitRecognizer;
+    player:Player;
 }
 
-const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart, digitRecognizer }: BrailleProps) => {
+const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart, digitRecognizer, player }: BrailleProps) => {
     /*const gestureHandlerRef = useRef(
         new GestureHandler(
             () => console.log("Double tap detected"),
@@ -55,40 +59,33 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
         // Очистить таймеры, если тап завершен
         digitRecognizer.onRelease();
       };*/
-    console.log(digitRecognizer)
+    //console.log(digitRecognizer)
+    const onTap = (event: { type: 'doubleTap' | 'longTap' | 'tap'; position: { x: number; y: number } }) => {
+        console.log('Event type:', event.type);
+        console.log('Position:', event.position);
+        if (event.type === 'doubleTap') player.PlayDoubleTouch();
+        if (event.type === 'longTap') player.PlayLongTouch();
+    };
+
+    useTapRecognizer(onTap);
+
+
     return (
         <Container
-            
-            /*onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}*/
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh" }}
         >
-            <LinkButtonComponent tabIndex={0}  onClick={() => {
+            <LinkButtonComponent tabIndex={0} onClick={() => {
                 messagePlayer.stopMessages();
             }
             }
                 style={buttonWithImageStyle} classes={"back-arrow-button color-button"} img={arrow} />
             {!isStarted && (
-                <Button tabIndex={1}  variant="contained" id="startbutton" onClick={handleStart}>
+                <Button tabIndex={1} variant="contained" id="startbutton" onClick={handleStart}>
                     Начать
                 </Button>
             )}
-            {/*<Container  sx={{ display: "flex", 
-            flexDirection: "row", 
-            margin:"0 auto",
-            alignItems: "center;",
-            justifyContent:" center; "}}>
-                <input
-                    type="checkbox"
-                    id="switch"
-                    checked={speechEnabled}
-                    onChange={() => setSpeechEnabled(!speechEnabled)}
-                />
-                <Typography color="info">
-                    Озвучивать введенные цифры встроенным синтезатором речи
-                </Typography>
-            </Container>*/}
+
             {isStarted && (
                 <Container id="main" ref={mainRef}>
                     <div className={"numbers-container"}>
