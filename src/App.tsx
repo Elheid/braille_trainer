@@ -18,19 +18,13 @@ function App() {
     setIsMobile(isMobileDevice);
 
   }, []);
-  const alert = !isMobile &&
-    <Alert aria-hidden="true" severity="error" sx={{position:"absolute"}}>
-      Функционал приложения доступен только на мобильных устройствах
-    </Alert>
-    console.log(alert)
 
-  if (!isMobile){
-    return alert;
-  }
-  else 
   return (
     <BrowserRouter>
-
+      {!isMobile &&
+    <Alert aria-hidden="true" severity="error" sx={{position:"absolute"}}>
+      Функционал приложения доступен только на мобильных устройствах
+    </Alert>}
       <div className={"App"} aria-live="assertive" tabIndex={0}>
         <Routes >
           <Route  path="/braille" element={<BrailleTrainApp/>}/>
