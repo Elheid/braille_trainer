@@ -55,7 +55,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     img={learning}
                     alt="учиться"
                     setType={setType}
-                    renderHeader={() => <MyTypography aria-hidden="true" sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Обучение</MyTypography>}
+                    renderHeader={() => <MyTypography id="header" aria-label={'Перейти в режим тренировки'} sx={{color:"black", fontSize:"1.5rem"}}>Обучение</MyTypography>}
                 />
 
                 <ViewCardComponent
@@ -65,8 +65,8 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     typeOfRoute="training"
                     img={training}
                     alt="Тренирвать шрифт брайля"
-                    setType={setType}
-                    renderHeader={() => <MyTypography aria-hidden="true" sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Тренажер</MyTypography>}
+                    setType={setType} 
+                    renderHeader={() => <MyTypography  id="header" aria-label={'Перейти в режим обучения'} sx={{color:"black", fontSize:"1.5rem"}}>Тренажер</MyTypography>}
                 />
             </Box>
             </section>

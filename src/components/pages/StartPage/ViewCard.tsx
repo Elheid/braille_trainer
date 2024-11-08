@@ -27,7 +27,9 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
     imageContainer = <img src={img} aria-hidden="true" alt={alt} />;
     return (
         <button className={classNamees}
+            tabIndex={0}
             role="button"
+            aria-describedby="header"
             //aria-label={typeOfRoute === 'learning' ? 'Перейти в режим обучения' : 'Перейти в режим тренировки'}
             style={{ cursor: "pointer", position: 'relative' }}
             onClick={() => {
