@@ -74,7 +74,7 @@ export class SayCustomMessages {
 
         const isSkippable = this.isSkippable([messageSrc]).length > 0 ? false : true;
         this.sounds2.push({howl:this.customMessage, skippable:isSkippable });
-        if ((this.isDescriptionSrc(messageSrc) ||  || this.isEndMessage(messageSrc)) && this.customMessage !== null){
+        if ((this.isDescriptionSrc(messageSrc) || this.isEndMessage(messageSrc)) && this.customMessage !== null){
             const message = this.customMessage;
             sleep(this.sleepAfterMessage);
             //myFunctionWithDelay(()=> message.play(), 150)
