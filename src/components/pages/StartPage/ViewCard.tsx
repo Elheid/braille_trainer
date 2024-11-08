@@ -23,7 +23,7 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
 
     const classNamees = `${styles["view-card"]} ${className}  ${styles["transition-icon"]}`; //"gestural-language" или "clear-language";
     let imageContainer: React.ReactElement | null = null;
-    imageContainer = <img src={img} alt={alt} />;
+    imageContainer = <img src={img} aria-hidden="true" alt={alt} />;
     //const image = img ? img :"Пусто";
    /* const isImagePath = /^(?:(?:https?|ftp):\/\/)?(?:[a-z0-9.-]+(:[0-9]+)?\/?)*(?:[a-z0-9-]+\.[a-z0-9]{2,6}\/?)(?:[\w\-.]+)?(?:[?#].*)?$/.test(image);
     if ((typeof image === 'string') && isImagePath){
