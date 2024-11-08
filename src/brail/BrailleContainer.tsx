@@ -46,38 +46,41 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
     }, []);
 
     return (
-        <main>
-            <Container
-                disableGutters={true}
-                sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh" }}
-            >
-                <LinkButtonComponent role="button" onClick={() => {
-                    messagePlayer.stopMessages();
-                }
-                }
-                    style={buttonWithImageStyle} classes={"back-arrow-button color-button"} img={arrow} />
-                {!isStarted && (
-                    <Button role="button" aria-describedby="start-button" sx={{ backgroundColor: "#A8EF25", color: "black", }} tabIndex={0} variant="contained" id="startbutton" onClick={handleStart}>
-                        <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
-                    </Button>
-                )}
 
-                {isStarted && (
-                    <Container id="main" ref={mainRef}>
-                        <div className={"numbers-container"}>
-                            <Container className={"result-number-container"}>
-                                <div className={"result-number"} ref={resultRef}></div>
-                                <MyTypography>Распознано</MyTypography>
-                            </Container>
-                            {necessaryRef && <Container className={"necessary-number-container"}>
-                                <div className={"necessary-number"} ref={necessaryRef}></div>
-                                <MyTypography>Ожидается</MyTypography>
-                            </Container>}
-                        </div>
-                    </Container>
-                )}
-            </Container>
-        </main>
+        <Container
+            disableGutters={true}
+            sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh" }}
+        >
+            {!isStarted && (
+                <Button role="button" aria-describedby="start-button" sx={{ backgroundColor: "#A8EF25", color: "black", }} tabIndex={0} variant="contained" id="startbutton" onClick={handleStart}>
+                    <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
+                </Button>
+            )}
+
+            {isStarted && (
+                <Container id="main" ref={mainRef}>
+                    <div className={"numbers-container"}>
+                        <Container className={"result-number-container"}>
+                            <div className={"result-number"} ref={resultRef}></div>
+                            <MyTypography>Распознано</MyTypography>
+                        </Container>
+                        {necessaryRef && <Container className={"necessary-number-container"}>
+                            <div className={"necessary-number"} ref={necessaryRef}></div>
+                            <MyTypography>Ожидается</MyTypography>
+                        </Container>}
+                    </div>
+                </Container>
+            )}
+            <LinkButtonComponent role="button" onClick={() => {
+                messagePlayer.stopMessages();
+            }
+            }
+                style={buttonWithImageStyle}
+                classes={"back-arrow-button color-button"}
+                img={arrow}
+            />
+        </Container>
+
 
     )
 }
