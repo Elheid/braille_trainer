@@ -60,7 +60,18 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                 img={arrow}
             />
             {!isStarted && (
-                <Button role="button" aria-describedby="start-button" sx={{ backgroundColor: "#A8EF25", color: "black", }} tabIndex={0} variant="contained" id="startbutton" onClick={handleStart}>
+                <Button 
+                role="button" 
+                aria-describedby="start-button" 
+                sx={{ backgroundColor: "#A8EF25", color: "black", }} 
+                tabIndex={0} 
+                variant="contained" 
+                id="startbutton" 
+                onClick={()=>{
+                    window.scrollTo(0, 0);
+                    handleStart();
+                }}
+                >
                     <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
                 </Button>
             )}
