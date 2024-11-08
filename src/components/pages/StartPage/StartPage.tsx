@@ -47,9 +47,8 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
             </header>
             <main style={{flex:1}}>
             <section className={`main-menu ${styles["main-content"]} main`}>
-            <Box role="menu" aria-label="Кнопки перехода" className={styles["view-cards"]}>
+            <Box className={styles["view-cards"]}>
                 <ViewCardComponent
-                    role="menu-item"
                     destination={"/learning"}
                     className={`${styles["learning"]}  ${styles["view-card"]}`} 
                     typeOfRoute="learning"
@@ -60,7 +59,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                 />
 
                 <ViewCardComponent
-                    role="menu-item"
+
                     destination={"/training"}
                     className={`${styles["training"]} ${styles["view-card"]}`}
                     typeOfRoute="training"
