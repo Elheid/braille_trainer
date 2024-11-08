@@ -9,6 +9,7 @@ import { SayCustomMessages } from "./classes/SayCustomMessages";
 
 import { useTapRecognizer } from "../hooks/useTapRecognizer";
 import { Player } from "./classes/player";
+import { useEffect } from "react";
 
 interface BrailleProps {
     messagePlayer: SayCustomMessages,
@@ -40,10 +41,13 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
     useTapRecognizer(player, onTap);
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
     return (
-        <Container
+        <main>
+<Container
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh" }}
         >
@@ -73,6 +77,8 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                 </Container>
             )}
         </Container>
+        </main>
+        
     )
 }
 
