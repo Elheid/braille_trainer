@@ -19,7 +19,7 @@ const ReturnButtonComponent = ({img, description}: ReturnButtonComponentProps) =
     return (
         <div style={buttonWithImageStyle} >
             <img src={img}  aria-hidden="true" alt="Кнопка назад" />
-            <span className="button-title back-title">{description}</span>
+            <span tabIndex={0} className="button-title back-title">{description}</span>
         </div>
     );
 }
@@ -36,6 +36,7 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
     }
     return (
         <Button
+        
             variant="contained"
             className={classes}
             sx={{
