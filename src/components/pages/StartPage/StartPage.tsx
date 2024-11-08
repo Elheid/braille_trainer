@@ -45,8 +45,8 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
             Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
             </MyTypography>}
             </header>
-            <main style={{flex:1}}>
-            <section className={`main-menu ${styles["main-content"]} main`}>
+            <main aria-label="testMain" style={{flex:1}}>
+            <section aria-label="testMain 1234" className={`main-menu ${styles["main-content"]} main`}>
             <Box className={styles["view-cards"]}>
                 <ViewCardComponent
                     destination={"/learning"}
