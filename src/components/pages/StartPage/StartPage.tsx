@@ -64,7 +64,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     className={`${styles["training"]} ${styles["view-card"]}`}
                     typeOfRoute="training"
                     img={training}
-                    alt="Тренирвать шрифт брайля"
+                    alt="тренироваться"
                     setType={setType} 
                     renderHeader={() => <MyTypography  id="header"  tabIndex={1} aria-label={'Тренировка'} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Тренажер</MyTypography>}
                 />
