@@ -1,6 +1,6 @@
 
 //import { useEffect, useState } from "react";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import ViewCardComponent from "./ViewCard";
 
 import styles from './mainPage.module.css'
@@ -40,7 +40,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
             {<MyTypography className="sans-text" sx={{textAlign:"left"}} tabIndex={1}>
             Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
             </MyTypography>}
-            <ul className={styles["view-cards"]}>
+            <Box className={styles["view-cards"]}>
                 <ViewCardComponent
                     destination={"/learning"}
                     className={`${styles["learning"]}  ${styles["view-card"]}`} 
@@ -60,7 +60,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     setType={setType}
                     renderHeader={() => <MyTypography sx={{color:"black"}} variant="h5">Тренажер</MyTypography>}
                 />
-            </ul>
+            </Box>
             </section>
         </Container>
     );
