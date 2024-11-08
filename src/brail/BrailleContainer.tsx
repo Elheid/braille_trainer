@@ -49,7 +49,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
         <Container
             disableGutters={true}
-            sx={{ pt: "2vh", display: "flex", flexDirection: "column", height: "100%" }}
+            sx={{ pt: "2vh", display: "flex", gap:"2vh" ,flexDirection: "column", height: "100%" }}
         >
             <LinkButtonComponent role="button" onClick={() => {
                 messagePlayer.stopMessages();
