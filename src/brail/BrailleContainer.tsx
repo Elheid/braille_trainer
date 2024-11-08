@@ -49,7 +49,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
         <Container
             disableGutters={true}
-            sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh", justifyContent: "space-between" }}
+            sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100%", justifyContent: "space-between" }}
         >
             {!isStarted && (
                 <Button role="button" aria-describedby="start-button" sx={{ backgroundColor: "#A8EF25", color: "black", }} tabIndex={0} variant="contained" id="startbutton" onClick={handleStart}>
