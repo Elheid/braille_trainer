@@ -47,13 +47,13 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", flexDirection: "column", gap: "2.5vh", height: "100vh" }}
         >
-            <LinkButtonComponent tabIndex={0} onClick={() => {
+            <LinkButtonComponent role="button" tabIndex={0} onClick={() => {
                 messagePlayer.stopMessages();
             }
             }
                 style={buttonWithImageStyle} classes={"back-arrow-button color-button"} img={arrow} />
             {!isStarted && (
-                <Button aria-describedby="start-button" sx={{backgroundColor:"#A8EF25", color:"black",}} tabIndex={1} variant="contained" id="startbutton" onClick={handleStart}>
+                <Button role="button" aria-describedby="start-button" sx={{backgroundColor:"#A8EF25", color:"black",}} tabIndex={0} variant="contained" id="startbutton" onClick={handleStart}>
                     <p style={{ margin:"5px", float:"left"}} id="start-button">Начать</p>
                 </Button>
             )}
