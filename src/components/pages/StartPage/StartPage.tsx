@@ -47,7 +47,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
             </header>
             <main style={{flex:1}}>
             <section className={`main-menu ${styles["main-content"]} main`}>
-            <Box className={styles["view-cards"]}>
+            <Box role="navigation" className={styles["view-cards"]}>
                 <ViewCardComponent
                     destination={"/learning"}
                     className={`${styles["learning"]}  ${styles["view-card"]}`} 
