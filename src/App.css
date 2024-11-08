@@ -21,6 +21,48 @@
   --gray: #92959E;
 }
 
+
+@font-face {
+  font-family: 'SB Sans Display';
+  src: url('/fonts/sb-sans-display.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SB Sans Display Bold';
+  src: url('/fonts/sb-sans-display-bold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SB Sans Display Semibold';
+  src: url('/fonts/sb-sans-display-semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SB Sans Text';
+  src: url('/fonts/sb-sans-text-medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  font-family: 'SB Sans Text', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'SB Sans Display Semibold', sans-serif !important;
+}
+
+p {
+  font-family: 'SB Sans Display', sans-serif !important;
+}
+
+
 /*
 section.main{
   max-width: 1280px;

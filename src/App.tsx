@@ -22,7 +22,10 @@ function App() {
   return (
     <BrowserRouter>
       {!isMobile &&
-    <Alert aria-hidden="true" severity="error" sx={{position:"absolute"}}>
+    <Alert aria-hidden="true" severity="error" sx={{
+      position:"absolute",
+      width: "-webkit-fill-available"
+      }}>
       Функционал приложения доступен только на мобильных устройствах
     </Alert>}
       <div className={"App"} aria-live="assertive" tabIndex={0}>
