@@ -7,8 +7,9 @@ import { Container } from "@mui/material";
 
 import arrow from "../../../assets/img/chevron-right.svg"
 import whiteArrowButton from "../../../styles/whiteArrowButton";
+import React, { ButtonHTMLAttributes } from "react";
 
-interface ViewCardComponentProps {
+interface ViewCardComponentProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className: string;
     destination: string;
     img?: string;
@@ -18,7 +19,7 @@ interface ViewCardComponentProps {
     renderHeader?: () => JSX.Element;
 }
 
-const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRoute, renderHeader }: ViewCardComponentProps) => {
+const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRoute, renderHeader, ...buttonProps  }: ViewCardComponentProps) => {
     const navigate = useNavigate();
 
     const classNamees = `${styles["view-card"]} ${className}  ${styles["transition-icon"]}`; //"gestural-language" или "clear-language";
@@ -35,7 +36,9 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
                 localStorage.setItem("language", typeOfRoute);
                 navigateHandleClick(false, destination, navigate)
 
-            }}>
+            }}
+            {...buttonProps}
+            >
             <Container className={styles["card-header"]}>
                 {imageContainer}
                 { /*<ImageButton sx={whiteArrowButton}>*/}
