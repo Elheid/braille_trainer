@@ -7,6 +7,7 @@ type TapEvent = {
 };
 
 export const useTapRecognizer = (
+    isStarted:boolean,
     player:Player,
     onTap: (event: TapEvent) => void,
     doubleTapThreshold = 300,
@@ -70,10 +71,12 @@ export const useTapRecognizer = (
     }, [longTapTimer]);
 
     useEffect(() => {
+        if (isStarted){
         // Добавляем события нажатия
         window.addEventListener('touchstart', handleTouchStart);
         window.addEventListener('touchend', handleTouchEnd);
         window.addEventListener('touchcancel', handleTouchCancel);
+        }
 
         return () => {
             window.removeEventListener('touchstart', handleTouchStart);

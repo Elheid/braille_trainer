@@ -39,7 +39,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
     };
 
-    useTapRecognizer(player, onTap);
+    useTapRecognizer(isStarted, player, onTap);
 
     useEffect(() => {
         window.scrollTo(0, 0);
