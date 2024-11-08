@@ -53,8 +53,8 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             }
                 style={buttonWithImageStyle} classes={"back-arrow-button color-button"} img={arrow} />
             {!isStarted && (
-                <Button tabIndex={1} variant="contained" id="startbutton" onClick={handleStart}>
-                    Начать
+                <Button aria-describedby="start-button" sx={{backgroundColor:"#A8EF25", color:"black",}} tabIndex={1} variant="contained" id="startbutton" onClick={handleStart}>
+                    <p style={{ margin:"5px", float:"left"}} id="start-button">Начать</p>
                 </Button>
             )}
 

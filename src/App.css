@@ -59,10 +59,12 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
-  font-family: 'SB Sans Display', sans-serif !important;
+  font-family: 'SB Sans Display Semibold', sans-serif !important;
 }
 
-
+.sans-text{
+  font-family: 'SB Sans Text', sans-serif !important;
+}
 /*
 section.main{
   max-width: 1280px;
