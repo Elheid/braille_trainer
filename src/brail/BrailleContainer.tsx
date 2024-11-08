@@ -51,6 +51,14 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", flexDirection: "column", height: "100%" }}
         >
+            <LinkButtonComponent role="button" onClick={() => {
+                messagePlayer.stopMessages();
+            }
+            }
+                style={buttonWithImageStyle}
+                classes={"back-arrow-button color-button"}
+                img={arrow}
+            />
             {!isStarted && (
                 <Button role="button" aria-describedby="start-button" sx={{ backgroundColor: "#A8EF25", color: "black", }} tabIndex={0} variant="contained" id="startbutton" onClick={handleStart}>
                     <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
@@ -71,14 +79,6 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                     </div>
                 </Container>
             )}
-            <LinkButtonComponent role="button" onClick={() => {
-                messagePlayer.stopMessages();
-            }
-            }
-                style={buttonWithImageStyle}
-                classes={"back-arrow-button color-button"}
-                img={arrow}
-            />
         </Container>
 
 
