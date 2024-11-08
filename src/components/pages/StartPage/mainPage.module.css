@@ -25,6 +25,8 @@
     height: inherit;
     gap: 40px;
     padding: 5%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .view-card {
@@ -36,6 +38,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    height: 40%;
 }
 
 .card-header, .card-footer{

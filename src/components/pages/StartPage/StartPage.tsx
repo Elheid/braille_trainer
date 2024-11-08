@@ -34,14 +34,18 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
     const training = trainingSVG
 
     return (
-        <Container sx={{height:"inherit;"}}>
-            <header>
+        <Container sx={{
+            height:"inherit;", 
+            display: "flex",
+            flexDirection: "column",
+            }}>
+            <header style={{margin:"5%"}}>
             <MyTypography sx={{textAlign:"left", paddingTop:"5%"}} tabIndex={0}  variant="h4">Тренажер брайльского ввода</MyTypography>
             {<MyTypography className="sans-text" sx={{textAlign:"left"}} tabIndex={1}>
             Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
             </MyTypography>}
             </header>
-            <main>
+            <main style={{flex:1}}>
             <section className={`main-menu ${styles["main-content"]} main`}>
             <Box className={styles["view-cards"]}>
                 <ViewCardComponent
