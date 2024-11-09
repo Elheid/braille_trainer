@@ -4,6 +4,7 @@
   text-align: center;
   height: 100%;
   width: 100%;
+  overflow-y: auto;
 }
 
 :root {
@@ -201,7 +202,7 @@ div#result {
 
 div#main {
   height: 100%;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 .back-arrow-button{
@@ -215,7 +216,7 @@ div#main {
 
 .numbers-container{
   height: fit-content;
-  position: absolute;
+  position: fixed;
   display: flex;
   bottom: 0;
   align-items: flex-end;
