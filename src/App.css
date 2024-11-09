@@ -204,14 +204,14 @@ div#main {
   height: 100%;
   /*border: 1px solid black;*/
 }
-
+/*
 .buttons-container {
   position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
   gap: 2vh;
-}
+}*/
 
 .back-arrow-button{
   margin-top: auto;
