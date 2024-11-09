@@ -183,7 +183,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                             </Grid2>}
                     </Grid2>
                 }
-                <LinkButtonComponent role="button" onClick={() => {
+                <LinkButtonComponent onClick={() => {
                     messagePlayer.stopAllMessages();
                 }
                 }

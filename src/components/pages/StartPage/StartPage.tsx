@@ -55,7 +55,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     img={learning}
                     alt="учиться"
                     setType={setType}
-                    renderHeader={() => <MyTypography aria-hidden={true} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Обучение</MyTypography>}
+                    renderHeader={() => <MyTypography id="header" aria-hidden={true} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Обучение</MyTypography>}
                 />
 
                 <ViewCardComponent
@@ -66,7 +66,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     img={training}
                     alt="тренироваться"
                     setType={setType} 
-                    renderHeader={() => <MyTypography  aria-hidden={true} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Тренажер</MyTypography>}
+                    renderHeader={() => <MyTypography  id="header" aria-hidden={true} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Тренажер</MyTypography>}
                 />
             </Box>
             </section>
