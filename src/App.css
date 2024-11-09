@@ -45,7 +45,7 @@
 
 @font-face {
   font-family: 'SB Sans Text';
-  src: url('/fonts/sb-sans-text-medium.ttf') format('truetype');
+  src: url('/fonts/sb-sans-text.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
