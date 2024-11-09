@@ -15,6 +15,9 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     private necessaryRef: HTMLElement;
 
+    private levelEndEvent : CustomEvent;
+    private errorEvent:CustomEvent;
+
     constructor(player: Player,digitRecognizer:BrailleDigitRecognizer, resultElement: HTMLElement, necessaryRef: HTMLElement , levelInstructions: LevelCondition[], maxAttempts = 4) {
         super(player, resultElement, digitRecognizer);
         this.necessaryRef = necessaryRef
@@ -22,6 +25,8 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         this.attempts = 0;
         this.maxAttempts = maxAttempts;
         this.levelInstructions = levelInstructions;
+        this.levelEndEvent = new CustomEvent('level-end');
+        this.errorEvent = new CustomEvent('level-error');
     }
 
     protected showNecessaryNumber(message: string): void {
@@ -113,6 +118,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
             return true;
         }
         this.player.PlayError();
+        window.dispatchEvent(this.errorEvent)
         if (digit !== undefined && digit > 0){
             this.player.SayDigit(digit)
         }
@@ -122,6 +128,9 @@ export class TouchHandlerLearning extends BaseTouchHandler {
     private nextLevel(): void {
         this.level++;
         this.attempts = 0;
+
+        window.dispatchEvent(this.levelEndEvent)
+
         if (this.level <= this.levelInstructions.length) {
             this.startLevel();
         } else {

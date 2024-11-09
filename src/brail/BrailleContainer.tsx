@@ -9,7 +9,10 @@ import { SayCustomMessages } from "./classes/SayCustomMessages";
 
 import { useTapRecognizer } from "../hooks/useTapRecognizer";
 import { Player } from "./classes/player";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Attempts from "../components/Attempts";
+
+import arrowForButton from "../assets/img/chevron-right.svg"
 
 interface BrailleProps {
     messagePlayer: SayCustomMessages,
@@ -86,21 +89,53 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
     const title = necessaryRef ? "Обучение" : "Тренировка";
 
     const resStyle = !necessaryRef ? {
-        flex:1,
+        flex: 1,
         marginLeft: "auto",
         marginRight: "20%",
-    } : {flex:1}
+    } : { flex: 1 }
+
+    const maxAttempts = 4;
+    const [attempts, setAttempts] = useState<number>(maxAttempts);
+
+
+    useEffect(() => {
+        /*const handleIncrement = () => {
+            if (attempts < maxAttempts) setAttempts(attempts + 1);
+        };*/
+        const handleAttemptsRecover= ()=>{
+            setAttempts(maxAttempts);
+        }
+
+        const handleDecrement = () => {
+            if (attempts > 0) setAttempts(attempts - 1);
+        };
+        window.addEventListener('level-end', handleAttemptsRecover);
+        window.addEventListener('level-error', handleDecrement);
+
+
+        return () => {
+            window.removeEventListener('level-end', handleAttemptsRecover);
+            window.removeEventListener('level-error', handleDecrement);
+        };
+
+
+    }, [attempts])
+
+
     return (
 
         <Container
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", gap: "2vh", flexDirection: "column", height: "100%" }}
         >
-        <Container className="header">
-        <MyTypography sx={{fontSize:"1.2em"}} variant="h1">{title}</MyTypography>
-        {/*isStarted && necessaryRef &&
-        <></>*/}
-        </Container>
+            <Container className="header">
+                <MyTypography sx={{ fontSize: "1.2em" }} variant="h1">{title}</MyTypography>
+                {isStarted && necessaryRef &&
+                    <div className="attempts-container">
+                        <MyTypography sx={{ fontSize: "0.8em" }}>Попытки</MyTypography>
+                        <Attempts attempts={attempts} maxAttempts={maxAttempts} />
+                    </div>}
+            </Container>
             <div className="buttons-container">
 
                 {!isStarted && (
@@ -117,6 +152,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                         }}
                     >
                         <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
+                        <img src={arrowForButton} aria-hidden="true" alt="Стрелка"></img>
                     </Button>
                 )}
             </div>
@@ -136,7 +172,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                         columnSpacing={{ xs: 3, sm: 3, md: 3 }}
                         sx={{ alignItems: "stretch" }}
                     >
-                        <Grid2 sx={{flex:1}} size={6} className={"result-number-container glass-effect"}>
+                        <Grid2 sx={{ flex: 1 }} size={6} className={"result-number-container glass-effect"}>
                             <div className={"result-number"} ref={resultRef}></div>
                             <MyTypography>Распознано</MyTypography>
                         </Grid2>

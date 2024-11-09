@@ -74,6 +74,7 @@ export class Player {
   public isLongTaped = false;
 
 
+
   constructor(speechEnabled: boolean, customMessagesPlayer:SayCustomMessages, typeOfTouchHandler:TouchHandlerType) {
     this._speechEnabled = speechEnabled;
     this.customMessagePlayer = customMessagesPlayer//new SayCustomMessages();
