@@ -51,7 +51,7 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
 
                 { /*</ImageButton>*/}
             </Container>
-            <Container aria-label={typeOfRoute === 'learning' ? 'Обучение' : 'Тренировка'} className={styles["card-footer"]}>{renderHeader?.()}</Container>
+            <Container id="header" aria-label={typeOfRoute === 'learning' ? 'Обучение' : 'Тренировка'} className={styles["card-footer"]}>{renderHeader?.()}</Container>
         </button>
     );
 }
