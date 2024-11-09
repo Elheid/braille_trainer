@@ -224,7 +224,7 @@ div#main {
 
 .numbers-container{
   height: fit-content;
-  position: fixed;
+  position: sticky;
   display: flex;
   bottom: 0;
   align-items: flex-end;
