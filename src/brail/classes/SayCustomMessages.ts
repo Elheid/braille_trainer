@@ -142,6 +142,18 @@ export class SayCustomMessages {
         this.isPlaying = false;
     }
 
+    public stopAllMessages(): void {
+        this.messageQueue = []; // Очистка очереди
+        //this.sounds.forEach(sound => sound.stop()); // Остановка всех звуков
+        //this.sounds = []; // Очистка массива экземпляров
+
+        this.sounds2.forEach(sound => sound.howl.stop());
+        this.sounds2 = [];
+
+        this.isPlaying = false;
+    }
+
+
     /*private getSuccessInQue(){
         return this.messageQueue.filter((sound) => {
             return (

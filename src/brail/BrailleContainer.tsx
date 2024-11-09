@@ -53,7 +53,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
         >
             <div className="buttons-container">
             <LinkButtonComponent role="button" onClick={() => {
-                messagePlayer.stopMessages();
+                messagePlayer.stopAllMessages();
             }
             }
                 style={buttonWithImageStyle}
