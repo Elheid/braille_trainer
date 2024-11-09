@@ -205,6 +205,11 @@ div#main {
   /*border: 1px solid black;*/
 }
 
+.buttons-container{
+  position:sticky;
+  top:0;
+}
+
 .back-arrow-button{
   margin-top: auto;
 }

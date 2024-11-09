@@ -51,6 +51,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", gap:"2vh" ,flexDirection: "column", height: "100%" }}
         >
+            <div className="buttons-container">
             <LinkButtonComponent role="button" onClick={() => {
                 messagePlayer.stopMessages();
             }
@@ -75,6 +76,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                     <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
                 </Button>
             )}
+            </div>
 
             {isStarted && (
                 <Container id="main" ref={mainRef}>
