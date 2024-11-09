@@ -3,5 +3,6 @@ const buttonWithImageStyle : React.CSSProperties={
     display: "flex",
     flexDirection: "row",
     gap:"10px",
+    justifyContent: "flex-start",
 }
 export default buttonWithImageStyle;

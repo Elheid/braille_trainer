@@ -49,33 +49,26 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
         <Container
             disableGutters={true}
-            sx={{ pt: "2vh", display: "flex", gap:"2vh" ,flexDirection: "column", height: "100%" }}
+            sx={{ pt: "2vh", display: "flex", gap: "2vh", flexDirection: "column", height: "100%" }}
         >
             <div className="buttons-container">
-            <LinkButtonComponent role="button" onClick={() => {
-                messagePlayer.stopAllMessages();
-            }
-            }
-                style={buttonWithImageStyle}
-                classes={"back-arrow-button color-button"}
-                img={arrow}
-            />
-            {!isStarted && (
-                <Button 
-                role="button" 
-                aria-describedby="start-button" 
-                sx={{ backgroundColor: "#A8EF25", color: "black", }} 
-                tabIndex={0} 
-                variant="contained" 
-                id="startbutton" 
-                onClick={()=>{
-                    window.scrollTo(0, 0);
-                    handleStart();
-                }}
-                >
-                    <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
-                </Button>
-            )}
+
+                {!isStarted && (
+                    <Button
+                        role="button"
+                        aria-describedby="start-button"
+                        sx={{ backgroundColor: "#A8EF25", color: "black", }}
+                        tabIndex={0}
+                        variant="contained"
+                        id="startbutton"
+                        onClick={() => {
+                            window.scrollTo(0, 0);
+                            handleStart();
+                        }}
+                    >
+                        <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
+                    </Button>
+                )}
             </div>
 
             {isStarted && (
@@ -85,13 +78,24 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                             <div className={"result-number"} ref={resultRef}></div>
                             <MyTypography>Распознано</MyTypography>
                         </Container>
-                        {necessaryRef && <Container className={"necessary-number-container"}>
-                            <div className={"necessary-number"} ref={necessaryRef}></div>
-                            <MyTypography>Ожидается</MyTypography>
-                        </Container>}
                     </div>
                 </Container>
             )}
+            <Container className="footer">
+            {isStarted && necessaryRef && <Container className={"necessary-number-container"}>
+                <div className={"necessary-number"} ref={necessaryRef}></div>
+                <MyTypography>Ожидается</MyTypography>
+            </Container>}
+
+            <LinkButtonComponent role="button" onClick={() => {
+                messagePlayer.stopAllMessages();
+            }
+            }
+                style={buttonWithImageStyle}
+                classes={"back-arrow-button color-button"}
+                img={arrow}
+            />
+            </Container>
         </Container>
 
 
