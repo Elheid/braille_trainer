@@ -30,6 +30,7 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
             tabIndex={0}
             role="button"
             aria-describedby="header"
+            
             //aria-label={typeOfRoute === 'learning' ? 'Перейти в режим обучения' : 'Перейти в режим тренировки'}
             style={{ cursor: "pointer", position: 'relative' }}
             onClick={() => {
@@ -50,7 +51,7 @@ const ViewCardComponent = ({ className, destination, img, alt, setType, typeOfRo
 
                 { /*</ImageButton>*/}
             </Container>
-            <Container className={styles["card-footer"]}>{renderHeader?.()}</Container>
+            <Container aria-label={typeOfRoute === 'learning' ? 'Обучение' : 'Тренировка'} className={styles["card-footer"]}>{renderHeader?.()}</Container>
         </button>
     );
 }

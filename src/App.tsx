@@ -28,7 +28,7 @@ function App() {
       }}>
       Функционал приложения доступен только на мобильных устройствах
     </Alert>}
-      <div className={"App"} aria-live="assertive" tabIndex={0}>
+      <div className={"App"} aria-live="assertive">
         <Routes >
           <Route  path="/braille" element={<BrailleTrainApp/>}/>
           <Route  path="/" element={<StartPage type={typeOfRoute} setType={setType}/>}/>

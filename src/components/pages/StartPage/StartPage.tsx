@@ -40,8 +40,8 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
             flexDirection: "column",
             }}>
             <header style={{margin:"5%"}}>
-            <MyTypography sx={{textAlign:"left", paddingTop:"5%", fontSize:"1.5rem", marginBottom:"10px"}} tabIndex={0}  variant="h1">Тренажер брайльского ввода</MyTypography>
-            {<MyTypography className="sans-text" sx={{textAlign:"left"}} tabIndex={0}>
+            <MyTypography sx={{textAlign:"left", paddingTop:"5%", fontSize:"1.5rem", marginBottom:"10px"}}  variant="h1">Тренажер брайльского ввода</MyTypography>
+            {<MyTypography className="sans-text" sx={{textAlign:"left"}}>
             Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
             </MyTypography>}
             </header>
@@ -55,7 +55,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     img={learning}
                     alt="учиться"
                     setType={setType}
-                    renderHeader={() => <MyTypography id="header" tabIndex={1} aria-label={'Обучение'} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Обучение</MyTypography>}
+                    renderHeader={() => <MyTypography id="header" aria-hidden={true} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Обучение</MyTypography>}
                 />
 
                 <ViewCardComponent
@@ -66,7 +66,7 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
                     img={training}
                     alt="тренироваться"
                     setType={setType} 
-                    renderHeader={() => <MyTypography  id="header"  tabIndex={1} aria-label={'Тренировка'} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Тренажер</MyTypography>}
+                    renderHeader={() => <MyTypography  id="header" aria-hidden={true} sx={{color:"black", fontSize:"1.5rem"}} variant="h2">Тренажер</MyTypography>}
                 />
             </Box>
             </section>
