@@ -222,11 +222,18 @@ div#main {
   max-height: 3vh;
 }
 
-.footer{
+.header{
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer {
   position: fixed;
   bottom: 0;
   display: flex;
   flex-direction: column;
+  gap: 2vh;
+  margin-bottom: 20px;
 }
 
 .numbers-container{
@@ -239,6 +246,11 @@ div#main {
   align-items: flex-end;
 }
 
+.glass-effect{
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .result-number-container , .necessary-number-container{
   height: fit-content;
   bottom: 0;
@@ -247,9 +259,12 @@ div#main {
   flex-direction: column;
   align-items: center;
   padding: 14px;
+  align-items: flex-start;
+
 }
 .result-number , .necessary-number{
   font-size: 8vw;
   color:white;
   width: fit-content;
+  text-align: left;
 }

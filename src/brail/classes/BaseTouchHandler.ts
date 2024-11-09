@@ -18,7 +18,6 @@ export class BaseTouchHandler {
     protected digitRecognizer:BrailleDigitRecognizer;// = new BrailleDigitRecognizer();
 
 
-
     constructor(player: Player,  resultElement: HTMLElement, digitRecognizer:BrailleDigitRecognizer) {
         this.player = player;
 

@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material"
+import { Button, Container, Grid2 } from "@mui/material"
 import LinkButtonComponent from "../components/ReturnButton";
 
 
@@ -45,12 +45,62 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
         window.scrollTo(0, 0);
     }, []);
 
+
+    useEffect(() => {
+        const updateHeight = () => {
+
+            if (isStarted && necessaryRef && resultRef.current && necessaryRef.current) {
+                resultRef.current.style.height = "";
+                necessaryRef.current.style.height = "";
+
+                const resultHeight = resultRef.current.offsetHeight;
+                const necessaryHeight = necessaryRef.current.offsetHeight;
+                const minHeight = 40;
+                const maxHeight = Math.max(Math.max(resultHeight, necessaryHeight), minHeight);
+
+                resultRef.current.style.height = `${maxHeight}px`;
+                necessaryRef.current.style.height = `${maxHeight}px`;
+            }
+        };
+
+        // Создаём наблюдатель для отслеживания изменений
+        const observer = new MutationObserver(updateHeight);
+
+        if (necessaryRef && isStarted) {
+            // Подключаем наблюдатель к каждому из элементов
+            if (resultRef.current) {
+                observer.observe(resultRef.current, { childList: true, subtree: true, characterData: true });
+            }
+            if (necessaryRef.current) {
+                observer.observe(necessaryRef.current, { childList: true, subtree: true, characterData: true });
+            }
+
+            // Обновляем высоту при монтировании
+            updateHeight();
+        }
+
+        // Отключаем наблюдатель при размонтировании
+        return () => observer.disconnect();
+    }, [isStarted, necessaryRef, resultRef]);
+
+    const title = necessaryRef ? "Обучение" : "Тренировка";
+
+    const resStyle = !necessaryRef ? {
+        flex:1,
+        marginLeft: "auto",
+        marginRight: "20%",
+    } : {flex:1}
     return (
 
         <Container
             disableGutters={true}
             sx={{ pt: "2vh", display: "flex", gap: "2vh", flexDirection: "column", height: "100%" }}
         >
+        <Container className="header">
+        <MyTypography sx={{fontSize:"1.2em"}} variant="h1">{title}</MyTypography>
+        {/*isStarted && necessaryRef &&
+        <></>*/}
+        </Container>
             <div className="buttons-container">
 
                 {!isStarted && (
@@ -73,28 +123,38 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
             {isStarted && (
                 <Container id="main" ref={mainRef}>
-                    <div className={"numbers-container"}>
-                        <Container className={"result-number-container"}>
-                            <div className={"result-number"} ref={resultRef}></div>
-                            <MyTypography>Распознано</MyTypography>
-                        </Container>
-                    </div>
+
                 </Container>
             )}
             <Container className="footer">
-            {isStarted && necessaryRef && <Container className={"necessary-number-container"}>
-                <div className={"necessary-number"} ref={necessaryRef}></div>
-                <MyTypography>Ожидается</MyTypography>
-            </Container>}
 
-            <LinkButtonComponent role="button" onClick={() => {
-                messagePlayer.stopAllMessages();
-            }
-            }
-                style={buttonWithImageStyle}
-                classes={"back-arrow-button color-button"}
-                img={arrow}
-            />
+                {isStarted &&
+                    <Grid2
+                        className={"numbers-container"}
+                        container
+                        rowSpacing={6}
+                        columnSpacing={{ xs: 3, sm: 3, md: 3 }}
+                        sx={{ alignItems: "stretch" }}
+                    >
+                        <Grid2 sx={{flex:1}} size={6} className={"result-number-container glass-effect"}>
+                            <div className={"result-number"} ref={resultRef}></div>
+                            <MyTypography>Распознано</MyTypography>
+                        </Grid2>
+                        {necessaryRef &&
+                            <Grid2 sx={resStyle} size={6} className={"necessary-number-container glass-effect"}>
+                                <div className={"necessary-number"} ref={necessaryRef}></div>
+                                <MyTypography>Ожидается</MyTypography>
+                            </Grid2>}
+                    </Grid2>
+                }
+                <LinkButtonComponent role="button" onClick={() => {
+                    messagePlayer.stopAllMessages();
+                }
+                }
+                    style={buttonWithImageStyle}
+                    classes={"back-arrow-button color-button"}
+                    img={arrow}
+                />
             </Container>
         </Container>
 

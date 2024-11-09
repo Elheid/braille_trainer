@@ -78,6 +78,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         } else if (this.attempts >= this.maxAttempts) {
             console.log("Попытки исчерпаны. Переходим к следующему уровню.");
             //this.player.SayMessage("Попытки исчерпаны. Переходим к следующему уровню.");
+            this.player.PlayOnAttemptsZero()
             this.nextLevel();
         }
         this._points = [];

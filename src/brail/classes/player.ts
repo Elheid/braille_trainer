@@ -1,6 +1,8 @@
 import { Howl } from 'howler';
 
 
+
+
 //import succsesSound from "../../../public/sounds/success.mp3"//"../../assets/sounds/success.mp3"
 import succsesSound from "../../../public/sounds/Positive.mp3"
 //import errorSound from  "../../../public/sounds/error.mp3"
@@ -11,6 +13,9 @@ import touchSound from  "../../../public/sounds/Dot.mp3"
 import doubleTouchSound from  "../../../public/sounds/Pull_to_refresh_1.mp3"
 
 import longTouchSound from  "../../../public/sounds/Pin_Success.mp3"
+
+
+import nextNumSound from "../../../public/sounds/Next_num.wav"
 
 
 import { SayCustomMessages } from './SayCustomMessages';
@@ -131,6 +136,11 @@ export class Player {
     //this.error.play();
   }
 
+  public PlayOnAttemptsZero(): void {
+    //this.SayCustomMessage(errorSound,()=>this.stopMessages())
+    this.SayCustomMessage(nextNumSound)
+    //this.error.play();
+  }
 
 
     public SayCustomMessage(messageSrc: string, callBack?:()=>void): void {
