@@ -153,7 +153,8 @@ button.color-button{
 .button-title {
   color: #fff;
   padding-left: 15px;
-  font-family: Roboto, serif;
+  /*font-family: Roboto, serif;*/
+  font-family: "Sans Display Semibold", sans-serif;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -220,7 +221,11 @@ div#main {
   display: flex;
   flex-direction: column;
   gap: 2vh;
-  width: inherit;
+
+
+  width: -moz-available;       /* WebKit игнор. */
+  width: -webkit-fill-available;  /* Mozilla игнор. */
+  width: fill-available;
 }
 button#startbutton {
   margin: 5%;
@@ -245,8 +250,11 @@ button#startbutton {
   justify-content: space-between;
 }
 
-.attempts-container{
-
+.attempts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 .footer {

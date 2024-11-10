@@ -126,13 +126,13 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
         <Container
             disableGutters={true}
-            sx={{ pt: "2vh", display: "flex", gap: "2vh", flexDirection: "column", height: "100%" }}
+            sx={{ display: "flex", gap: "2vh", flexDirection: "column", height: "100%" }}
         >
             <Container className="header">
-                <MyTypography sx={{ fontSize: "1.2em" }} variant="h1">{title}</MyTypography>
+                <MyTypography sx={{ fontSize: "1.2em", pt:"4vh" }} variant="h1">{title}</MyTypography>
                 {isStarted && necessaryRef &&
                     <div className="attempts-container">
-                        <MyTypography sx={{ fontSize: "0.8em" }}>Попытки</MyTypography>
+                        <MyTypography className="sans-text" sx={{ fontSize: "1em", pt:"3vh" }}>Попытки</MyTypography>
                         <Attempts attempts={attempts} maxAttempts={maxAttempts} />
                     </div>}
             </Container>
@@ -183,7 +183,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                             </Grid2>}
                     </Grid2>
                 }
-                <LinkButtonComponent onClick={() => {
+                <LinkButtonComponent variant="text" onClick={() => {
                     messagePlayer.stopAllMessages();
                 }
                 }

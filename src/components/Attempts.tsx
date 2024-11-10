@@ -18,7 +18,7 @@ const Attempts: React.FC<AttemptsProps> = React.memo(({ attempts, maxAttempts}) 
                     sx={{
                         borderRadius: '50%',
                         backgroundColor: index < attempts ? '#A8EF25' : 'gray',
-                        marginRight: 1,
+                        marginRight: index < maxAttempts - 1 ? 1 : 0,
                     }}
                 />
             ))}
