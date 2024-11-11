@@ -10,7 +10,7 @@ export const useTapRecognizer = (
     isStarted:boolean,
     player:Player,
     onTap: (event: TapEvent) => void,
-    doubleTapThreshold = 300,
+    doubleTapThreshold = 2000,
     longTapThreshold = 500,
     doubleTapDistanceThreshold = 30, // Максимальное расстояние для двойного тапа,
 ) => {
@@ -18,13 +18,18 @@ export const useTapRecognizer = (
     const [lastTapPosition, setLastTapPosition] = useState<{ x: number; y: number } | null>(null);
     const [longTapTimer, setLongTapTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
+    const [isFirstMessageSkipped, setFirstMessageSkipped] = useState<boolean>(false);
+
+    const isSkipScreenreeder = ()=> setFirstMessageSkipped(true)
+    window.addEventListener("skip-start-message", isSkipScreenreeder)
     const calculateDistance = (x1: number, y1: number, x2: number, y2: number): number => {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     };
 
     const handleTouchStart = useCallback(
         (event: TouchEvent) => {
-            const { clientX, clientY } = event.touches[0];
+            if (isFirstMessageSkipped){
+                const { clientX, clientY } = event.touches[0];
             const now = Date.now();
 
 
@@ -51,6 +56,7 @@ export const useTapRecognizer = (
 
             setLastTapTime(now);
             setLastTapPosition({ x: clientX, y: clientY });
+            }
         },
         [lastTapTime, lastTapPosition, onTap, doubleTapThreshold, longTapThreshold, doubleTapDistanceThreshold]
     );
@@ -82,6 +88,9 @@ export const useTapRecognizer = (
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchend', handleTouchEnd);
             window.removeEventListener('touchcancel', handleTouchCancel);
+
+            window.removeEventListener("skip-start-message", isSkipScreenreeder)
+
         };
     }, [handleTouchStart, handleTouchEnd, handleTouchCancel]);
 

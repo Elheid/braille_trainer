@@ -36,7 +36,7 @@ import numberNineMP3 from  "../../../public/sounds/numbers/number_9.wav"
 import numberZeroMP3 from  "../../../public/sounds/numbers/number_0.wav"
 
 import succsesMessage from  "../../../public/sounds/Exellent.wav"
-import { TouchHandlerType } from '../../enum/TouchHandlerType';
+import { TouchHandlerType } from '../../types/TouchHandlerType';
 
 
 

@@ -4,6 +4,7 @@ import { sleep } from "../../components/utill";
 const uniquePartSrcOfSounds = {
     exellent:"Exellent",
     description:"v1",
+    secondDescription:"v2",
     numbder:"number_",
     success:"Positive",//"success",
     error:"Decline",//"error",
@@ -74,7 +75,7 @@ export class SayCustomMessages {
 
         const isSkippable = this.isSkippable([messageSrc]).length > 0 ? false : true;
         this.sounds2.push({howl:this.customMessage, skippable:isSkippable });
-        if ((this.isDescriptionSrc(messageSrc) || this.isEndMessage(messageSrc)) && this.customMessage !== null){
+        if ((this.isDescriptionSrc(messageSrc) || this.isSecondDescriptionSrc(messageSrc)  || this.isEndMessage(messageSrc)) && this.customMessage !== null){
             const message = this.customMessage;
             sleep(this.sleepAfterMessage);
             //myFunctionWithDelay(()=> message.play(), 150)
@@ -192,6 +193,11 @@ export class SayCustomMessages {
             (sound.includes('9') && sound.includes(uniquePartSrcOfSounds.description)) ||
             (sound.includes('0') && sound.includes(uniquePartSrcOfSounds.description));
         }
+
+        private isSecondDescriptionSrc(sound:string){
+            return sound.includes(uniquePartSrcOfSounds.secondDescription);
+        }
+
 
 
         private isSkippable(messageQueue:string[]){

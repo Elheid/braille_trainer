@@ -5,7 +5,8 @@ import { Player } from './player';
 
 
 import endLearningMessage from "../../../public/sounds/Obuch_end.wav"//"../../assets/sounds/Obuch_end.wav"
-type LevelCondition = {levelInstruct: string, levelExpect:number, mp3?:string}
+import { LevelCondition } from '../../types/lavelCondition';
+
 
 export class TouchHandlerLearning extends BaseTouchHandler {
     private level: number;
@@ -80,6 +81,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         } else if (this.attempts === 2) {
             //this.player.SayMessage("Попробуйте еще раз, вот дополнительная инструкция...");
             console.log("Попробуйте еще раз, вот дополнительная инструкция...");
+            this.SayAnotherLevelInstruct();
         } else if (this.attempts >= this.maxAttempts) {
             console.log("Попытки исчерпаны. Переходим к следующему уровню.");
             //this.player.SayMessage("Попытки исчерпаны. Переходим к следующему уровню.");
@@ -96,6 +98,12 @@ export class TouchHandlerLearning extends BaseTouchHandler {
     private getExpectedNumber(): number {
         return this.levelInstructions[this.level - 1].levelExpect;
     }
+    
+    private getLevelSecondInstruct(): string {
+        const res = this.levelInstructions[this.level - 1].mp3Second || "";
+        return res;
+    }
+
 
     private getLevelCondition(): LevelCondition {
         return this.levelInstructions[this.level - 1];
@@ -123,6 +131,11 @@ export class TouchHandlerLearning extends BaseTouchHandler {
             this.player.SayDigit(digit)
         }
         return false;
+    }
+
+    private SayAnotherLevelInstruct(){
+        const secondInstruct = this.getLevelSecondInstruct();
+        this.player.SayCustomMessage(secondInstruct);
     }
 
     private nextLevel(): void {

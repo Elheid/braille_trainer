@@ -1,0 +1,1 @@
+export type LevelCondition = {levelInstruct: string, levelExpect:number, mp3:string, mp3Second?:string}

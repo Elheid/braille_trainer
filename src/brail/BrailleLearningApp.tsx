@@ -4,7 +4,7 @@ import React, {useRef, useState } from 'react';
 import useTouchHandler from '../hooks/useTouchHandler';
 
 import BrailleContainer from './BrailleContainer';
-import { TouchHandlerType } from '../enum/TouchHandlerType';
+import { TouchHandlerType } from '../types/TouchHandlerType';
 import { SayCustomMessages } from './classes/SayCustomMessages';
 import { BrailleDigitRecognizer } from './classes/brailleDigetRecognizer';
 import { Player } from './classes/player';

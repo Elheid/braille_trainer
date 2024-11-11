@@ -28,6 +28,8 @@ interface BrailleProps {
 
 const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeechEnabled,*/ mainRef, resultRef, necessaryRef, handleStart, player }: BrailleProps) => {
 
+
+
     const onTap = (event: { type: 'doubleTap' | 'longTap' | 'tap'; position: { x: number; y: number } }) => {
         console.log('Event type:', event.type);
         console.log('Position:', event.position);
@@ -96,6 +98,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
     const maxAttempts = 4;
     const [attempts, setAttempts] = useState<number>(maxAttempts);
+
 
 
     useEffect(() => {
