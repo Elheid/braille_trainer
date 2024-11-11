@@ -3,7 +3,7 @@ import {  useNavigate } from "react-router-dom";
 import arrowLeftSVG from "../assets/img/arrow-left-white.svg";
 import { Button } from "@mui/material";
 import { myFunctionWithDelay } from "./utill";
-import { HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
 import buttonWithImageStyle from "../styles/buttonWithImageStyle";
 
 
@@ -11,7 +11,7 @@ interface ReturnButtonComponentProps extends HTMLAttributes<HTMLButtonElement> {
     img?: string;
     description?:string;
     classes?:string;
-    onClick?: () => void;
+    onTouchStart?: () => void;
     variant?:"text" | "contained" | "outlined";
 }
 
@@ -27,7 +27,7 @@ const ReturnButtonComponent = ({img, description}: ReturnButtonComponentProps) =
 
 
 
-const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", classes = "return-button", onClick, variant = "contained",  ...buttonProps} : ReturnButtonComponentProps) => {
+const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", classes = "return-button", onTouchStart, variant = "contained",  ...buttonProps} : ReturnButtonComponentProps) => {
     const navigate = useNavigate();
     const destination = "/";
     const backClick = () => {
@@ -39,7 +39,6 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
         <Button
             tabIndex={0}
             role="button"
-            aria-describedby="button-title"
 
             variant={variant}
             className={classes}
@@ -49,9 +48,9 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
                 fontWeight: "500",
                 ...(buttonProps.style ||{})
             }}
-            onClick={()=>{
+            onTouchStart={()=>{
                 backClick();
-                onClick?.();
+                onTouchStart?.();
                 /*if (!onClick) backClick();
                 else onClick();*/
             }}

@@ -40,9 +40,13 @@ const StartPage = ({ setType }: MainPageComponentProps) => {
             flexDirection: "column",
             }}>
             <header style={{margin:"5%"}}>
-            <MyTypography sx={{textAlign:"left", paddingTop:"5%", fontSize:"1.5rem", marginBottom:"10px"}}  variant="h1">Тренажер брайльского ввода</MyTypography>
-            {<MyTypography className="sans-text" sx={{textAlign:"left"}}>
-            Потренируйтесь перед покупкой. В этом вам поможет специальный тренажёр. Он работает на смартфонах с сенсорным дисплеем. Если вы хотите выучить цифры на Брайле, то выберите режим «Обучение». Если вы хотите потренироваться вводить цифры, то выберите режим «Тренажер»
+            <MyTypography tabIndex={0} sx={{textAlign:"left", paddingTop:"5%", fontSize:"1.5rem", marginBottom:"10px"}}  variant="h1">Тренажер брайльского ввода</MyTypography>
+            {<MyTypography tabIndex={0} className="sans-text" sx={{textAlign:"left"}}>
+            Современные сенсорные терминалы доступны для незрячих пользователей.
+Они предоставляют возможность ввести ПИН-код самостоятельно с помощью брайлевского ввода, а данное приложение поможет вам научиться это делать.
+Приложение работает на смартфонах с сенсорным экраном.
+Чтобы научиться вводить цифры на сенсорном ПОС -терминале нажмите кнопку “Обучение”.
+Если вы уже знакомы с методом ввода и хотите просто потренироваться нажмите кнопку “Тренажёр”.
             </MyTypography>}
             </header>
             <main style={{flex:1}}>

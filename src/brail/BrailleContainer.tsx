@@ -1,4 +1,4 @@
-import { Button, Container, Grid2 } from "@mui/material"
+import { Box, Button, Container, Grid2 } from "@mui/material"
 import LinkButtonComponent from "../components/ReturnButton";
 
 
@@ -48,6 +48,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        handleStart();
     }, []);
 
 
@@ -105,7 +106,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
         /*const handleIncrement = () => {
             if (attempts < maxAttempts) setAttempts(attempts + 1);
         };*/
-        const handleAttemptsRecover= ()=>{
+        const handleAttemptsRecover = () => {
             setAttempts(maxAttempts);
         }
 
@@ -131,20 +132,12 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             disableGutters={true}
             sx={{ display: "flex", gap: "2vh", flexDirection: "column", height: "100%" }}
         >
-            <Container className="header">
-                <MyTypography sx={{ fontSize: "1.2em", pt:"4vh" }} variant="h1">{title}</MyTypography>
-                {isStarted && necessaryRef &&
-                    <div className="attempts-container">
-                        <MyTypography className="sans-text" sx={{ fontSize: "1em", pt:"3vh" }}>Попытки</MyTypography>
-                        <Attempts attempts={attempts} maxAttempts={maxAttempts} />
-                    </div>}
-            </Container>
             <div className="buttons-container">
 
-                {!isStarted && (
+                {/*!isStarted && (
                     <Button
                         role="button"
-                        aria-describedby="start-button"
+
                         sx={{ backgroundColor: "#A8EF25", color: "black", }}
                         tabIndex={0}
                         variant="contained"
@@ -154,47 +147,57 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                             handleStart();
                         }}
                     >
-                        <p style={{ margin: "5px", float: "left" }} id="start-button">Начать</p>
+                        <p style={{ margin: "5px", float: "left" }}>Начать</p>
                         <img src={arrowForButton} aria-hidden="true" alt="Стрелка"></img>
                     </Button>
-                )}
+                )*/}
             </div>
 
             {isStarted && (
                 <Container id="main" ref={mainRef}>
+                    <Box className="header">
+                        <MyTypography sx={{ fontSize: "1.2em", pt: "4vh" }} variant="h1">{title}</MyTypography>
+                        {isStarted && necessaryRef &&
+                            <div className="attempts-container">
+                                <MyTypography className="sans-text" sx={{ fontSize: "1em", pt: "3vh" }}>Попытки</MyTypography>
+                                <Attempts attempts={attempts} maxAttempts={maxAttempts} />
+                            </div>}
+                    </Box>
+
+                    <Box className="footer">
+                        {isStarted &&
+                            <Grid2
+                                className={"numbers-container"}
+                                container
+                                rowSpacing={6}
+                                columnSpacing={{ xs: 3, sm: 3, md: 3 }}
+                                sx={{ alignItems: "stretch" }}
+                            >
+                                <Grid2 sx={{ flex: 1 }} size={6} className={"result-number-container glass-effect"}>
+                                    <div className={"result-number"} ref={resultRef}></div>
+                                    <MyTypography>Распознано</MyTypography>
+                                </Grid2>
+                                {necessaryRef &&
+                                    <Grid2 sx={resStyle} size={6} className={"necessary-number-container glass-effect"}>
+                                        <div className={"necessary-number"} ref={necessaryRef}></div>
+                                        <MyTypography>Ожидается</MyTypography>
+                                    </Grid2>}
+                            </Grid2>
+                        }
+                        <LinkButtonComponent variant="text" onTouchStart={() => 
+                            {
+                                //event.stopPropagation()
+                                messagePlayer.stopAllMessages();
+                            }
+                        }
+                            style={buttonWithImageStyle}
+                            classes={"back-arrow-button color-button"}
+                            img={arrow}
+                        />
+                    </Box>
 
                 </Container>
             )}
-            <Container className="footer">
-
-                {isStarted &&
-                    <Grid2
-                        className={"numbers-container"}
-                        container
-                        rowSpacing={6}
-                        columnSpacing={{ xs: 3, sm: 3, md: 3 }}
-                        sx={{ alignItems: "stretch" }}
-                    >
-                        <Grid2 sx={{ flex: 1 }} size={6} className={"result-number-container glass-effect"}>
-                            <div className={"result-number"} ref={resultRef}></div>
-                            <MyTypography>Распознано</MyTypography>
-                        </Grid2>
-                        {necessaryRef &&
-                            <Grid2 sx={resStyle} size={6} className={"necessary-number-container glass-effect"}>
-                                <div className={"necessary-number"} ref={necessaryRef}></div>
-                                <MyTypography>Ожидается</MyTypography>
-                            </Grid2>}
-                    </Grid2>
-                }
-                <LinkButtonComponent variant="text" onClick={() => {
-                    messagePlayer.stopAllMessages();
-                }
-                }
-                    style={buttonWithImageStyle}
-                    classes={"back-arrow-button color-button"}
-                    img={arrow}
-                />
-            </Container>
         </Container>
 
 
