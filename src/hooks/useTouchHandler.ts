@@ -59,7 +59,7 @@ const levelInstructions: LevelCondition[] = [
     { levelInstruct: 'Цифра "девять". Цифра 9 состоит из двух точек по диагонали. Коснитесь один раз в любом месте экрана и затем ниже по диагонали левее коснитесь еще раз.', levelExpect: 9, mp3:numberNineDescribeMP3, mp3Second:numberNineDescribe2MP3 },
     { levelInstruct: 'Цифра "ноль". Цифра 0 состоит из трех точек. Точки размещены в виде уголка: коснитесь один раз в любом месте экрана, далее коснитесь чуть ниже от первой точки и третий раз коснитесь чуть левее второй точки.', levelExpect: 0, mp3:numberZeroDescribeMP3, mp3Second: numberZeroDescribe2MP3},
     { levelInstruct: 'Чтобы удалить последнюю введенную цифру дважды коснитесь в одном любом месте экрана', levelExpect: -2, mp3:deleteDescribeMP3, mp3Second:deleteDescribe2MP3 },
-    { levelInstruct: 'Чтобы подтвердить ввод пин-кода или пароля на терминале удерживайте палец в любом месте экрана 2-3 секунды', levelExpect: -3, mp3:enterDescribeMP3 },
+    { levelInstruct: 'Чтобы подтвердить ввод пин-кода или пароля на терминале удерживайте палец в любом месте экрана 2-3 секунды', levelExpect: -3, mp3:enterDescribeMP3,  mp3Second:enterDescribeMP3 },
 ];
 
 
