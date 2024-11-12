@@ -108,6 +108,12 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
                 const addTouchHandler = ()=>{
                     if (!isHandlerAttachedRef.current && mainRef.current) {
                         player.stopMessages();
+                        if (touchHandlerClass instanceof TouchHandlerLearning){
+                            player.SayCustomMessage(startLearningMP3)
+                        }
+                        else{
+                            player.SayCustomMessage(startTrainingMP3)
+                        }
                         const startLearning = new CustomEvent("skip-start-message");
                         window.dispatchEvent(startLearning);
                         mainRef.current.addEventListener("touchstart", touchHandler);
@@ -125,14 +131,14 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
                 // Сообщение при запуске
                 if (isStarted && speechEnabled){
                     if (touchHandlerClass instanceof TouchHandlerLearning){
-                        player.SayCustomMessage(startLearningMP3)
+                        //player.SayCustomMessage(startLearningMP3)
 
                         player.SayCustomMessage(screenReaderLearningMP3)
                     
                         mainRef.current.addEventListener('touchstart', addTouchHandler);
                     }
                     else{
-                        player.SayCustomMessage(startTrainingMP3)
+                       // player.SayCustomMessage(startTrainingMP3)
 
                         player.SayCustomMessage(screenReaderTrainingMP3)
                         
