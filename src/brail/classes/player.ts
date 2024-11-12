@@ -12,9 +12,10 @@ import tryOneMoreTime from  "../../../public/sounds/no1.wav"
 import touchSound from  "../../../public/sounds/Dot.mp3"
 
 import doubleTouchSound from  "../../../public/sounds/Pull_to_refresh_1.mp3"
+import removeNumSound from  "../../../public/sounds/udaleno.wav"
 
 import longTouchSound from  "../../../public/sounds/Pin_Success.mp3"
-
+import enterPinSound from  "../../../public/sounds/uspeshno_vvod.wav"
 
 import nextNumSound from "../../../public/sounds/Next_num.wav"
 
@@ -41,20 +42,23 @@ import { TouchHandlerType } from '../../types/TouchHandlerType';
 
 
 
-const numbersToSay: { [key: number]: string } = {
-  1: numberOneMP3,
-  2: numberTwoMP3,
-  3:numberThreeMP3,
+const numbersToSay: { [key: string]: string} = {
+ "1": numberOneMP3,
+  "2": numberTwoMP3,
+  "3":numberThreeMP3,
 
-  4: numberFourMP3,
-  5: numberFiveMP3,
-  6:numberSixMP3,
+  "4": numberFourMP3,
+  "5": numberFiveMP3,
+  "6":numberSixMP3,
 
-  7: numberSevenMP3,
-  8: numberEightMP3,
-  9:numberNineMP3,
+  "7": numberSevenMP3,
+  "8": numberEightMP3,
+  "9":numberNineMP3,
 
-  0:numberZeroMP3,
+  "0":numberZeroMP3,
+
+  "-2":removeNumSound,
+  "-3":enterPinSound,
 };
 
 export class Player {
@@ -96,7 +100,7 @@ export class Player {
   }
 
   public SayDigit(digit: number):void{
-    if (numbersToSay[digit]){
+    if (numbersToSay[digit.toString()]){
       this.SayCustomMessage(numbersToSay[digit])
     }
 
@@ -130,6 +134,15 @@ export class Player {
       }
 
     }
+  }
+
+  public PlayOnDoubleTap(): void {
+    this.SayCustomMessage(removeNumSound)
+  }
+
+  
+  public PlayOnLongTap(): void {
+    this.SayCustomMessage(enterPinSound)
   }
 
   public PlayError(): void {

@@ -1,16 +1,16 @@
 import { Box, Container, Grid2 } from "@mui/material"
-import LinkButtonComponent from "../components/ReturnButton";
+import LinkButtonComponent from "../../ReturnButton";
 
 
-import arrow from "../assets/img/breadMini.svg"
-import buttonWithImageStyle from "../styles/buttonWithImageStyle";
-import MyTypography from "../components/MyTyphography";
-import { SayCustomMessages } from "./classes/SayCustomMessages";
+import arrow from "../../../assets/img/breadMini.svg"//"assets/img/breadMini.svg"
+import buttonWithImageStyle from "../../../styles/buttonWithImageStyle";
+import MyTypography from "../../MyTyphography";
+import { SayCustomMessages } from "../../../brail/classes/SayCustomMessages";
 
-import { useTapRecognizer } from "../hooks/useTapRecognizer";
-import { Player } from "./classes/player";
+import { useTapRecognizer } from "../../../hooks/useTapRecognizer";
+import { Player } from "../../../brail/classes/player";
 import { useEffect, useState } from "react";
-import Attempts from "../components/Attempts";
+import Attempts from "../../Attempts";
 
 //import arrowForButton from "../assets/img/chevron-right.svg"
 

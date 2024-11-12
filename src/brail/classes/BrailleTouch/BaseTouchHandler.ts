@@ -1,6 +1,6 @@
 // BaseTouchHandler.ts
 import { BrailleDigitRecognizer } from './brailleDigetRecognizer';
-import { Player } from './player';
+import { Player } from '../player';
 
 interface Point {
     x: number;
@@ -59,6 +59,27 @@ export class BaseTouchHandler {
     protected convertPoints(): void {
         // Обработка точки для распознавания цифр
     }
+
+    public ProcessNumAndGest(digit:number | undefined):number{
+        //console.log(digit)
+        if (digit || digit === 0){
+            if(digit !== -1){
+                let uniqueDigit:number = -1; // -2 double tap, -3 long tap
+                if (this.player.isDoubleTaped || this.player.isLongTaped) {
+                    //console.log("base touch handler return");
+                    if (this.player.isDoubleTaped ) uniqueDigit = -2
+                    if (this.player.isLongTaped ) uniqueDigit = -3
+                    //this._points = [];
+                    
+                }
+        
+                return  uniqueDigit !== -1 ? uniqueDigit : digit;
+            }
+            return digit;
+        }
+        return -1;
+    }
+
 
     public addMessageInRef(ref:HTMLElement, message:string){
         const existingContent = ref.textContent;

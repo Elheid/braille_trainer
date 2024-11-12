@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Player } from "../brail/classes/player";
-import { TouchHandlerTrainer } from "../brail/classes/TouchHandlerTrainer";
-import { TouchHandlerLearning } from "../brail/classes/TouchHandlerLearning";
+import { TouchHandlerTrainer } from "../brail/classes/BrailleHandlers/TouchHandlerTrainer";
+import { TouchHandlerLearning } from "../brail/classes/BrailleHandlers/TouchHandlerLearning";
 import { TouchHandlerType } from "../types/TouchHandlerType";
 
 
@@ -47,7 +47,7 @@ import deleteDescribe2MP3 from "../../public//sounds/numberDescription/Del10v2.w
 //import enterDescribe2MP3 from "../../public//sounds/numberDescription/Enter11v1.wav"
 
 
-import { BrailleDigitRecognizer } from "../brail/classes/brailleDigetRecognizer";
+import { BrailleDigitRecognizer } from "../brail/classes/BrailleTouch/brailleDigetRecognizer";
 import { LevelCondition } from "../types/lavelCondition";
 
 
@@ -126,7 +126,7 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
                 if (isStarted && speechEnabled){
                     if (touchHandlerClass instanceof TouchHandlerLearning){
                         player.SayCustomMessage(startLearningMP3)
-                        
+
                         player.SayCustomMessage(screenReaderLearningMP3)
                     
                         mainRef.current.addEventListener('touchstart', addTouchHandler);

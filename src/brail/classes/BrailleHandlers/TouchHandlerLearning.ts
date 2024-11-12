@@ -1,11 +1,11 @@
 // TrainingLevelHandler.ts
-import { BaseTouchHandler } from './BaseTouchHandler';
-import { BrailleDigitRecognizer } from './brailleDigetRecognizer';
-import { Player } from './player';
+import { BaseTouchHandler } from '../BrailleTouch/BaseTouchHandler';
+import { BrailleDigitRecognizer } from '../BrailleTouch/brailleDigetRecognizer';
+import { Player } from '../player';
 
 
-import endLearningMessage from "../../../public/sounds/Obuch_end.wav"//"../../assets/sounds/Obuch_end.wav"
-import { LevelCondition } from '../../types/lavelCondition';
+import endLearningMessage from "../../../../public/sounds/Obuch_end.wav"//"../../../public/sounds/Obuch_end.wav"//"../../assets/sounds/Obuch_end.wav"
+import { LevelCondition } from "../../../types/lavelCondition"//'../../../types/lavelCondition';
 
 
 export class TouchHandlerLearning extends BaseTouchHandler {
@@ -68,16 +68,18 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         super.convertPoints();
         this.attempts++;
 
-        let uniqueDigit:number = -1; // -2 double tap, -3 long tap
+        //let uniqueDigit:number = -1; // -2 double tap, -3 long tap
         if (this.player.isDoubleTaped || this.player.isLongTaped) {
-            console.log("base touch handler return");
+            /*console.log("base touch handler return");
             if (this.player.isDoubleTaped ) uniqueDigit = -2
-            if (this.player.isLongTaped ) uniqueDigit = -3
+            if (this.player.isLongTaped ) uniqueDigit = -3*/
             this._points = [];
             
         }
 
-        const resDigit = uniqueDigit !== -1 ? uniqueDigit : digit;
+        //const resDigit = uniqueDigit !== -1 ? uniqueDigit : digit;
+
+        const resDigit = this.ProcessNumAndGest(digit);
         if (this.isLevelCompleted(resDigit)) {
             this.nextLevel();
         } else if (this.attempts === 2) {
@@ -115,7 +117,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         // Логика завершения уровня
         //return true; // Временное значение
         const expectedNumber = this.getExpectedNumber();
-        if (digit){
+        if (digit || digit === 0) {
             if (digit !== -2 && digit !== -3) this.showResult(digit.toString());
             else {
                 if (this.player.isDoubleTaped ) this.showResult("Удаление цифры");
@@ -130,7 +132,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         this.player.PlayError();
 
         window.dispatchEvent(this.errorEvent)
-        if (digit !== undefined && digit > 0){
+        if (digit !== undefined /*&& digit > 0*/){
             this.player.SayDigit(digit)
         }
 

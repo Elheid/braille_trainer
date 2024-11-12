@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import StartPage from './components/pages/StartPage/StartPage'
 //import { LearningPage } from './components/pages/LearningPage/LearningPage';
 import SplitScreen from './components/pages/StartPage/SplitScreanPage';
-import BrailleTrainApp from './brail/BrailleTrainApp';
-import BrailleLearningApp from './brail/BrailleLearningApp';
+import BrailleTrainApp from "./components/pages/BraillePages/TrainingPage/BrailleTrainApp"
+import BrailleLearningApp from './components/pages/BraillePages/LearningPage/BrailleLearningApp';
 import { Alert } from '@mui/material';
 
 function App() {

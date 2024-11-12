@@ -1,6 +1,6 @@
-import { BaseTouchHandler } from './BaseTouchHandler';
-import { BrailleDigitRecognizer } from './brailleDigetRecognizer';
-import { Player } from './player';
+import { BaseTouchHandler } from '../BrailleTouch/BaseTouchHandler';
+import { BrailleDigitRecognizer } from '../BrailleTouch/brailleDigetRecognizer';
+import { Player } from '../player';
 
 
 
@@ -20,18 +20,21 @@ export class TouchHandlerTrainer extends BaseTouchHandler {
             console.log("base touch handler return");
             if (this.player.isDoubleTaped ) this.showResult("Удаление цифры");
             if (this.player.isLongTaped ) this.showResult("Ввод пин-кода");
-            this._points = [];
-            return;
+            //this._points = [];
+            //return;
         }
 
         const digit = this.digitRecognizer.recognizeDigit(this._points);
 
-        if (digit === undefined || digit < 0) {
+        const resDigit = this.ProcessNumAndGest(digit);
+
+        if (resDigit === -1 || digit === undefined/*|| digit < 0*/) {
             this.player.PlayError();
             this.showResult(this._errorMessage);
         } else {
-            this.player.PlaySuccess(digit);
-            this.showResult(digit.toString());
+            this.player.PlaySuccess(resDigit);
+            if (resDigit >= 0)
+            this.showResult(resDigit.toString());
         }
 
         this._points = [];
