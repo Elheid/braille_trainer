@@ -48,7 +48,7 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
                 fontWeight: "500",
                 ...(buttonProps.style ||{})
             }}
-            onTouchStart={()=>{
+            onClick={()=>{
                 backClick();
                 onClick?.();
                 /*if (!onClick) backClick();
