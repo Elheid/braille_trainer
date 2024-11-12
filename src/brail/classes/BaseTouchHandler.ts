@@ -60,12 +60,27 @@ export class BaseTouchHandler {
         // Обработка точки для распознавания цифр
     }
 
+    public addMessageInRef(ref:HTMLElement, message:string){
+        const existingContent = ref.textContent;
+        if (existingContent){
+            const index = existingContent.indexOf(' ');
+
+            if (index !== -1) {
+            // Если '-' уже есть, заменяем подстроку после него
+            ref.textContent = existingContent.substring(0, index + 1)  + message;
+            } else {
+            // Если '-' нет, добавляем в конец
+            ref.textContent = existingContent + " " + message;
+            }
+        }
+    }
 
     // Метод для отображения результата
     protected showResult(message: string): void {
         if (this.resultElement){
 
-            this.resultElement.textContent = message;
+           // this.resultElement.textContent = message;
+            this.addMessageInRef(this.resultElement, message)
         }
         else 
             console.log("result el not found")

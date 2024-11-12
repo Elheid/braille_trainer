@@ -7,6 +7,7 @@ import { Howl } from 'howler';
 import succsesSound from "../../../public/sounds/Positive.mp3"
 //import errorSound from  "../../../public/sounds/error.mp3"
 import errorSound from  "../../../public/sounds/Decline.mp3"
+import tryOneMoreTime from  "../../../public/sounds/no1.wav"
 //import touchSound from  "../../../public/sounds/touch.mp3"
 import touchSound from  "../../../public/sounds/Dot.mp3"
 
@@ -136,6 +137,13 @@ export class Player {
     this.SayCustomMessage(errorSound,()=>this.stopMessages())
     //this.error.play();
   }
+
+  public PlayTryOneMoreTime(): void {
+    //this.SayCustomMessage(errorSound,()=>this.stopMessages())
+    this.SayCustomMessage(tryOneMoreTime)
+    //this.error.play();
+  }
+
 
   public PlayOnAttemptsZero(): void {
     //this.SayCustomMessage(errorSound,()=>this.stopMessages())

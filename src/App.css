@@ -303,8 +303,14 @@ button#startbutton {
 
 }
 .result-number , .necessary-number{
-  font-size: 8vw;
+  /*font-size: 8vw;*/
+  font-size: 1.2rem;
   color:white;
   width: fit-content;
   text-align: left;
+}
+.result-number::after {
+  content: attr(data-text);
+  font-weight: bold;
+  color: red;
 }

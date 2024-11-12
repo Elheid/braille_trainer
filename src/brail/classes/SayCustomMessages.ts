@@ -39,8 +39,11 @@ export class SayCustomMessages {
             this.stopMessagesButNoSuccses();
         }
 
-        if (!this.isPlaying) {
-            this.playNextMessage();
+        const url = window.location.href;
+        if( url.includes("training") || url.includes("learning")){
+            if (!this.isPlaying) {
+                this.playNextMessage();
+            }
         }
     }
 

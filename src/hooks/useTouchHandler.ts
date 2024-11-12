@@ -8,6 +8,10 @@ import { TouchHandlerType } from "../types/TouchHandlerType";
 import screenReaderTrainingMP3 from "../../public/sounds/Terminal_screenreader.wav"//"../assets/sounds/Terminal_screenreader.wav"
 import screenReaderLearningMP3 from "../../public//sounds/Obuch_screenreader_off.wav"
 
+import startTrainingMP3 from "../../public/sounds/Information.wav"
+import startLearningMP3 from "../../public//sounds/obuchenie.wav"
+
+
 import numberOneDescribeMP3 from "../../public//sounds/numberDescription/1v1.wav"
 import numberTwoDescribeMP3 from "../../public//sounds/numberDescription/2v1.wav"
 import numberThreeDescribeMP3 from "../../public//sounds/numberDescription/3v1.wav"
@@ -121,11 +125,17 @@ const useTouchHandler = ({ isStarted, speechEnabled, resultRef, necessaryRef, ma
                 // Сообщение при запуске
                 if (isStarted && speechEnabled){
                     if (touchHandlerClass instanceof TouchHandlerLearning){
+                        player.SayCustomMessage(startLearningMP3)
+                        
                         player.SayCustomMessage(screenReaderLearningMP3)
+                    
                         mainRef.current.addEventListener('touchstart', addTouchHandler);
                     }
                     else{
+                        player.SayCustomMessage(startTrainingMP3)
+
                         player.SayCustomMessage(screenReaderTrainingMP3)
+                        
                         mainRef.current.addEventListener('touchstart', addTouchHandler);
                     }
                 }

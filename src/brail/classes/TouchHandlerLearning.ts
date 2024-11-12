@@ -32,7 +32,9 @@ export class TouchHandlerLearning extends BaseTouchHandler {
 
     protected showNecessaryNumber(message: string): void {
         if (this.necessaryRef)
-            this.necessaryRef.textContent = message;
+            //this.necessaryRef.textContent = message;
+            //this.necessaryRef.textContent = + "-" + message;
+            this.addMessageInRef(this.necessaryRef, message)
         else 
             console.log("result el not found")
     }
@@ -126,9 +128,14 @@ export class TouchHandlerLearning extends BaseTouchHandler {
             return true;
         }
         this.player.PlayError();
+
         window.dispatchEvent(this.errorEvent)
         if (digit !== undefined && digit > 0){
             this.player.SayDigit(digit)
+        }
+
+        if (this.attempts !== this.maxAttempts){
+            this.player.PlayTryOneMoreTime();
         }
         return false;
     }

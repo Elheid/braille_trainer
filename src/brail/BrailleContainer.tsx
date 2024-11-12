@@ -174,13 +174,13 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                                 sx={{ alignItems: "stretch" }}
                             >
                                 <Grid2 sx={{ flex: 1 }} size={6} className={"result-number-container glass-effect"}>
-                                    <div className={"result-number"} ref={resultRef}></div>
-                                    <MyTypography>Распознано</MyTypography>
+                                    <div className={"result-number"} ref={resultRef}>Распознано</div>
+                                
                                 </Grid2>
                                 {necessaryRef &&
                                     <Grid2 sx={resStyle} size={6} className={"necessary-number-container glass-effect"}>
-                                        <div className={"necessary-number"} ref={necessaryRef}></div>
-                                        <MyTypography>Ожидается</MyTypography>
+                                        <div className={"necessary-number"} ref={necessaryRef}>Ожидается</div>
+                                        
                                     </Grid2>}
                             </Grid2>
                         }
