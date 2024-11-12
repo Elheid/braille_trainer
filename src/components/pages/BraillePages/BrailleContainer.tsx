@@ -164,7 +164,9 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                             </div>}
                     </Box>
 
-                    <Box className="footer">
+                    <Box
+                        className="footer"
+                    >
                         {isStarted &&
                             <Grid2
                                 className={"numbers-container"}
@@ -175,29 +177,35 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                             >
                                 <Grid2 sx={{ flex: 1 }} size={6} className={"result-number-container glass-effect"}>
                                     <div className={"result-number"} ref={resultRef}>Распознано</div>
-                                
+
                                 </Grid2>
                                 {necessaryRef &&
                                     <Grid2 sx={resStyle} size={6} className={"necessary-number-container glass-effect"}>
                                         <div className={"necessary-number"} ref={necessaryRef}>Ожидается</div>
-                                        
+
                                     </Grid2>}
                             </Grid2>
                         }
-                        <LinkButtonComponent variant="text" onClick={() => 
-                            {
-                                //event.stopPropagation()
-                                messagePlayer.stopAllMessages();
-                            }
-                        }
-                            style={buttonWithImageStyle}
-                            classes={"back-arrow-button color-button"}
-                            img={arrow}
-                        />
                     </Box>
 
                 </Container>
             )}
+            <LinkButtonComponent variant="text" 
+            myOnClick={(e: React.MouseEvent) => 
+                {
+                    e.stopPropagation()
+                    messagePlayer.stopAllMessages();
+                }
+            }
+            onTouchStart={(e: React.TouchEvent) => {
+                e.stopPropagation()
+                messagePlayer.stopAllMessages();
+            }}
+            style={buttonWithImageStyle}
+            classes={"back-arrow-button color-button"}
+            img={arrow}
+            />
+
         </Container>
 
 

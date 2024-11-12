@@ -143,6 +143,10 @@ ol.MuiBreadcrumbs-ol.css-1uwp4ue-MuiBreadcrumbs-ol {
 
 button.color-button{
   background-color: var(--main-buttons-bg-color);
+  width: fit-content;
+  position: absolute;
+  bottom:0;
+  margin-bottom: 10px;
 }
 
 /*Кнопка назад*/
@@ -260,14 +264,14 @@ button#startbutton {
 .footer {
   position: fixed;
   bottom: 0;
-  /*display: flex;*/
+  display: flex;
   flex-direction: column;
   gap: 2vh;
   margin-bottom: 20px;
 
   position: fixed;
-  bottom: 0;
-  /*bottom: 10%;*/
+  /*bottom: 0;*/
+  bottom: 5%;
   width: -moz-available;     
   width: -webkit-fill-available; 
   width: fill-available;

@@ -11,7 +11,7 @@ interface ReturnButtonComponentProps extends HTMLAttributes<HTMLButtonElement> {
     img?: string;
     description?:string;
     classes?:string;
-    onClick?: () => void;
+    myOnClick?: (e:React.MouseEvent) => void;
     variant?:"text" | "contained" | "outlined";
 }
 
@@ -27,7 +27,7 @@ const ReturnButtonComponent = ({img, description}: ReturnButtonComponentProps) =
 
 
 
-const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", classes = "return-button", onClick, variant = "contained",  ...buttonProps} : ReturnButtonComponentProps) => {
+const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", classes = "return-button", myOnClick, variant = "contained",  ...buttonProps} : ReturnButtonComponentProps) => {
     const navigate = useNavigate();
     const destination = "/";
     const backClick = () => {
@@ -48,9 +48,9 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
                 fontWeight: "500",
                 ...(buttonProps.style ||{})
             }}
-            onClick={()=>{
+            onClick={(e)=>{
                 backClick();
-                onClick?.();
+                myOnClick?.(e);
                 /*if (!onClick) backClick();
                 else onClick();*/
             }}
