@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid2 } from "@mui/material"
+import { Box, Container, Grid2 } from "@mui/material"
 import LinkButtonComponent from "../components/ReturnButton";
 
 
@@ -12,7 +12,7 @@ import { Player } from "./classes/player";
 import { useEffect, useState } from "react";
 import Attempts from "../components/Attempts";
 
-import arrowForButton from "../assets/img/chevron-right.svg"
+//import arrowForButton from "../assets/img/chevron-right.svg"
 
 interface BrailleProps {
     messagePlayer: SayCustomMessages,

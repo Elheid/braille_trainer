@@ -3,7 +3,7 @@ import {  useNavigate } from "react-router-dom";
 import arrowLeftSVG from "../assets/img/arrow-left-white.svg";
 import { Button } from "@mui/material";
 import { myFunctionWithDelay } from "./utill";
-import React, { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 import buttonWithImageStyle from "../styles/buttonWithImageStyle";
 
 
