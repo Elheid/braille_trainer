@@ -184,7 +184,7 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                                     </Grid2>}
                             </Grid2>
                         }
-                        <LinkButtonComponent variant="text" onTouchStart={() => 
+                        <LinkButtonComponent variant="text" onClick={() => 
                             {
                                 //event.stopPropagation()
                                 messagePlayer.stopAllMessages();

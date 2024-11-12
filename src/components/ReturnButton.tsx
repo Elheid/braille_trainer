@@ -11,7 +11,7 @@ interface ReturnButtonComponentProps extends HTMLAttributes<HTMLButtonElement> {
     img?: string;
     description?:string;
     classes?:string;
-    onTouchStart?: () => void;
+    onClick?: () => void;
     variant?:"text" | "contained" | "outlined";
 }
 
@@ -27,7 +27,7 @@ const ReturnButtonComponent = ({img, description}: ReturnButtonComponentProps) =
 
 
 
-const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", classes = "return-button", onTouchStart, variant = "contained",  ...buttonProps} : ReturnButtonComponentProps) => {
+const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", classes = "return-button", onClick, variant = "contained",  ...buttonProps} : ReturnButtonComponentProps) => {
     const navigate = useNavigate();
     const destination = "/";
     const backClick = () => {
@@ -50,7 +50,7 @@ const LinkButtonComponent = ({img = arrowLeftSVG, description = "Назад", cl
             }}
             onTouchStart={()=>{
                 backClick();
-                onTouchStart?.();
+                onClick?.();
                 /*if (!onClick) backClick();
                 else onClick();*/
             }}
