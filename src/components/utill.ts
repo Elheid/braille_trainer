@@ -24,3 +24,11 @@ export const sleep = (milliseconds: number) => {
         currentDate = Date.now();
     } while (currentDate - date < milliseconds);
 }
+
+
+export const preloadSounds = (soundUrls: string[]) => {
+    soundUrls.forEach(url => {
+        const audio = new Audio(url);
+        audio.preload = "auto";
+    });
+};

@@ -7,6 +7,7 @@ import SplitScreen from './components/pages/StartPage/SplitScreanPage';
 import BrailleTrainApp from "./components/pages/BraillePages/TrainingPage/BrailleTrainApp"
 import BrailleLearningApp from './components/pages/BraillePages/LearningPage/BrailleLearningApp';
 import { Alert } from '@mui/material';
+import usePreloadSounds from './hooks/usePreloadSounds';
 
 function App() {
   const [typeOfRoute, setType] = useState(localStorage.getItem('route') || ''); 
@@ -18,6 +19,7 @@ function App() {
     setIsMobile(isMobileDevice);
 
   }, []);
+  usePreloadSounds();
 
   return (
     <BrowserRouter>
