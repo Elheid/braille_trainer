@@ -132,7 +132,7 @@ export class TouchHandlerLearning extends BaseTouchHandler {
         this.player.PlayError();
 
         window.dispatchEvent(this.errorEvent)
-        if (digit !== undefined /*&& digit > 0*/){
+        if (digit !== undefined && digit > 0){
             this.player.SayDigit(digit)
         }
 

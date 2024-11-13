@@ -69,11 +69,11 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
             }
         };
 
-        // Создаём наблюдатель для отслеживания изменений
+
         const observer = new MutationObserver(updateHeight);
 
         if (necessaryRef && isStarted) {
-            // Подключаем наблюдатель к каждому из элементов
+
             if (resultRef.current) {
                 observer.observe(resultRef.current, { childList: true, subtree: true, characterData: true });
             }
@@ -81,11 +81,11 @@ const BrailleContainer = ({ messagePlayer, isStarted, /*speechEnabled, setSpeech
                 observer.observe(necessaryRef.current, { childList: true, subtree: true, characterData: true });
             }
 
-            // Обновляем высоту при монтировании
+
             updateHeight();
         }
 
-        // Отключаем наблюдатель при размонтировании
+
         return () => observer.disconnect();
     }, [isStarted, necessaryRef, resultRef]);
 

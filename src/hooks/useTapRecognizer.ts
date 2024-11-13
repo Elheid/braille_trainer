@@ -10,8 +10,8 @@ export const useTapRecognizer = (
     isStarted:boolean,
     player:Player,
     onTap: (event: TapEvent) => void,
-    doubleTapThreshold = 2000,
-    longTapThreshold = 500,
+    doubleTapThreshold = 800,
+    longTapThreshold = 250,
     doubleTapDistanceThreshold = 30, // Максимальное расстояние для двойного тапа,
 ) => {
     const [lastTapTime, setLastTapTime] = useState<number | null>(null);
