@@ -13,7 +13,7 @@ export class BaseTouchHandler {
     protected player: Player;
     protected _points: Point[] = [];
     protected _timerId: ReturnType<typeof setTimeout> | null = null;
-    protected _period = 1000; // время в миллисекундах
+    protected _period = 1510; // время в миллисекундах
 
     protected digitRecognizer:BrailleDigitRecognizer;// = new BrailleDigitRecognizer();
 
