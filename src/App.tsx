@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import {  BrowserRouter, Route, Routes } from 'react-router-dom'
 import StartPage from './components/pages/StartPage/StartPage'
 //import { LearningPage } from './components/pages/LearningPage/LearningPage';
 import SplitScreen from './components/pages/StartPage/SplitScreanPage';
 import BrailleTrainApp from "./components/pages/BraillePages/TrainingPage/BrailleTrainApp"
 import BrailleLearningApp from './components/pages/BraillePages/LearningPage/BrailleLearningApp';
 import { Alert } from '@mui/material';
-import usePreloadSounds from './hooks/usePreloadSounds';
+
 
 function App() {
   const [typeOfRoute, setType] = useState(localStorage.getItem('route') || ''); 
@@ -19,10 +19,10 @@ function App() {
     setIsMobile(isMobileDevice);
 
   }, []);
-  usePreloadSounds();
+  
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       {!isMobile &&
     <Alert aria-hidden="true" severity="error" sx={{
       position:"absolute",
@@ -37,6 +37,7 @@ function App() {
           <Route path="/split" element={<SplitScreen type={typeOfRoute} setType={setType}/>}/>
           <Route  path="/training" element={<BrailleTrainApp/>}/>
           <Route  path="/learning" element={<BrailleLearningApp/>}/>
+          <Route path="*" element={<StartPage type={typeOfRoute} setType={setType}/>} />
         </Routes>
       </div>
     </BrowserRouter>
