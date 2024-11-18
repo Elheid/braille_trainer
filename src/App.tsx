@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import {  BrowserRouter, Route, Routes } from 'react-router-dom'
+import {  HashRouter, Route, Routes } from 'react-router-dom'
 import StartPage from './components/pages/StartPage/StartPage'
 //import { LearningPage } from './components/pages/LearningPage/LearningPage';
 import SplitScreen from './components/pages/StartPage/SplitScreanPage';
@@ -22,7 +22,7 @@ function App() {
   
 
   return (
-    <BrowserRouter basename="/">
+    <HashRouter basename="/">
       {!isMobile &&
     <Alert aria-hidden="true" severity="error" sx={{
       position:"absolute",
@@ -40,7 +40,7 @@ function App() {
           <Route path="*" element={<StartPage type={typeOfRoute} setType={setType}/>} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
